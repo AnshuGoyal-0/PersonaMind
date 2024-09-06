@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anshu Goyal - Certificates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: visible;
+            /* Prevent horizontal scroll */
+
+        }
+
+        li {
+            font-weight: bold;
+            margin: 1%;
+        }
+
+        h2 {
+            border-bottom: 2px solid rgb(0, 0, 0);
+            padding: 1%;
+            margin: 1%;
+            width: 95%;
+            font-weight: bolder;
+            text-align: center;
+            font-size: 50px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Header */
+
+        header {
+            margin: 1%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(218, 218, 218);
+            color: #000000;
+            padding: 20px;
+            position: relative;
+            overflow: visible;
+        }
+
+        p {
+            font-weight: bolder;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-left img {
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .nav-left h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-right ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-right li {
+            margin-left: 20px;
+        }
+
+        .nav-right a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-right .dropdown {
+            position: relative;
+        }
+
+        .nav-right .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 0%;
+            right: 0%;
+            background: #fff;
+            color: #000;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .nav-right .dropdown-content a {
+            display: block;
+            padding: 5px 5px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .nav-right .dropdown-content a:hover {
+            background: #ebebeb;
+        }
+
+        .nav-right .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* Skills */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .skill-card {
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 5px;
+            padding: 10px;
+            width: auto;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Certificates */
+
+        .Certificates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .Certificates-card {
+            background-color: #ffffff00;
+            border-radius: 10px;
+            text-align: center;
+            padding: 15px;
+            margin: 3%;
+            width: 500px;
+
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .Certificates-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: #ffffff00;
+        }
+
+        .Certificates-card img {
+            width: 500px;
+            height: 350px;
+            border-radius: 10px;
+        }
+
+        .Certificates-card h3 {
+            color: #000000;
+            margin: 10px 0;
+        }
+
+        .Certificates-card p {
+            color: #333;
+        }
+
+        .Certificates-card a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .Certificates-card a:hover {
+            text-decoration: underline;
+        }
+        
+
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img src="/PersonaMind/Images/Personal/Profile/profile.jpg" alt="Anshu Goyal" />
+                <h1>Anshu Goyal</h1>
+            </div>
+            <div class="nav-right">
+                <div class="dropdown">
+                    <a href="/PersonaMind/index.html" class="dropdown-toggle">About</a>
+                    <div class="dropdown-content">
+                        <a href="/PersonaMind/index.html">About</a>
+                        <a href="/PersonaMind/Main/Contact.html">Contact</a>
+                        <a href="/PersonaMind/Main/Projects.html">Projects</a>
+                        <a href="/PersonaMind/Main/Certificates.html">Certificates</a>
+                        <a href="/PersonaMind/Computer_Coaching/Computer_Classes_Home.html">Computer_Class</a>
+                        <a href="/PersonaMind/Main/Services.html">Services</a>
+                        <a href="https://thecuriousminddiaries.blogspot.com/">Blogs</a>
+                        <a href="/PersonaMind/Main/Videos.html">Videos</a>
+                        <a href="/PersonaMind/Main/Community.html">Community</a>
+                        <a href="/PersonaMind/Main/Games.html">Games</a>
+                        <a href="/PersonaMind/Main/Knowledge.html">Knowledge Base</a>
+                        <a href="/PersonaMind/Main/Updates">Updates</a>
+                        <a href="/PersonaMind/Main/Policy.html">Policy</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="section">
+        <div class="skills">
+            <div class="skill-card">Java</div>
+            <div class="skill-card">Python</div>
+            <div class="skill-card">HTML & CSS</div>
+            <div class="skill-card">SQL</div>
+            <div class="skill-card">Data Science</div>
+            <div class="skill-card">Cybersecurity</div>
+            <div class="skill-card">AI & ML</div>
+            <div class="skill-card">Educational Tech</div>
+            <div class="skill-card">Scripting & Automation</div>
+        </div>
+    </div>
+    <section class="Certificates">
+        <h2>Python</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-f6860ffe-3ebd-4dfc-89a3-cbb168722c8a/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ 2024 Complete Python Bootcamp from Zero to Hero in Python.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-83356426-31ab-4d85-8558-d6f798ec66db/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Learn To Create AI Assistant (JARVIS) With Python .jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.coursera.org/account/accomplishments/verify/7DQFS7T6BKY5" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Advanced Python - Reconnaissanc.png" /></a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.coursera.org/account/accomplishments/verify/GXWMCUTV2ZBJ" target="_blank"><img
+                    src="/PersonaMind/Images/Certificates/Crash Course on Python.png" /></a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.coursera.org/account/accomplishments/verify/XJCKUVZ2VFEV" target="_blank"><img
+                    src="/PersonaMind/Images/Certificates/Machine Learning with Python.png" /></a>
+        </div>
+
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-2f49090f-ce6e-420e-8b8f-1f298e80efc0/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Applied Python: Building Projects with Python Programming.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-828b46ec-c0e0-47e6-8e28-3f4e87976e8d/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Learn Python With 20+ Real World Projects.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-aee9dcf9-0c7d-4110-8b08-382ce03d5edf/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Python - Data Analytics - Real World Hands-on Projects.jpg"/>
+            </a>
+        </div>
+
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-e43fdad8-a6df-4e9e-b9ff-6f8b64af0b34/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ PySide Mastery: Python GUI Development Unleashed.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-79756792-4fa0-4c3b-b702-c200e692ef79/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Professional Diploma in Python Development.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-ce589355-0660-4f69-ad35-7a9cb1a7dfc1/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Python 101 - Python Programming for Absolute Beginners.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-fce2452a-5b6a-4fac-a7e9-699acf520db7/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Master Python Web Scraping & Automation using BS4 & Selenium.jpg"/>
+            </a>
+        </div>
+
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-523e4e62-8de1-419c-a038-2adc3a8e9ff8/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ 2024 Data Visualization in Tableau & Python (2 Courses in 1).jpg"/>
+            </a>
+        </div>
+        </div>
+        <h2>Special</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-16daf1b1-50bf-43c4-885b-91afe6d7817c/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Digital Twin.jpg"/>
+            </a>
+        </div>
+        <h2>Language</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-a248a423-518a-4acc-a3c8-4ffb4e7461f3/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Professional Diploma in Business English and Communications.jpg"/>
+            </a>
+        </div>
+        <h2>Body Language</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-346fdb3d-0107-4ddd-9a88-71f0c807bbec/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Body Language: Appear Confident and Poised When You Speak.jpg"/>
+            </a>
+        </div>
+        <h2>Database</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-8730d102-d82c-4902-a4fa-ec1d3543527d/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Introduction to Database Management Systems.jpg"/>
+            </a>
+        </div>
+        <h2>IBM</h2>
+        <div class="Certificates-card">
+            <a href="https://www.coursera.org/account/accomplishments/verify/5KTURWL5GLTQ" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Full Stack Software Developer Assessment.png" />
+            </a>
+        </div>
+        <h2>Psychology</h2>
+        <div class="Certificates-card">
+            <a href="https://www.coursera.org/account/accomplishments/verify/5R7LPWJPKRWD"" target=" _blank">
+                <img src="/PersonaMind/Images/Certificates/Introduction to Psychology.png" />
+            </a>
+        </div>
+        <h2>CMD</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-ab203b96-1902-4136-b133-ee0a7e839081/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Batch Script Programming Crash Course (CMD).jpg"/>
+            </a>
+        </div>
+        <h2>Computers</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-e06b8d91-812a-4754-a797-1b41b45596a1/" target="_blank"><img
+                    src="/PersonaMind/Images/Certificates/The Complete Computer Basics Course: Become a Power User.jpg" /></a>
+        </div>
+
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-2dc767db-b591-4796-9c12-1054f710f7ec/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Computer Networks Simplified.jpg"/>
+            </a>
+        </div>
+        <h2>Hacking</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-bb6e6ac3-690b-4270-b6df-14780229cadf/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Web Hacking For Beginners.jpg"/>
+            </a>
+        </div>   
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-9104abb5-88ae-46af-becf-66c412f6d823/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Practical Password cracking - Office files | Ethical Hacking.jpg"/>
+            </a>
+        </div>     
+        <h2>Typing</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-3b658838-73b8-45d3-8306-9c53137d4fa8/" target="_blank"><img src="/PersonaMind/Images/Certificates/ The Complete Typing Masterclass: Touch Typing Training.jpg"/></a>
+        </div>
+        <h2>Graphic Designing</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-1c856a76-3725-4671-9466-ba04050f88a0/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Figma for User Interface and User Experience UIUX Design.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-3107f20c-6f1f-4b62-a8a1-2073b2875563/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/HTML 5,Python,Flask Framework All In One Complete Course.jpg"/>
+            </a>
+        </div>
+        <h2>Linux</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-1b7bace8-07dd-4b27-89c1-5078f3eaf849/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Linux Security .jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-7aa48e5d-6331-4958-b032-8f414bc30b4e/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Learn Linux and Shell Scripting From Basic To Advanced .jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-4754f242-b46f-4dff-bb4a-6181e6f24604/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Linux Desktop Automation.jpg"/>
+            </a>
+        </div>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-b8445156-b676-49ba-bb95-3919133c5678/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Linux Bash Scripting.jpg"/>
+            </a>
+        </div>
+        <h2>Coach</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-6b97e406-f1f3-476b-9ba3-6fd8c3362c02/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ How to Become a Life Coach - Is Training Needed.jpg"/>
+            </a>
+        </div>
+        <h2>Brain</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-a8ccc904-f4f4-4575-8fc6-871f06325a30/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Cognitive Behavioural Therapy (CBT) for Anxiety, Depression.jpg"/>
+            </a>
+        </div>
+        <h2>Softwares</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-dcb25541-df5d-4abc-9dbd-17bed4312455/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/Excel 2023 - The Complete Introduction to Excel .jpg"/>
+            </a>
+        </div>       
+        <h2>Google</h2>
+        <div class="Certificates-card">
+            <a href="https://www.udemy.com/certificate/UC-17249047-b661-435d-aa64-b6db91e46d28/" target="_blank">
+                <img src="/PersonaMind/Images/Certificates/ Data Entry Skills via Google Sheets : A Practical Course.jpg"/>
+            </a>
+        </div>
+        <!-- <div class="Certificates-card">
+            <a href="" target="_blank">
+                <img src=""/>
+            </a>
+        </div> -->
+        
+        
+        </div>
+</body>
+
+</html>
