@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz Game</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Quiz Game</h1>
+    <div id="question"></div>
+    <div id="answers"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            { question: 'What is the capital of France?', answers: ['Paris', 'Rome', 'Madrid'], correct: 0 },
+            { question: 'What is 2 + 2?', answers: ['3', '4', '5'], correct: 1 },
+            { question: 'What is the color of the sky?', answers: ['Red', 'Blue', 'Green'], correct: 1 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = question.question;
+            const answersDiv = document.getElementById('answers');
+            answersDiv.innerHTML = '';
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.textContent = answer;
+                button.onclick = () => checkAnswer(index);
+                answersDiv.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = questions[currentQuestionIndex];
+            if (selectedIndex === question.correct) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                document.getElementById('result').textContent = `Quiz over! Your score: ${score}/${questions.length}`;
+                document.getElementById('question').style.display = 'none';
+                document.getElementById('answers').style.display = 'none';
+            }
+        }
+
+        function nextQuestion() {
+            displayQuestion();
+        }
+
+        // Initialize the quiz
+        nextQuestion();
+    </script>
+</body>
+</html>

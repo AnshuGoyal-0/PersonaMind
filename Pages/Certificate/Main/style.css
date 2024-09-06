@@ -1,0 +1,451 @@
+/* Body */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #272727;
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+}
+/* Header and Navigation */
+header {
+    padding: 0.5%;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+.nav-left img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.nav-left h1 {
+    display: inline-block;
+    font-size: 16px;
+    
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #272727;
+    font-size: 20px;
+    font-weight: bolder;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+/* Drop Down */
+.dropdown {
+    position: relative;
+}
+.dropdown-toggle {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bolder;
+   
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #272727;
+    font-size: 20px;
+    font-weight: bolder;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dropdown-content {
+    font-weight: bolder;
+    color: #000000;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 300px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.dropdown-content a:hover {
+    background-color: #ffffff;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #000000;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Alone Tags */
+
+h1 {
+    font-size: 40px;
+    
+}
+h2 {
+    margin-bottom: 10px;
+}
+h4 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 30px;
+}
+p {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+p:hover {
+    color: #0077ff;
+}
+.text {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 5px;
+}
+/* link */
+a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bolder;
+    margin: 0 5px;
+    display: flex;
+}
+/* button */
+.button {
+    background-color: #fffb00;
+    font-size: 20px;
+    font-weight: bolder;
+    font-weight: bolder;
+    color: #000000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 1%;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: #0077ff;
+    font-weight: bolder;
+}
+/* section and container */
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bolder;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+/* overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.overlay:hover {
+    opacity: 1;
+}
+/* images */
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+img:hover {
+    transform: scale(1.1);
+}
+/* list */
+li {
+    text-align: left;
+    font-size: 15px;
+    font-weight: bolder;
+    margin: 0%;
+    padding: 0%;
+}
+li:hover {
+    color: rgb(255, 74, 74);
+    font-size: 20px;
+}
+/* Hide extra space */
+html {
+    overflow-x: hidden;
+}
+/* end */
+/* Projects */
+.project {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.project:hover {
+    opacity: 1;
+}
+/* Apps */
+
+.app {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.app:hover {
+    opacity: 1;
+}
+
+/* Services */
+.service {
+    position: relative;
+    width: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.service:hover {
+    opacity: 1;
+}
+.details {
+    background-color: #272727;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.details:hover {
+    background-color: #0077ff;
+    transform: scale(1.1);
+}
+/* Certificate */
+.Certificate {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.Certificate:hover {
+    opacity: 1;
+}
+
+/* Computer_Classs */
+
+.Computer_Class {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.Computer_Class:hover {
+    opacity: 1;
+}
+.details {
+    font-size: 20px;
+    font-weight: bolder;
+}
+.details:hover {
+    background-color: #0077ff;
+    transform: scale(1.1);
+}
+
+/* Contact */
+.main-card {
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    text-align: center;
+}
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+.profile img:hover {
+    transform: scale(1.1);
+}
+
+.contact-buttons a {
+    color: #ffffff;
+    border-radius: 20%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.contact-buttons i {
+    font-size: 24px;
+    line-height: 1;
+}
+.social-media {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+.social-card {
+    border-radius: 10px;
+    background-color: #333;
+    padding: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.social-card:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+.social-card i {
+    font-size: 1.5rem;
+}
+.contact-card {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+}
+/* Games */
+.Game {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.Game:hover {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 1200px) {
+    .project, .app, .service, .Certificate, .Computer_Class, .Game {
+        width: 250px;
+    }
+    .dropdown-content {
+        min-width: 250px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .project, .app, .service, .Certificate, .Computer_Class, .Game {
+        width: 200px;
+    }
+    .dropdown-content {
+        min-width: 200px;
+    }
+    .nav-left img {
+        width: 40px;
+        height: 40px;
+    }
+    .nav-left h1, .dropdown-toggle {
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+    .details {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        
+    }
+    .nav-right {
+        margin-top: 10px;
+    }
+    .project, .app, .service, .Certificate, .Computer_Class, .Game {
+        width: 100%;
+    }
+    .contact-buttons a {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    body {
+        font-size: 16px;
+    }
+    .project, .app, .service, .Certificate, .Computer_Class, .Game {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .button, .dropdown-toggle, .details {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+    .dropdown-content {
+        min-width: 150px;
+    }
+    .nav-left img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    h4 {
+        font-size: 16px;
+    }
+    .text {
+        font-size: 16px;
+    }
+    .button, .dropdown-toggle, .details {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
+    .nav-left img {
+        width: 30px;
+        height: 30px;
+    }
+    .nav-left h1, .dropdown-toggle {
+        font-size: 16px;
+        padding: 6px 10px;
+    }
+}

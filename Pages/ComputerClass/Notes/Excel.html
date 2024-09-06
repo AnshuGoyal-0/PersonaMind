@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        /* Dark theme body */
+        body.dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+    
+        /* Header styles */
+        header {
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+    
+        body.dark-theme header {
+            background-color: #1a1a1a;
+        }
+    
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+    
+        /* Navigation styles */
+        nav {
+            background: #444;
+            color: #fff;
+            padding: 0.5rem 0;
+        }
+    
+        body.dark-theme nav {
+            background: #2c2c2c;
+        }
+    
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+    
+        nav ul li {
+            margin: 0 1rem;
+        }
+    
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Content styles */
+        .content {
+            padding: 2rem;
+            width: auto;
+        }
+    
+        .content section {
+            margin-bottom: 2rem;
+        }
+    
+        .content h2 {
+            font-size: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    
+        body.dark-theme .content h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+    
+        .content ul {
+            padding-left: 1.5rem;
+        }
+    
+        .content ul li {
+            margin-bottom: 0.5rem;
+        }
+    
+        .content p {
+            margin-bottom: 1rem;
+        }
+    
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    
+        /* Card Theme for .question */
+        .question {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 40px;
+            font-weight: bolder;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+    
+        .question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    
+        body.dark-theme .question {
+            background: #1e1e1e;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+    
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+    
+        body.dark-theme h1, body.dark-theme h2 {
+            color: #4A90E2;
+        }
+    
+        h2 {
+            color: #007BFF;
+            text-align: center;
+        }
+    
+        ul {
+            list-style-type: square;
+            font-weight: bold;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-weight: bold;
+        }
+    
+        table, th, td {
+            border: 1px solid #1784ff;
+            font-weight: bold;
+        }
+    
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+    
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    
+        body.dark-theme th {
+            background-color: #4A90E2;
+        }
+    
+        td {
+            background-color: #ffffff;
+        }
+    
+        body.dark-theme td {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+    
+        .question li:hover {
+            font-size: large;
+            color: #ff0000;
+        }
+    
+        body.dark-theme .question li:hover {
+            color: #ff4f4f;
+        }
+    
+        .question h3 {
+            font-weight: bold;
+            margin: 5px;
+            text-align: center;
+            font-size: 20px;
+        }
+    
+        .answer {
+            margin-left: 5px;
+        }
+    
+        td:hover {
+            font-size: 20px;
+        }
+    
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s, color 0.3s;
+            color: #000;
+        }
+
+    
+        .icon-sun, .icon-moon {
+            display: none;
+            transition: color 0.3s;
+        }
+    
+        /* Light Theme Styling */
+        body.light-theme .theme-toggle {
+            color: #000000;
+        }
+    
+        body.light-theme .icon-sun {
+            display: inline-block;
+        }
+    
+        /* Dark Theme Styling */
+        body.dark-theme .theme-toggle {
+            color: #ffffff;
+        }
+    
+        body.dark-theme .icon-moon {
+            display: inline-block;
+        }
+        .head {
+        display: flex;        
+    }
+    </style>
+    
+    
+</head>
+<body>
+    <div>
+        <div class="head">
+            <h1>Excel __ </h1>
+        <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-sun icon-sun"></i>
+            <i class="fas fa-moon icon-moon"></i>
+        </button> 
+        <h1>__</h1>
+    </div> 
+    <div class="content">
+        <section id="what">
+            <h2>What is Microsoft Excel?</h2>
+            <p>Microsoft Excel is a spreadsheet application developed by Microsoft. It is part of the Microsoft Office suite and is widely used for data analysis, visualization, and management.</p>
+        </section>
+        <section id="why">
+            <h2>Why We Use Excel</h2>
+            <ul>
+                <li><strong>Data Organization:</strong> Excel allows users to organize data into rows and columns, making it easy to input, manage, and retrieve information.</li>
+                <li><strong>Data Analysis:</strong> Excel provides powerful tools for analyzing data, including formulas, functions, and pivot tables. This helps in performing calculations, summarizing data, and drawing insights.</li>
+                <li><strong>Data Visualization:</strong> Users can create various types of charts and graphs to visualize data trends, comparisons, and patterns.</li>
+                <li><strong>Data Management:</strong> Excel supports large datasets and provides tools for sorting, filtering, and managing data efficiently.</li>
+                <li><strong>Automation:</strong> With macros and VBA (Visual Basic for Applications), users can automate repetitive tasks and create custom functions.</li>
+            </ul>
+        </section>
+        <section id="where">
+            <h2>Where It’s Used</h2>
+            <ul>
+                <li><strong>Business:</strong> For financial analysis, budgeting, forecasting, and reporting.</li>
+                <li><strong>Education:</strong> To track student grades, manage educational data, and perform research analysis.</li>
+                <li><strong>Personal Finance:</strong> For managing household budgets, tracking expenses, and planning investments.</li>
+                <li><strong>Data Analysis:</strong> In various industries to analyze sales data, customer data, and operational metrics.</li>
+                <li><strong>Project Management:</strong> To create project timelines, track milestones, and manage resources.</li>
+            </ul>
+        </section>
+        <section id="shortcuts">
+            <h2>Excel Shortcuts</h2>
+            <p>Using keyboard shortcuts in Excel can significantly improve your productivity and efficiency by allowing you to perform tasks quickly without needing to navigate through menus. Here’s a comprehensive list of commonly used shortcuts and why they are useful:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                        <th>Why It’s Useful</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ctrl + C</td>
+                        <td>Copy selected cells</td>
+                        <td>Allows you to quickly duplicate data without manually copying it.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + X</td>
+                        <td>Cut selected cells</td>
+                        <td>Helps move data from one location to another easily by cutting and pasting.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + V</td>
+                        <td>Paste copied/cut cells</td>
+                        <td>Enables you to quickly insert data that was copied or cut from another location.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Z</td>
+                        <td>Undo the last action</td>
+                        <td>Allows you to revert recent changes if a mistake is made.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Y</td>
+                        <td>Redo the last action</td>
+                        <td>Re-applies an action that was previously undone, helpful for correcting mistakes.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + A</td>
+                        <td>Select all cells</td>
+                        <td>Selects the entire worksheet or a data range for quick operations.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + S</td>
+                        <td>Save the current workbook</td>
+                        <td>Ensures that your work is saved quickly and reduces the risk of losing data.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + P</td>
+                        <td>Print the current worksheet</td>
+                        <td>Provides a fast way to print your data without navigating through the Print menu.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + F</td>
+                        <td>Open the Find dialog box</td>
+                        <td>Allows you to search for specific data within your worksheet quickly.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + H</td>
+                        <td>Open the Replace dialog box</td>
+                        <td>Facilitates replacing specific data or text within the worksheet.</td>
+                    </tr>
+                    <tr>
+                        <td>F2</td>
+                        <td>Edit the active cell</td>
+                        <td>Enables you to quickly edit the content of the currently selected cell.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + E, S, V</td>
+                        <td>Paste Special</td>
+                        <td>Provides options for pasting data with specific formats or attributes.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Arrow Key</td>
+                        <td>Navigate to the edge of data region</td>
+                        <td>Quickly moves you to the boundary of data ranges, speeding up navigation.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + L</td>
+                        <td>Add or remove filters</td>
+                        <td>Allows you to easily filter data to focus on specific subsets.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + $</td>
+                        <td>Apply currency format</td>
+                        <td>Formats selected cells to display values as currency, simplifying financial data presentation.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + T</td>
+                        <td>Create a table</td>
+                        <td>Transforms a range of data into a table, enabling easier data management and analysis.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + "+ "</td>
+                        <td>Insert a new row or column</td>
+                        <td>Quickly adds new rows or columns without using the context menu.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + "-"</td>
+                        <td>Delete the selected row or column</td>
+                        <td>Removes rows or columns swiftly, streamlining data editing.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + H, O, I</td>
+                        <td>Auto-fit column width</td>
+                        <td>Adjusts column widths to fit the content, making your data easier to read.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + K</td>
+                        <td>Insert a hyperlink</td>
+                        <td>Inserts links to other documents or web pages, integrating additional resources.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + D</td>
+                        <td>Fill down</td>
+                        <td>Copies the content of the top cell into the cells below, speeding up data entry.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + R</td>
+                        <td>Fill right</td>
+                        <td>Copies the content of the leftmost cell into the cells to the right.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + Arrow Key</td>
+                        <td>Select a range of cells</td>
+                        <td>Quickly selects a block of cells, facilitating data manipulation.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + "+ "</td>
+                        <td>Insert new cells</td>
+                        <td>Quickly inserts new cells into the selected area without removing existing data.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + 1</td>
+                        <td>Open Format Cells dialog box</td>
+                        <td>Provides quick access to cell formatting options, such as number formats and alignment.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + &</td>
+                        <td>Add border to selected cells</td>
+                        <td>Applies borders to selected cells to enhance data presentation.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + _</td>
+                        <td>Remove border from selected cells</td>
+                        <td>Removes borders from selected cells, useful for clearing formatting.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + U</td>
+                        <td>Expand or collapse the formula bar</td>
+                        <td>Allows you to toggle the formula bar's visibility for better visibility of long formulas.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Page Up/Page Down</td>
+                        <td>Switch between worksheet tabs</td>
+                        <td>Quickly navigates between different worksheets within the same workbook.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + F4</td>
+                        <td>Close the current workbook</td>
+                        <td>Closes the currently open workbook window, speeding up workspace management.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + F</td>
+                        <td>Open the Font dialog box</td>
+                        <td>Provides access to advanced font formatting options, such as typeface and size.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + E, S, T</td>
+                        <td>Transpose data during paste</td>
+                        <td>Changes the orientation of data when pasting, switching rows and columns.</td>
+                    </tr>
+                    <tr>
+                        <td>F4</td>
+                        <td>Repeat the last action</td>
+                        <td>Repeats the last action, saving time if you need to apply the same formatting or operation multiple times.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + 5</td>
+                        <td>Apply percentage format</td>
+                        <td>Formats selected cells to display values as percentages, useful for financial and statistical data.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + E, S, F</td>
+                        <td>Paste as Values</td>
+                        <td>Past data as plain values, stripping away formulas and formatting.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + N</td>
+                        <td>Apply the Normal style</td>
+                        <td>Resets selected cells to the default formatting style, useful for clearing custom formats.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + O</td>
+                        <td>Select all cells with comments</td>
+                        <td>Quickly selects cells that contain comments for review or editing.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + 7</td>
+                        <td>Add or remove outline border</td>
+                        <td>Quickly adds or removes an outline border around the selected cells, useful for organizing data visually.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + H, M, C</td>
+                        <td>Center align selected cells</td>
+                        <td>Centers text and numbers within the selected cells for improved readability and presentation.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + H, M, L</td>
+                        <td>Left align selected cells</td>
+                        <td>Aligns text and numbers to the left edge of the selected cells.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + H, M, R</td>
+                        <td>Right align selected cells</td>
+                        <td>Aligns text and numbers to the right edge of the selected cells.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Shift + T</td>
+                        <td>Insert table</td>
+                        <td>Quickly converts a range of data into a table format for easier data management.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + Alt + F5</td>
+                        <td>Refresh all data connections</td>
+                        <td>Updates all data connections within the workbook, ensuring the most current data is displayed.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + K</td>
+                        <td>Insert hyperlink</td>
+                        <td>Enables adding links to other documents or websites, integrating external resources.</td>
+                    </tr>
+                    <tr>
+                        <td>Alt + Enter</td>
+                        <td>Start a new line within a cell</td>
+                        <td>Inserts a line break within the same cell, allowing for multi-line text entries.</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl + `</td>
+                        <td>Show or hide formulas</td>
+                        <td>Toggles the visibility of formulas within cells, useful for debugging and reviewing calculations.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+    <section class ="tables">
+<h2>1. Student Result</h2>
+<table >
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Hindi</th>
+        <th>English</th>
+        <th>Math</th>
+        <th>SST</th>
+        <th>Science</th>
+        <th>Total</th>
+        <th>Percentage</th>
+        <th>Pass/Fail</th>
+        <th>Rank</th>
+        <th>Scholarship</th>
+    </tr>
+</thead>
+    <tr>
+        <td>Anshu</td>
+        <td>85</td>
+        <td>90</td>
+        <td>78</td>
+        <td>82</td>
+        <td>88</td>
+        <td>423</td>
+        <td>84.6</td>
+        <td>PASS</td>
+        <td>13</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>92</td>
+        <td>88</td>
+        <td>76</td>
+        <td>85</td>
+        <td>79</td>
+        <td>420</td>
+        <td>84</td>
+        <td>PASS</td>
+        <td>14</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Emily</td>
+        <td>78</td>
+        <td>95</td>
+        <td>82</td>
+        <td>88</td>
+        <td>85</td>
+        <td>428</td>
+        <td>85.6</td>
+        <td>PASS</td>
+        <td>11</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Michael</td>
+        <td>88</td>
+        <td>85</td>
+        <td>90</td>
+        <td>79</td>
+        <td>91</td>
+        <td>433</td>
+        <td>86.6</td>
+        <td>PASS</td>
+        <td>8</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Sarah</td>
+        <td>75</td>
+        <td>91</td>
+        <td>85</td>
+        <td>92</td>
+        <td>83</td>
+        <td>426</td>
+        <td>85.2</td>
+        <td>PASS</td>
+        <td>12</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>David</td>
+        <td>89</td>
+        <td>93</td>
+        <td>79</td>
+        <td>86</td>
+        <td>87</td>
+        <td>434</td>
+        <td>86.8</td>
+        <td>PASS</td>
+        <td>6</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Emma</td>
+        <td>80</td>
+        <td>87</td>
+        <td>94</td>
+        <td>81</td>
+        <td>94</td>
+        <td>436</td>
+        <td>87.2</td>
+        <td>PASS</td>
+        <td>5</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>James</td>
+        <td>94</td>
+        <td>84</td>
+        <td>88</td>
+        <td>87</td>
+        <td>88</td>
+        <td>441</td>
+        <td>88.2</td>
+        <td>PASS</td>
+        <td>3</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Lily</td>
+        <td>87</td>
+        <td>92</td>
+        <td>76</td>
+        <td>89</td>
+        <td>76</td>
+        <td>420</td>
+        <td>84</td>
+        <td>PASS</td>
+        <td>14</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Ethan</td>
+        <td>91</td>
+        <td>89</td>
+        <td>83</td>
+        <td>90</td>
+        <td>79</td>
+        <td>432</td>
+        <td>86.4</td>
+        <td>PASS</td>
+        <td>9</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Olivia</td>
+        <td>82</td>
+        <td>96</td>
+        <td>81</td>
+        <td>91</td>
+        <td>81</td>
+        <td>431</td>
+        <td>86.2</td>
+        <td>PASS</td>
+        <td>10</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Daniel</td>
+        <td>85</td>
+        <td>87</td>
+        <td>92</td>
+        <td>88</td>
+        <td>82</td>
+        <td>434</td>
+        <td>86.8</td>
+        <td>PASS</td>
+        <td>6</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Ava</td>
+        <td>79</td>
+        <td>94</td>
+        <td>87</td>
+        <td>93</td>
+        <td>87</td>
+        <td>440</td>
+        <td>88</td>
+        <td>PASS</td>
+        <td>4</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Benjamin</td>
+        <td>90</td>
+        <td>82</td>
+        <td>95</td>
+        <td>94</td>
+        <td>89</td>
+        <td>450</td>
+        <td>90</td>
+        <td>PASS</td>
+        <td>2</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Mia</td>
+        <td>93</td>
+        <td>86</td>
+        <td>89</td>
+        <td>95</td>
+        <td>90</td>
+        <td>453</td>
+        <td>90.6</td>
+        <td>PASS</td>
+        <td>1</td>
+        <td>Yes</td>
+    </tr>
+</table>
+<h2>Formulas</h2>
+<table>
+    <tr>
+        <td>Total Marks:</td>
+    </tr>
+    <tr>
+        <td>Formula: Total Marks = Subject1 + Subject2 + Subject3 + ...</td>
+    </tr>
+    <tr>
+        <td>Percentage:</td>
+    </tr>
+    <tr>
+        <td>Formula: Percentage = (Total Marks / Total Possible Marks) * 100</td>
+    </tr>
+    <tr>
+        <td>Pass/Fail:</td>
+    </tr>
+    <tr>
+        <td>Formula (Assuming passing criteria is 40%): Pass/Fail = IF(Percentage &gt;= 40, &quot;Pass&quot;, &quot;Fail&quot;)</td>
+    </tr>
+    <tr>
+        <td>Rank (Assuming descending order):</td>
+    </tr>
+    <tr>
+        <td>Formula: Rank = RANK(Percentage, Descending Order)</td>
+    </tr>
+    <tr>
+        <td>Scholarship (Assuming top 3 students):</td>
+    </tr>
+    <tr>
+        <td>Formula: Scholarship = IF(Rank &lt;= 3, &quot;Yes&quot;, &quot;No&quot;)</td>
+    </tr>
+</table>
+<h2>2. Attendance</h2>
+<table>
+    <tr>
+        <th>Student Name</th>
+        <th colspan="10">ATTENDENCE</th>
+        <th>PRESENT</th>
+        <th>ABSENT</th>
+        <th>LATE</th>
+    </tr>
+    <tr>
+        <td>John Doe</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>6</td>
+        <td>1</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>Jane Smith</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>P</td>
+        <td>L</td>
+        <td>6</td>
+        <td>0</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Bob Johnson</td>
+        <td>L</td>
+        <td>A</td>
+        <td>L</td>
+        <td>L</td>
+        <td>A</td>
+        <td>L</td>
+        <td>A</td>
+        <td>L</td>
+        <td>L</td>
+        <td>A</td>
+        <td>0</td>
+        <td>4</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Alice Williams</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>A</td>
+        <td>0</td>
+        <td>9</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Charlie Brown</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>4</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Emily Davis</td>
+        <td>L</td>
+        <td>P</td>
+        <td>L</td>
+        <td>L</td>
+        <td>P</td>
+        <td>L</td>
+        <td>P</td>
+        <td>L</td>
+        <td>L</td>
+        <td>P</td>
+        <td>4</td>
+        <td>0</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Michael </td>
+        <td>A</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>A</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>2</td>
+        <td>3</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Olivia Taylor</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>A</td>
+        <td>L</td>
+        <td>P</td>
+        <td>A</td>
+        <td>4</td>
+        <td>4</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>David Smith</td>
+        <td>P</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>P</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>8</td>
+        <td>2</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Sophia Miller</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>P</td>
+        <td>A</td>
+        <td>P</td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+    </tr>
+</table>
+<h2>Formulas</h2>
+<table>
+    <thead>
+        <tr>
+            <th>FORMULAS</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>PRESENT = COUNTIF(RANGE,&quot;P&quot;)</td>
+    </tr>
+    <tr>
+        <td>ABSENT = COUNTIF(RANGE,&quot;A&quot;)</td>
+    </tr>
+    <tr>
+        <td>LATE = COUNTIF(RANGE,&quot;L&quot;)</td>
+    </tr>
+</table>
+<h2>3. Salary Slipt</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Post</th>
+            <th>Basic</th>
+            <th>HRA</th>
+            <th>CCA</th>
+            <th>DA</th>
+            <th>OD</th>
+            <th>OI</th>
+            <th>PF</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Doctor</td>
+            <td>35000</td>
+            <td>10500</td>
+            <td>1575</td>
+            <td>158</td>
+            <td>0</td>
+            <td>2100</td>
+            <td>3500</td>
+        </tr>
+        <tr>
+            <td>Engineer</td>
+            <td>25000</td>
+            <td>7500</td>
+            <td>1125</td>
+            <td>113</td>
+            <td>0</td>
+            <td>1500</td>
+            <td>2500</td>
+        </tr>
+        <tr>
+            <td>Teacher</td>
+            <td>18000</td>
+            <td>3600</td>
+            <td>540</td>
+            <td>54</td>
+            <td>0</td>
+            <td>1080</td>
+            <td>1800</td>
+        </tr>
+        <tr>
+            <td>Manager</td>
+            <td>26000</td>
+            <td>7800</td>
+            <td>1170</td>
+            <td>117</td>
+            <td>0</td>
+            <td>1560</td>
+            <td>2600</td>
+        </tr>
+        <tr>
+            <td>Scientist</td>
+            <td>34000</td>
+            <td>10200</td>
+            <td>1530</td>
+            <td>153</td>
+            <td>0</td>
+            <td>2040</td>
+            <td>3400</td>
+        </tr>
+        <tr>
+            <td>A/C Manager</td>
+            <td>15000</td>
+            <td>3000</td>
+            <td>450</td>
+            <td>45</td>
+            <td>0</td>
+            <td>900</td>
+            <td>1500</td>
+        </tr>
+        <tr>
+            <td>Police Officer</td>
+            <td>102008</td>
+            <td>30602</td>
+            <td>6120</td>
+            <td>612</td>
+            <td>0</td>
+            <td>6120</td>
+            <td>10200</td>
+        </tr>
+        <tr>
+            <td>Supervisor As</td>
+            <td>8000</td>
+            <td>1600</td>
+            <td>240</td>
+            <td>24</td>
+            <td>0</td>
+            <td>480</td>
+            <td>800</td>
+        </tr>
+        <tr>
+            <td>Hardware</td>
+            <td>3000</td>
+            <td>600</td>
+            <td>90</td>
+            <td>9</td>
+            <td>0</td>
+            <td>180</td>
+            <td>300</td>
+        </tr>
+    </tbody>
+</table>
+<h2>Formulas</h2>
+<table>
+    <tr>
+        <td>HRA (House Rent Allowance):</td>
+    </tr>
+    <tr>
+        <td>HRA = if(Basic &gt; 18000, Basic * 0.30, Basic * 0.20)</td>
+    </tr>
+    <tr>
+        <td>CCA (City Conveyance Allowance):</td>
+    </tr>
+    <tr>
+        <td>CCA = if(Basic &gt; 18000, Basic * 0.20, Basic * 0.15)</td>
+    </tr>
+    <tr>
+        <td>DA (Dearness Allowance):</td>
+    </tr>
+    <tr>
+        <td>DA = if(Basic &gt; 18000, Basic * 0.12, Basic * 0.10)</td>
+    </tr>
+</table>
+<h2>Meaning</h2>
+<table>
+    <tr>
+        <td>OI (Other Includes): Fixed, so no calculation needed.</td>
+    </tr>
+    <tr>
+        <td>OD (Other Deduction): Fixed, so no calculation needed.</td>
+    </tr>
+    <tr>
+        <td>PF (Provident Fund): Fixed value specified in the table.</td>
+    </tr>
+</table>
+<h2>4. Showroom</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Vehicle</th>
+            <th>Factory Price</th>
+            <th>Tax (4%)</th>
+            <th>Transport Cash</th>
+            <th>Cash Price</th>
+            <th>Showroom Tax</th>
+            <th>Profit (9%)</th>
+            <th>Showroom Price</th>
+            <th>Road Tax (2%)</th>
+            <th>Insurance (3%)</th>
+            <th>Sale Price</th>
+            <th>Down Payment</th>
+            <th>Balance</th>
+            <th>Year</th>
+            <th>Interest</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Car A</td>
+            <td>25000</td>
+            <td>1000</td>
+            <td>100</td>
+            <td>26100</td>
+            <td>1566</td>
+            <td>2490</td>
+            <td>30156</td>
+            <td>603</td>
+            <td>500</td>
+            <td>31259</td>
+            <td>5000</td>
+            <td>26259</td>
+            <td>3</td>
+            <td>7090</td>
+            <td>33349</td>
+        </tr>
+        <tr>
+            <td>Bike B</td>
+            <td>12000</td>
+            <td>480</td>
+            <td>100</td>
+            <td>12580</td>
+            <td>754.8</td>
+            <td>1200</td>
+            <td>14535</td>
+            <td>291</td>
+            <td>500</td>
+            <td>15326</td>
+            <td>3000</td>
+            <td>12326</td>
+            <td>3</td>
+            <td>3328</td>
+            <td>15654</td>
+        </tr>
+        <tr>
+            <td>Car C</td>
+            <td>30000</td>
+            <td>1200</td>
+            <td>100</td>
+            <td>31300</td>
+            <td>1878</td>
+            <td>2986</td>
+            <td>36164</td>
+            <td>723</td>
+            <td>500</td>
+            <td>37387</td>
+            <td>5000</td>
+            <td>32387</td>
+            <td>3</td>
+            <td>8745</td>
+            <td>41132</td>
+        </tr>
+        <tr>
+            <td>Bike D</td>
+            <td>8000</td>
+            <td>320</td>
+            <td>100</td>
+            <td>8420</td>
+            <td>505.2</td>
+            <td>803</td>
+            <td>9728</td>
+            <td>195</td>
+            <td>500</td>
+            <td>10423</td>
+            <td>1000</td>
+            <td>9423</td>
+            <td>3</td>
+            <td>2544</td>
+            <td>11967</td>
+        </tr>
+        <tr>
+            <td>Car E</td>
+            <td>35000</td>
+            <td>1400</td>
+            <td>100</td>
+            <td>36500</td>
+            <td>2190</td>
+            <td>3482</td>
+            <td>42172</td>
+            <td>843</td>
+            <td>500</td>
+            <td>43516</td>
+            <td>2000</td>
+            <td>41516</td>
+            <td>3</td>
+            <td>11209</td>
+            <td>52725</td>
+        </tr>
+        <tr>
+            <td>Bike F</td>
+            <td>5000</td>
+            <td>200</td>
+            <td>100</td>
+            <td>5300</td>
+            <td>318</td>
+            <td>506</td>
+            <td>6124</td>
+            <td>122</td>
+            <td>500</td>
+            <td>6746</td>
+            <td>800</td>
+            <td>5946</td>
+            <td>3</td>
+            <td>1605</td>
+            <td>7552</td>
+        </tr>
+        <tr>
+            <td>Car G</td>
+            <td>45000</td>
+            <td>1800</td>
+            <td>100</td>
+            <td>46900</td>
+            <td>2814</td>
+            <td>4474</td>
+            <td>54188</td>
+            <td>1084</td>
+            <td>500</td>
+            <td>55772</td>
+            <td>2000</td>
+            <td>53772</td>
+            <td>3</td>
+            <td>14518</td>
+            <td>68290</td>
+        </tr>
+        <tr>
+            <td>Bike H</td>
+            <td>7000</td>
+            <td>280</td>
+            <td>100</td>
+            <td>7380</td>
+            <td>442.8</td>
+            <td>704</td>
+            <td>8527</td>
+            <td>171</td>
+            <td>500</td>
+            <td>9197</td>
+            <td>2000</td>
+            <td>7197</td>
+            <td>3</td>
+            <td>1943</td>
+            <td>9141</td>
+        </tr>
+        <tr>
+            <td>Car I</td>
+            <td>28000</td>
+            <td>1120</td>
+            <td>100</td>
+            <td>29220</td>
+            <td>1753.2</td>
+            <td>2788</td>
+            <td>33761</td>
+            <td>675</td>
+            <td>500</td>
+            <td>34936</td>
+            <td>3000</td>
+            <td>31936</td>
+            <td>3</td>
+            <td>8623</td>
+            <td>40559</td>
+        </tr>
+        <tr>
+            <td>Bike J</td>
+            <td>6000</td>
+            <td>240</td>
+            <td>100</td>
+            <td>6340</td>
+            <td>380.4</td>
+            <td>605</td>
+            <td>7325</td>
+            <td>147</td>
+            <td>500</td>
+            <td>7972</td>
+            <td>5000</td>
+            <td>2972</td>
+            <td>3</td>
+            <td>802</td>
+            <td>3774</td>
+        </tr>
+    </tbody>
+</table>
+<h2>Formulas and Meaning</h2>
+<table>
+    <tr>
+        <td>1. Tax: Tax =  Factory_Price * 0.04</td>
+        <td>&gt;&gt;</td>
+        <td>Tax: Calculates the tax amount (4%) based on the factory price.</td>
+    </tr>
+    <tr>
+        <td>2. Transport Cash:  Transport_Cash = 50 (fixed value)</td>
+        <td>&gt;&gt;</td>
+        <td>Transport Cash: A fixed cost of 50 for transportation.</td>
+    </tr>
+    <tr>
+        <td>3. Cash Price:  Cash_Price = Factory_Price + Tax + Transport_Cash</td>
+        <td>&gt;&gt;</td>
+        <td>Cash Price: Adds the tax and transport cash to the factory price.</td>
+    </tr>
+    <tr>
+        <td>4. Showroom Price:  Showroom_Price = Cost_Price + Showroom_Tax + Profit</td>
+        <td>&gt;&gt;</td>
+        <td>Showroom Price: Includes cost price, showroom tax, and profit to  determine the showroom price.</td>
+    </tr>
+    <tr>
+        <td>5. Profit: Profit =  (Cost_Price + Showroom_Tax) * 0.09</td>
+        <td>&gt;&gt;</td>
+        <td>Profit: Calculates the profit (9%) based on the cost price and showroom tax.</td>
+    </tr>
+    <tr>
+        <td>6. Road Tax:  Road_Tax = Showroom_Price * 0.02 (corrected to 2%)</td>
+        <td>&gt;&gt;</td>
+        <td>Road Tax: Calculates the road tax (corrected to 2%) on the showroom price.</td>
+    </tr>
+    <tr>
+        <td>7. Sale Price:  Sale_Price = Showroom_Price + Road_Tax + Insurance (replace Insurance with its actual value)</td>
+        <td>&gt;&gt;</td>
+        <td>Sale Price: Adds road tax and insurance to the showroom price  (replace Insurance with its actual value).</td>
+    </tr>
+    <tr>
+        <td>8. Down Payment:  Down_Payment = 25000 (fixed value)</td>
+        <td>&gt;&gt;</td>
+        <td>Down Payment: Represents the fixed down payment amount of 25,000.</td>
+    </tr>
+    <tr>
+        <td>9. Balance:  Balance = Sale_Price - Down_Payment</td>
+        <td>&gt;&gt;</td>
+        <td>Balance: Calculates the remaining amount after subtracting the  down payment from the sale price.</td>
+    </tr>
+    <tr>
+        <td>10. Interest:  Interest = Balance * 0.09 * Year (calculates interest for the entire loan period)</td>
+        <td>&gt;&gt;</td>
+        <td>Interest: Calculates the total interest for the entire loan period by multiplying the balance, interest rate (9%), and loan duration (years).</td>
+    </tr>
+    <tr>
+        <td>11. Total Amount:  Total_Amount = Balance + Interest</td>
+        <td>&gt;&gt;</td>
+        <td>Total Amount: Adds the balance and total interest to get the total amount to be repaid.</td>
+    </tr>
+    <tr>
+        <td>12. Number of Months:  Number_of_Months = Year * 12</td>
+        <td>&gt;&gt;</td>
+        <td>Number of Months: Converts the loan duration (years) into the total number of months.</td>
+    </tr>
+    <tr>
+        <td>13. Monthly Installment:  Monthly_Installment = Total_Amount / Number_of_Months</td>
+        <td>&gt;&gt;</td>
+        <td>Monthly Installment: Divides the total amount by the number of months to determine the monthly installment amount.</td>
+    </tr>
+</table>
+<h2>5. Stock</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Items</th>
+            <th>Stock</th>
+            <th>P.Price</th>
+            <th>S.Price</th>
+            <th>Sale</th>
+            <th>Rstock</th>
+            <th>A.Price</th>
+            <th>Sale Value</th>
+            <th>Profit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Red balloon</td>
+            <td>100</td>
+            <td>5</td>
+            <td>8</td>
+            <td>20</td>
+            <td>80</td>
+            <td>100</td>
+            <td>160</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Leather wallet</td>
+            <td>50</td>
+            <td>10</td>
+            <td>15</td>
+            <td>10</td>
+            <td>40</td>
+            <td>100</td>
+            <td>150</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Electric kettle</td>
+            <td>75</td>
+            <td>3</td>
+            <td>6</td>
+            <td>25</td>
+            <td>50</td>
+            <td>75</td>
+            <td>150</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>Cactus plant</td>
+            <td>120</td>
+            <td>2</td>
+            <td>4</td>
+            <td>30</td>
+            <td>90</td>
+            <td>60</td>
+            <td>120</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Tennis racket</td>
+            <td>200</td>
+            <td>8</td>
+            <td>12</td>
+            <td>50</td>
+            <td>150</td>
+            <td>400</td>
+            <td>600</td>
+            <td>200</td>
+        </tr>
+        <tr>
+            <td>Goldfish bowl</td>
+            <td>30</td>
+            <td>15</td>
+            <td>25</td>
+            <td>5</td>
+            <td>25</td>
+            <td>75</td>
+            <td>125</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Umbrella</td>
+            <td>80</td>
+            <td>6</td>
+            <td>10</td>
+            <td>15</td>
+            <td>65</td>
+            <td>90</td>
+            <td>150</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Blue notebook</td>
+            <td>40</td>
+            <td>12</td>
+            <td>18</td>
+            <td>10</td>
+            <td>30</td>
+            <td>120</td>
+            <td>180</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Hiking boots</td>
+            <td>60</td>
+            <td>4</td>
+            <td>7</td>
+            <td>20</td>
+            <td>40</td>
+            <td>80</td>
+            <td>140</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>Chocolate bar</td>
+            <td>90</td>
+            <td>9</td>
+            <td>14</td>
+            <td>25</td>
+            <td>65</td>
+            <td>225</td>
+            <td>350</td>
+            <td>125</td>
+        </tr>
+    </tbody>
+</table>
+<h2>Formulas</h2>
+<table>
+    <thead>
+        <tr>
+            <th>FORMULAS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1. R.Stock = Stock - Sale</td>
+        </tr>
+        <tr>
+            <td>2. A.Price = P.Price * Sale</td>
+        </tr>
+        <tr>
+            <td>3. Sale Value = S.Price * Sale</td>
+        </tr>
+        <tr>
+            <td>4. Profit = Sale Value - A.Price</td>
+        </tr>
+    </tbody>
+</table>
+</section>        
+        <section id="questions">
+
+            <div class="question">
+                <h3>Question 1: How do I create a new Excel workbook?</h3>
+                <ol>
+                <li>Open Excel.</li>
+                <li>Click on "File" in the top-left corner of the window.</li>
+                <li>Select "New" from the menu on the left.</li>
+                <li>Choose "Blank workbook" or select a template from the available options.</li>
+                <li>Click on "Create" or "New" to open a new workbook.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 2: How can I apply a formula in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula, starting with an equal sign (=).</li>
+                <li>Enter the required function or formula, such as <code>=SUM(A1:A10)</code>.</li>
+                <li>Press "Enter" to execute the formula.</li>
+                <li>The result will be displayed in the selected cell.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 3: How do I format cells in Excel?</h3>
+                <ol>
+                <li>Select the cells you want to format.</li>
+                <li>Right-click on the selected cells and choose "Format Cells" from the context menu.</li>
+                <li>In the Format Cells dialog box, choose the desired formatting options (e.g., number format, font, border).</li>
+                <li>Click "OK" to apply the formatting.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 4: How do I create a chart in Excel?</h3>
+                <ol>
+                <li>Select the data range you want to include in the chart.</li>
+                <li>Click on the "Insert" tab in the Ribbon.</li>
+                <li>Choose the type of chart you want to create from the Charts group (e.g., Column, Line, Pie).</li>
+                <li>Excel will generate the chart and place it on the worksheet.</li>
+                <li>Use the Chart Tools to customize the chart’s appearance and layout as needed.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 5: How can I filter data in Excel?</h3>
+                <ol>
+                <li>Select the range of data you want to filter.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on the "Filter" button in the Sort &amp; Filter group.</li>
+                <li>Drop-down arrows will appear in the header row of your selected data range.</li>
+                <li>Click the drop-down arrow in the column you want to filter by and select the filter criteria.</li>
+                <li>The data will be filtered according to your selection.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 6: How do I use conditional formatting in Excel?</h3>
+                <ol>
+                <li>Select the cells you want to format conditionally.</li>
+                <li>Click on the "Home" tab in the Ribbon.</li>
+                <li>Click on "Conditional Formatting" in the Styles group.</li>
+                <li>Choose the desired formatting rule from the drop-down menu (e.g., Highlight Cell Rules, Data Bars).</li>
+                <li>Set the conditions and formatting options in the dialog box that appears.</li>
+                <li>Click "OK" to apply the conditional formatting to the selected cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 7: How can I protect a worksheet in Excel?</h3>
+                <ol>
+                <li>Open the worksheet you want to protect.</li>
+                <li>Click on the "Review" tab in the Ribbon.</li>
+                <li>Click on "Protect Sheet" in the Changes group.</li>
+                <li>Enter a password if you want to set one (optional) and specify the protection options you want (e.g., allow users to select locked cells).</li>
+                <li>Click "OK" to apply protection to the worksheet.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 8: How do I merge cells in Excel?</h3>
+                <ol>
+                <li>Select the cells you want to merge.</li>
+                <li>Click on the "Home" tab in the Ribbon.</li>
+                <li>Click on the "Merge &amp; Center" button in the Alignment group. Alternatively, click the drop-down arrow next to it to choose "Merge Across," "Merge Cells," or "Unmerge Cells."</li>
+                <li>The selected cells will be merged into one cell. If you selected "Merge &amp; Center," the text will be centered within the merged cell.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 9: How can I create a pivot table in Excel?</h3>
+                <ol>
+                <li>Select the data range you want to include in the pivot table.</li>
+                <li>Click on the "Insert" tab in the Ribbon.</li>
+                <li>Click on "PivotTable" in the Tables group.</li>
+                <li>In the Create PivotTable dialog box, choose whether to place the pivot table in a new worksheet or an existing worksheet.</li>
+                <li>Click "OK" to create the pivot table.</li>
+                <li>Use the PivotTable Field List to drag and drop fields into the Rows, Columns, Values, and Filters areas to organize your data.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 10: How do I use VLOOKUP function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=VLOOKUP(</code>.</li>
+                <li>Enter the lookup value, table array, column index number, and range lookup (TRUE for approximate match, FALSE for exact match). For example: <code>=VLOOKUP(A2, B1:D10, 3, FALSE)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 11: How can I create a named range in Excel?</h3>
+                <ol>
+                <li>Select the range of cells you want to name.</li>
+                <li>Click on the "Formulas" tab in the Ribbon.</li>
+                <li>Click on "Define Name" in the Defined Names group.</li>
+                <li>Enter a name for the range in the Name field.</li>
+                <li>Click "OK" to create the named range.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 12: How do I use the SUMIF function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SUMIF(</code>.</li>
+                <li>Enter the range to evaluate, criteria, and sum range. For example: <code>=SUMIF(A1:A10, "Apples", B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 13: How can I use data validation in Excel?</h3>
+                <ol>
+                <li>Select the cell or range of cells where you want to apply data validation.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Data Validation" in the Data Tools group.</li>
+                <li>In the Data Validation dialog box, choose the validation criteria you want (e.g., list, whole number, date).</li>
+                <li>Enter the required details and click "OK" to apply the validation rules.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 14: How do I create a conditional formatting rule based on a formula?</h3>
+                <ol>
+                <li>Select the cells you want to apply conditional formatting to.</li>
+                <li>Click on the "Home" tab in the Ribbon.</li>
+                <li>Click on "Conditional Formatting" in the Styles group.</li>
+                <li>Select "New Rule" from the drop-down menu.</li>
+                <li>Choose "Use a formula to determine which cells to format."</li>
+                <li>Enter your formula in the "Format values where this formula is true" box.</li>
+                <li>Click "Format" to specify the formatting options and click "OK" to apply the rule.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 15: How do I use the TEXT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=TEXT(</code>.</li>
+                <li>Enter the value you want to format and the format code. For example: <code>=TEXT(A1, "mm/dd/yyyy")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 16: How can I use the CONCATENATE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=CONCATENATE(</code>.</li>
+                <li>Enter the text strings or cell references you want to combine, separated by commas. For example: <code>=CONCATENATE(A1, " ", B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 17: How do I protect a workbook in Excel?</h3>
+                <ol>
+                <li>Open the workbook you want to protect.</li>
+                <li>Click on the "File" tab in the Ribbon.</li>
+                <li>Select "Info" from the menu on the left.</li>
+                <li>Click on "Protect Workbook" and choose "Encrypt with Password" from the drop-down menu.</li>
+                <li>Enter a password in the Password field and click "OK."</li>
+                <li>Re-enter the password to confirm and click "OK" again.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 18: How do I use the INDEX and MATCH functions together?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=INDEX(</code>.</li>
+                <li>Enter the range of cells you want to return a value from, followed by a comma.</li>
+                <li>Next, type <code>MATCH(</code> and specify the lookup value, lookup range, and match type (e.g., <code>0</code> for exact match).</li>
+                <li>Close the MATCH function with a parenthesis and complete the INDEX formula.</li>
+                <li>For example: <code>=INDEX(B1:B10, MATCH("Apple", A1:A10, 0))</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 19: How can I split text into columns?</h3>
+                <ol>
+                <li>Select the range of cells containing the text you want to split.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Text to Columns" in the Data Tools group.</li>
+                <li>In the Convert Text to Columns Wizard, choose "Delimited" or "Fixed width" depending on your data.</li>
+                <li>Click "Next" and specify the delimiters (e.g., commas, tabs) or column widths if using fixed width.</li>
+                <li>Click "Finish" to split the text into columns based on your selected options.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 20: How do I add a new worksheet to an existing workbook?</h3>
+                <ol>
+                <li>Open the workbook where you want to add a new worksheet.</li>
+                <li>Click on the "+" button at the bottom of the Excel window next to the existing worksheet tabs.</li>
+                <li>Alternatively, click on the "Home" tab in the Ribbon, then click "Insert" in the Cells group and choose "Insert Sheet."</li>
+                <li>A new worksheet will be added to the workbook.</li>
+                <li>Rename the new worksheet by right-clicking on the tab and selecting "Rename," then entering the desired name.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 21: How do I use the IF function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=IF(</code>.</li>
+                <li>Enter the logical test you want to evaluate, followed by a comma. For example: <code>A1&gt;10,</code>.</li>
+                <li>Enter the value or formula to return if the test is true, followed by another comma. For example: <code>"Over 10",</code>.</li>
+                <li>Enter the value or formula to return if the test is false. For example: <code>"10 or less"</code>.</li>
+                <li>Close the IF function with a parenthesis. For example: <code>=IF(A1&gt;10, "Over 10", "10 or less")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 22: How can I use the COUNTIF function?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=COUNTIF(</code>.</li>
+                <li>Enter the range of cells to count, followed by a comma. For example: <code>A1:A10,</code>.</li>
+                <li>Enter the criteria for counting cells. For example: <code>"Apple"</code> to count cells that contain "Apple."</li>
+                <li>Close the COUNTIF function with a parenthesis. For example: <code>=COUNTIF(A1:A10, "Apple")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 23: How do I hide or unhide rows and columns?</h3>
+                <ol>
+                <li>Select the row or column you want to hide.</li>
+                <li>Right-click on the selected row number or column letter.</li>
+                <li>Choose "Hide" from the context menu.</li>
+                <li>To unhide, select the rows or columns adjacent to the hidden ones.</li>
+                <li>Right-click on the selection and choose "Unhide" from the context menu.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 24: How can I use the LEFT, MID, and RIGHT functions?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=LEFT(</code>, <code>=MID(</code>, or <code>=RIGHT(</code> depending on the function you want to use.</li>
+                <li>For LEFT: Enter the text and the number of characters to extract from the beginning. Example: <code>=LEFT(A1, 5)</code>.</li>
+                <li>For MID: Enter the text, starting position, and number of characters to extract. Example: <code>=MID(A1, 3, 5)</code>.</li>
+                <li>For RIGHT: Enter the text and the number of characters to extract from the end. Example: <code>=RIGHT(A1, 4)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 25: How do I use the HLOOKUP function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=HLOOKUP(</code>.</li>
+                <li>Enter the lookup value, table array, row index number, and range lookup (TRUE for approximate match, FALSE for exact match). For example: <code>=HLOOKUP("Header", A1:D10, 2, FALSE)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 26: How can I use the SUMPRODUCT function?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SUMPRODUCT(</code>.</li>
+                <li>Enter the arrays or ranges you want to multiply and sum. For example: <code>=SUMPRODUCT(A1:A10, B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 27: How do I create a drop-down list in Excel?</h3>
+                <ol>
+                <li>Select the cell or range of cells where you want to create the drop-down list.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Data Validation" in the Data Tools group.</li>
+                <li>In the Data Validation dialog box, select "List" from the "Allow" drop-down menu.</li>
+                <li>Enter the list of values separated by commas in the "Source" field or select a range of cells that contain the list values.</li>
+                <li>Click "OK" to apply the drop-down list to the selected cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 28: How do I apply a custom number format in Excel?</h3>
+                <ol>
+                <li>Select the cell or range of cells where you want to apply a custom number format.</li>
+                <li>Right-click on the selected cells and choose "Format Cells" from the context menu.</li>
+                <li>In the Format Cells dialog box, click on the "Number" tab.</li>
+                <li>Select "Custom" from the list on the left.</li>
+                <li>Enter your custom number format code in the "Type" field. For example, <code>0.00</code> for two decimal places, or <code>[$$-409]#,##0.00</code> for currency.</li>
+                <li>Click "OK" to apply the custom format to the selected cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 29: How do I filter data in Excel?</h3>
+                <ol>
+                <li>Select the range of cells or the entire table you want to filter.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Filter" in the Sort &amp; Filter group.</li>
+                <li>Filter arrows will appear in the header row of your data range.</li>
+                <li>Click the filter arrow in the column header you want to filter, and choose the filter criteria from the drop-down menu.</li>
+                <li>Your data will be filtered based on the selected criteria.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 30: How do I use the TODAY and NOW functions in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the current date or time to appear.</li>
+                <li>For the current date, type the formula <code>=TODAY()</code>.</li>
+                <li>For the current date and time, type the formula <code>=NOW()</code>.</li>
+                <li>Press "Enter" to execute the formula and display the current date or time.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 31: How can I remove duplicates from a data range?</h3>
+                <ol>
+                <li>Select the range of cells or table from which you want to remove duplicates.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Remove Duplicates" in the Data Tools group.</li>
+                <li>In the Remove Duplicates dialog box, select the columns you want to check for duplicates.</li>
+                <li>Click "OK" to remove duplicate values. A message will display showing how many duplicate values were removed.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 32: How do I use the CONCAT function?</h3>
+                <ol>
+                <li>Select the cell where you want the combined text to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=CONCAT(</code>.</li>
+                <li>Enter the text strings or cell references you want to combine, separated by commas. For example: <code>=CONCAT(A1, " ", B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the combined text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 33: How do I use the XLOOKUP function?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=XLOOKUP(</code>.</li>
+                <li>Enter the lookup value, lookup array, and return array. Optionally, you can include the match mode and search mode.</li>
+                <li>For example: <code>=XLOOKUP("Apple", A1:A10, B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 34: How do I create a table in Excel?</h3>
+                <ol>
+                <li>Select the range of cells that you want to include in the table.</li>
+                <li>Click on the "Insert" tab in the Ribbon.</li>
+                <li>Click on "Table" in the Tables group.</li>
+                <li>In the Create Table dialog box, ensure the correct range is selected and that "My table has headers" is checked if your data includes headers.</li>
+                <li>Click "OK" to create the table. Excel will format the data range as a table with filter buttons in the header row.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 35: How do I use the REPT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the repeated text to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=REPT(</code>.</li>
+                <li>Enter the text string you want to repeat and the number of times to repeat it. For example: <code>=REPT("Hello ", 3)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the repeated text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 36: How do I create a hyperlink in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want to create the hyperlink.</li>
+                <li>Right-click on the selected cell and choose "Hyperlink" from the context menu.</li>
+                <li>In the Insert Hyperlink dialog box, enter the URL or file path in the "Address" field. You can also link to another sheet or document.</li>
+                <li>Enter the text you want to display for the hyperlink in the "Text to display" field.</li>
+                <li>Click "OK" to create the hyperlink.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 37: How do I use the SUBSTITUTE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SUBSTITUTE(</code>.</li>
+                <li>Enter the text, old text, and new text you want to replace. For example: <code>=SUBSTITUTE(A1, "old", "new")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 38: How can I group and ungroup data in Excel?</h3>
+                <ol>
+                <li>Select the range of rows or columns you want to group.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Group" in the Outline group.</li>
+                <li>To ungroup, select the grouped rows or columns, click on "Data," and then click "Ungroup."</li>
+                <li>You can also use the minus and plus buttons that appear to collapse or expand the grouped data.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 39: How do I protect a worksheet or workbook in Excel?</h3>
+                <ol>
+                <li>To protect a worksheet, right-click on the worksheet tab and select "Protect Sheet."</li>
+                <li>In the Protect Sheet dialog box, enter a password if desired, and choose the options you want to allow (e.g., selecting locked cells).</li>
+                <li>Click "OK" to apply protection.</li>
+                <li>To protect the entire workbook, click on the "Review" tab in the Ribbon.</li>
+                <li>Click on "Protect Workbook" and choose "Protect Structure and Windows."</li>
+                <li>Enter a password if desired and click "OK" to apply protection to the workbook structure.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 40: How do I use the VLOOKUP function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=VLOOKUP(</code>.</li>
+                <li>Enter the lookup value, table array, column index number, and range lookup (TRUE for approximate match or FALSE for exact match). For example: <code>=VLOOKUP(A1, B1:D10, 2, FALSE)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 41: How do I use the LEFT, MID, and RIGHT functions in Excel?</h3>
+                <ol>
+                <li>To extract text from the left side, use the LEFT function: <code>=LEFT(text, num_chars)</code>.</li>
+                <li>To extract text from the middle, use the MID function: <code>=MID(text, start_num, num_chars)</code>.</li>
+                <li>To extract text from the right side, use the RIGHT function: <code>=RIGHT(text, num_chars)</code>.</li>
+                <li>Replace <code>text</code> with the cell reference or text string and <code>num_chars</code> with the number of characters to extract.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 42: How do I split text into columns in Excel?</h3>
+                <ol>
+                <li>Select the cell or range of cells containing the text you want to split.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Text to Columns" in the Data Tools group.</li>
+                <li>Choose either "Delimited" or "Fixed width" based on your data structure, and click "Next."</li>
+                <li>If you selected "Delimited," specify the delimiter (e.g., comma, space), and if you selected "Fixed width," set the column breaks.</li>
+                <li>Click "Finish" to split the text into columns.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 43: How do I use the TRIM function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=TRIM(</code>.</li>
+                <li>Enter the text you want to trim. For example: <code>=TRIM(A1)</code>.</li>
+                <li>Press "Enter" to execute the formula and remove any extra spaces from the text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 44: How do I calculate the average of a range of cells in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the average to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=AVERAGE(</code>.</li>
+                <li>Select the range of cells you want to average, or enter the range manually. For example: <code>=AVERAGE(A1:A10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the average.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 45: How do I use the COUNTIF function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=COUNTIF(</code>.</li>
+                <li>Enter the range to apply the criteria and the criteria itself. For example: <code>=COUNTIF(A1:A10, "&gt;100")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the count of cells that meet the criteria.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 46: How do I create a pivot table in Excel?</h3>
+                <ol>
+                <li>Select the range of data you want to analyze.</li>
+                <li>Click on the "Insert" tab in the Ribbon.</li>
+                <li>Click on "PivotTable" in the Tables group.</li>
+                <li>In the Create PivotTable dialog box, select the range or table and choose where you want the PivotTable to be placed (new worksheet or existing worksheet).</li>
+                <li>Click "OK" to create the PivotTable.</li>
+                <li>Drag and drop fields from the PivotTable Field List into the Rows, Columns, Values, and Filters areas to build your PivotTable.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 47: How do I use data validation in Excel?</h3>
+                <ol>
+                <li>Select the cell or range of cells where you want to apply data validation.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Data Validation" in the Data Tools group.</li>
+                <li>In the Data Validation dialog box, choose the validation criteria you want (e.g., whole number, decimal, list, date).</li>
+                <li>Configure the validation settings according to your requirements.</li>
+                <li>Click "OK" to apply data validation to the selected cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 48: How do I use the CONCATENATE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the concatenated result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=CONCATENATE(</code>.</li>
+                <li>Enter the text or cell references you want to combine, separated by commas. For example: <code>=CONCATENATE(A1, " ", B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the concatenated text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 49: How do I use the POWER function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=POWER(</code>.</li>
+                <li>Enter the base number and the exponent, separated by a comma. For example: <code>=POWER(2, 3)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 50: How do I use the COUNT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=COUNT(</code>.</li>
+                <li>Enter the range of cells you want to count. For example: <code>=COUNT(A1:A10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the count of numeric values in the range.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 51: How do I use the DATE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the date to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=DATE(</code>.</li>
+                <li>Enter the year, month, and day as arguments. For example: <code>=DATE(2024, 8, 17)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the date.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 52: How do I use the HYPERLINK function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the hyperlink to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=HYPERLINK(</code>.</li>
+                <li>Enter the URL and the link text, separated by a comma. For example: <code>=HYPERLINK("http://www.example.com", "Visit Example")</code>.</li>
+                <li>Press "Enter" to execute the formula and create the hyperlink.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 53: How do I remove duplicates in Excel?</h3>
+                <ol>
+                <li>Select the range of data from which you want to remove duplicates.</li>
+                <li>Click on the "Data" tab in the Ribbon.</li>
+                <li>Click on "Remove Duplicates" in the Data Tools group.</li>
+                <li>In the Remove Duplicates dialog box, select the columns where you want to check for duplicates.</li>
+                <li>Click "OK" to remove duplicate rows from the selected range.</li>
+                <li>A message will appear indicating how many duplicates were removed and how many unique values remain.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 54: How do I use the LEFT and RIGHT functions in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the LEFT or RIGHT function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=LEFT(</code> or <code>=RIGHT(</code>.</li>
+                <li>Enter the text string and the number of characters to extract. For example: <code>=LEFT(A1, 5)</code> or <code>=RIGHT(A1, 3)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the extracted characters.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 55: How do I create a named range in Excel?</h3>
+                <ol>
+                <li>Select the range of cells you want to name.</li>
+                <li>Click on the "Formulas" tab in the Ribbon.</li>
+                <li>Click on "Define Name" in the Defined Names group.</li>
+                <li>Enter a name for the range in the Name field and verify the cell references.</li>
+                <li>Click "OK" to create the named range.</li>
+                <li>You can now use the name in formulas instead of cell references.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 56: How do I use the ROUND function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the rounded result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=ROUND(</code>.</li>
+                <li>Enter the number you want to round and the number of digits to which you want to round. For example: <code>=ROUND(A1, 2)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the rounded result.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 57: How do I use the MAX and MIN functions in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the MAX or MIN function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=MAX(</code> or <code>=MIN(</code>.</li>
+                <li>Enter the range of cells or values you want to evaluate. For example: <code>=MAX(A1:A10)</code> or <code>=MIN(B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the maximum or minimum value.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 58: How do I use the MID function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the extracted text to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=MID(</code>.</li>
+                <li>Enter the text string, the start position, and the number of characters to extract. For example: <code>=MID(A1, 2, 5)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the extracted text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 59: How do I use the TRANSPOSE function in Excel?</h3>
+                <ol>
+                <li>Select the range where you want to paste the transposed data.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=TRANSPOSE(</code>.</li>
+                <li>Select the range of cells you want to transpose.</li>
+                <li>Press "Ctrl + Shift + Enter" to execute the formula as an array formula and display the transposed data.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 60: How do I use the AVERAGEIF function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the AVERAGEIF function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=AVERAGEIF(</code>.</li>
+                <li>Enter the range, criteria, and average range. For example: <code>=AVERAGEIF(A1:A10, "&gt;10", B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the average based on the criteria.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 61: How do I use the CHOOSE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the CHOOSE function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=CHOOSE(</code>.</li>
+                <li>Enter the index number and the values you want to choose from. For example: <code>=CHOOSE(2, "Apple", "Banana", "Cherry")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the chosen value based on the index number.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 62: How do I use the DATEVALUE function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the DATEVALUE function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=DATEVALUE(</code>.</li>
+                <li>Enter the date in text format that you want to convert to a date serial number. For example: <code>=DATEVALUE("August 17, 2024")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the date serial number.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 63: How do I use the LEFT, RIGHT, and MID functions together in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula using <code>=LEFT(</code>, <code>=RIGHT(</code>, and <code>=MID(</code> functions as needed. For example: <code>=LEFT(A1, 3) &amp; MID(A1, 4, 2) &amp; RIGHT(A1, 2)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result based on the text manipulations.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 64: How do I use the NETWORKDAYS function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the NETWORKDAYS function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=NETWORKDAYS(</code>.</li>
+                <li>Enter the start date and end date, and optionally, a range of holiday dates. For example: <code>=NETWORKDAYS(A1, B1, C1:C5)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the number of working days between the dates.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 65: How do I use the CHARTS function in Excel?</h3>
+                <ol>
+                <li>Select the range of data you want to visualize.</li>
+                <li>Click on the "Insert" tab in the Ribbon.</li>
+                <li>Choose a chart type from the Charts group and click to insert it.</li>
+                <li>Customize the chart using the Chart Tools tabs (Design and Format).</li>
+                <li>Review the chart and adjust settings as needed to present the data effectively.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 66: How do I use the INDIRECT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the INDIRECT function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=INDIRECT(</code>.</li>
+                <li>Enter the cell reference or named range you want to refer to indirectly. For example: <code>=INDIRECT("A1")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result based on the indirect reference.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 67: How do I use the OFFSET function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the OFFSET function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=OFFSET(</code>.</li>
+                <li>Enter the reference cell, number of rows, number of columns, height, and width. For example: <code>=OFFSET(A1, 2, 3, 1, 2)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result based on the offset parameters.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 68: How do I use the ROW and COLUMN functions in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the ROW or COLUMN function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=ROW(</code> or <code>=COLUMN(</code>.</li>
+                <li>Enter the cell reference or leave it blank to return the row number or column number of the cell where the formula is located. For example: <code>=ROW(A1)</code> or <code>=COLUMN(B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the row or column number.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 69: How do I use the SUMPRODUCT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the SUMPRODUCT function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SUMPRODUCT(</code>.</li>
+                <li>Enter the arrays or ranges you want to multiply and sum. For example: <code>=SUMPRODUCT(A1:A10, B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result based on the multiplication and summation of the arrays.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 70: How do I use the IFERROR function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the IFERROR function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=IFERROR(</code>.</li>
+                <li>Enter the value or formula to check for errors, and the value to return if an error occurs. For example: <code>=IFERROR(A1/B1, "Error")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result or the specified value if an error occurs.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 71: How do I use the MATCH function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the MATCH function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=MATCH(</code>.</li>
+                <li>Enter the lookup value, lookup array, and match type. For example: <code>=MATCH("value", A1:A10, 0)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the position of the lookup value in the array.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 72: How do I use the INDEX function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the INDEX function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=INDEX(</code>.</li>
+                <li>Enter the array or range, row number, and optionally column number. For example: <code>=INDEX(A1:B10, 2, 1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the value at the specified row and column.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 73: How do I use the COUNTA function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the COUNTA function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=COUNTA(</code>.</li>
+                <li>Enter the range or array of cells to count. For example: <code>=COUNTA(A1:A10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the count of non-empty cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 74: How do I use the DATEDIF function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the DATEDIF function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=DATEDIF(</code>.</li>
+                <li>Enter the start date, end date, and the unit of time to calculate (e.g., "d" for days, "m" for months, "y" for years). For example: <code>=DATEDIF(A1, B1, "d")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the difference between the two dates in the specified unit of time.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 75: How do I use the FIND function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the FIND function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=FIND(</code>.</li>
+                <li>Enter the text you want to find and the text or cell reference to search in. For example: <code>=FIND("find_text", A1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the position of the first occurrence of the specified text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 76: How do I use the SUBTOTAL function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the SUBTOTAL function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SUBTOTAL(</code>.</li>
+                <li>Enter the function number and the range of cells. For example: <code>=SUBTOTAL(9, A1:A10)</code>, where 9 refers to the SUM function.</li>
+                <li>Press "Enter" to execute the formula and display the subtotal of the specified range.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 77: How do I use the LEFT and MID functions together in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=MID(</code> to extract a part of the text.</li>
+                <li>Enter the text or cell reference, starting position, and length. For example: <code>=MID(A1, 3, 5)</code> to extract 5 characters starting from the 3rd position.</li>
+                <li>Use <code>=LEFT(</code> to extract characters from the left side if needed, specifying the number of characters. For example: <code>=LEFT(A1, 4)</code>.</li>
+                <li>Press "Enter" to display the result of the combined text extraction.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 78: How do I use the TEXTJOIN function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the TEXTJOIN function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=TEXTJOIN(</code>.</li>
+                <li>Enter the delimiter, whether to ignore empty cells, and the range or text strings to join. For example: <code>=TEXTJOIN(", ", TRUE, A1:A10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the concatenated text with the specified delimiter.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 79: How do I use the CONCAT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the CONCAT function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=CONCAT(</code>.</li>
+                <li>Enter the text or cell references to concatenate. For example: <code>=CONCAT(A1, " ", B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the concatenated text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 80: How do I use the LOOKUP function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the LOOKUP function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=LOOKUP(</code>.</li>
+                <li>Enter the lookup value and lookup vector, or specify a vector and result vector. For example: <code>=LOOKUP(2, A1:A10, B1:B10)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the corresponding value from the result vector.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 81: How do I use the YEARFRAC function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the YEARFRAC function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=YEARFRAC(</code>.</li>
+                <li>Enter the start date, end date, and optionally the basis for the calculation. For example: <code>=YEARFRAC(A1, B1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the fraction of the year between the two dates.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 82: How do I use the TEXTSPLIT function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the TEXTSPLIT function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=TEXTSPLIT(</code>.</li>
+                <li>Enter the text to split, the delimiter, and the optional number of rows and columns. For example: <code>=TEXTSPLIT(A1, ",")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the split text in separate cells.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 83: How do I use the XLOOKUP function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the XLOOKUP function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=XLOOKUP(</code>.</li>
+                <li>Enter the lookup value, lookup array, return array, and optionally the if-not-found value and match mode. For example: <code>=XLOOKUP("value", A1:A10, B1:B10, "Not Found")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the result based on the lookup value.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 84: How do I use the SEARCH function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the SEARCH function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=SEARCH(</code>.</li>
+                <li>Enter the text to search for, and the text or cell reference to search in. For example: <code>=SEARCH("apple", A1)</code>.</li>
+                <li>Press "Enter" to execute the formula and display the position of the first instance of the text.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 85: How do I use the R1C1 referencing style in Excel?</h3>
+                <ol>
+                <li>Open Excel and go to "File" &gt; "Options" &gt; "Formulas".</li>
+                <li>In the "Working with formulas" section, check the box for "R1C1 reference style".</li>
+                <li>Click "OK" to apply the R1C1 referencing style, which uses row and column numbers for cell references instead of letters and numbers.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 86: How do I use the RAND and RANDBETWEEN functions in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the RAND or RANDBETWEEN function to appear.</li>
+                <li>For random decimal numbers between 0 and 1, type <code>=RAND()</code>.</li>
+                <li>For random whole numbers between a specified range, type <code>=RANDBETWEEN(1, 100)</code>, replacing 1 and 100 with your desired range.</li>
+                <li>Press "Enter" to display the random number generated by the function.</li>
+                </ol>
+                </div><div class="question">
+                <h3>Question 87: How do I use the COUNTIFS function in Excel?</h3>
+                <ol>
+                <li>Select the cell where you want the result of the COUNTIFS function to appear.</li>
+                <li>Type the formula starting with an equal sign, followed by <code>=COUNTIFS(</code>.</li>
+                <li>Enter the range and criteria for each condition. For example: <code>=COUNTIFS(A1:A10, "&gt;10", B1:B10, "&lt;20")</code>.</li>
+                <li>Press "Enter" to execute the formula and display the count of cells meeting all criteria.</li>
+                </ol>
+                </div>
+
+        </section>
+        <script>
+            const toggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+        
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                body.classList.toggle('light-theme');
+            });
+        
+            // Default theme
+            if (!body.classList.contains('dark-theme') && !body.classList.contains('light-theme')) {
+                body.classList.add('light-theme');
+            }
+        </script>
+</body>
+</html>

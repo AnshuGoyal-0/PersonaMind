@@ -1,0 +1,165 @@
+ /* Projects */
+ body{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #272727;
+ }
+ .section {
+    text-align: center;
+    padding: 50px 0;
+
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.project img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.project:hover img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.project:hover .overlay {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+
+/* Alone Tags */
+
+h1 {
+    font-size: 20px;
+    
+}
+h2 {
+    margin-bottom: 10px;
+}
+h4 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 30px;
+}
+p {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+p:hover {
+    color: #0077ff;
+}
+.text {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 5px;
+}
+/* link */
+a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bolder;
+    margin: 0 5px;
+    display: flex;
+}
+/* button */
+.button {
+    background-color: #fffb00;
+    font-size: 20px;
+    font-weight: bolder;
+    font-weight: bolder;
+    color: #000000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 1%;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: #0077ff;
+    font-weight: bolder;
+}
+/* section and container */
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bolder;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+/* overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.overlay:hover {
+    opacity: 1;
+}
+.project:hover .button {
+    opacity: 1;
+}

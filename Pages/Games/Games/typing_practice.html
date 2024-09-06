@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compact Typing Game</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+        }
+        h1 {
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+        .container {
+            width: 95%;
+            margin: auto;
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .section {
+            margin-bottom: 10px;
+        }
+        #quote {
+            font-size: 20px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px solid #4caf50;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            display: inline-block;
+            word-wrap: break-word;
+        }
+        #user-input {
+            font-size: 18px;
+            padding: 10px;
+            border: 2px solid #4caf50;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            width: 95%;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .statistics {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        button:disabled {
+            background-color: #9e9e9e;
+            cursor: not-allowed;
+        }
+        .difficulty-buttons {
+            margin: 10px 0;
+        }
+        #custom-text, #file-input, #time-input {
+            width: 95%;
+            max-width: 400px;
+            margin: 5px auto;
+            padding: 8px;
+            border: 2px solid #4caf50;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        #file-import-button, #import-button, #set-time-button {
+            margin-top: 5px;
+        }
+        #feedback {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .correct {
+            color: #4caf50;
+        }
+        .incorrect {
+            color: #f44336;
+        }
+        .section-header {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compact Typing Game</h1>
+
+        <div class="section">
+            <div class="section-header">High Score</div>
+            <div id="high-score">High Score: <span id="high-score-value">0</span></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Difficulty</div>
+            <div id="difficulty" class="difficulty-buttons">
+                <button id="easy-button">Easy</button>
+                <button id="medium-button">Medium</button>
+                <button id="hard-button">Hard</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Custom Text</div>
+            <textarea id="custom-text" placeholder="Enter custom text..."></textarea>
+            <button id="import-button">Use Custom Text</button>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Import File</div>
+            <input type="file" id="file-input" accept=".txt">
+            <button id="file-import-button">Import File</button>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Set Time</div>
+            <input type="number" id="time-input" placeholder="Set time (s)" min="10" max="300">
+            <button id="set-time-button">Set Time</button>
+        </div>
+
+        <div class="section">
+            <div id="quote">Press Start to Begin</div>
+            <textarea id="user-input" placeholder="Type here..." disabled></textarea>
+        </div>
+
+        <div class="section statistics">
+            <div id="timer">Time left: <span id="time">30</span>s</div>
+            <div id="score">Score: <span id="score-count">0</span></div>
+            <div id="errors">Errors: <span id="error-count">0</span></div>
+            <div id="wpm">WPM: <span id="wpm-count">0</span></div>
+        </div>
+
+        <div class="section">
+            <button id="start-button">Start Game</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <script>
+        const quotes = {
+            easy: [
+                "The quick brown fox jumps over the lazy dog.",
+                "To be or not to be, that is the question.",
+                "All that glitters is not gold.",
+                "A journey of a thousand miles begins with a single step.",
+                "To infinity and beyond!"
+            ],
+            medium: [
+                "The only thing we have to fear is fear itself.",
+                "The best way to predict the future is to invent it.",
+                "I think, therefore I am.",
+                "In the middle of difficulty lies opportunity.",
+                "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment."
+            ],
+            hard: [
+                "The unexamined life is not worth living.",
+                "Life is what happens when you’re busy making other plans.",
+                "The purpose of our lives is to be happy.",
+                "Success is not the key to happiness. Happiness is the key to success.",
+                "You only live once, but if you do it right, once is enough."
+            ]
+        };
+
+        let timer;
+        let timeLeft = 30;
+        let score = 0;
+        let errors = 0;
+        let startTime;
+        let currentDifficulty = 'easy';
+        let highScore = parseInt(localStorage.getItem('typingGameHighScore')) || 0;
+
+        const quoteElement = document.getElementById('quote');
+        const userInputElement = document.getElementById('user-input');
+        const timerElement = document.getElementById('time');
+        const scoreElement = document.getElementById('score-count');
+        const errorElement = document.getElementById('error-count');
+        const wpmElement = document.getElementById('wpm-count');
+        const highScoreElement = document.getElementById('high-score-value');
+        const feedbackElement = document.getElementById('feedback');
+        const startButton = document.getElementById('start-button');
+        const difficultyButtons = document.querySelectorAll('#difficulty button');
+        const customTextArea = document.getElementById('custom-text');
+        const importButton = document.getElementById('import-button');
+        const timeInput = document.getElementById('time-input');
+        const setTimeButton = document.getElementById('set-time-button');
+        const fileInput = document.getElementById('file-input');
+        const fileImportButton = document.getElementById('file-import-button');
+
+        function getRandomQuote() {
+            const quotesArray = quotes[currentDifficulty];
+            return quotesArray[Math.floor(Math.random() * quotesArray.length)];
+        }
+
+        function startGame() {
+            score = 0;
+            errors = 0;
+            timeLeft = parseInt(timeInput.value) || 30;
+            startTime = new Date();
+            scoreElement.textContent = score;
+            errorElement.textContent = errors;
+            timerElement.textContent = timeLeft;
+            wpmElement.textContent = 0;
+            userInputElement.value = '';
+            feedbackElement.textContent = '';
+            userInputElement.disabled = false;
+            userInputElement.focus();
+            quoteElement.textContent = getRandomQuote();
+            startButton.disabled = true;
+
+            timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    userInputElement.disabled = true;
+                    startButton.disabled = false;
+                    const endTime = new Date();
+                    const elapsedTime = (endTime - startTime) / 1000;
+                    const wpm = Math.round((score / elapsedTime) / 5);
+                    wpmElement.textContent = wpm;
+                    if (score > highScore) {
+                        highScore = score;
+                        highScoreElement.textContent = highScore;
+                        localStorage.setItem('typingGameHighScore', highScore);
+                    }
+                    feedbackElement.textContent = `Game Over! Your score is ${score}.`;
+                    feedbackElement.className = 'feedback';
+                }
+            }, 1000);
+        }
+
+        function handleInput() {
+            const quoteText = quoteElement.textContent;
+            const userText = userInputElement.value;
+            const correctText = quoteText.slice(0, userText.length);
+            const isCorrect = userText === correctText;
+
+            if (userText === quoteText) {
+                score++;
+                scoreElement.textContent = score;
+                feedbackElement.textContent = 'Correct!';
+                feedbackElement.className = 'feedback correct';
+                userInputElement.value = '';
+                quoteElement.textContent = getRandomQuote();
+            } else if (!isCorrect) {
+                errors++;
+                errorElement.textContent = errors;
+                feedbackElement.textContent = 'Incorrect!';
+                feedbackElement.className = 'feedback incorrect';
+            } else {
+                feedbackElement.textContent = '';
+            }
+        }
+
+        function handleDifficultyChange(event) {
+            currentDifficulty = event.target.id.split('-')[0];
+            quoteElement.textContent = getRandomQuote();
+        }
+
+        function handleCustomTextImport() {
+            quoteElement.textContent = customTextArea.value.trim() || 'No text provided.';
+        }
+
+        function handleFileImport() {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    quoteElement.textContent = event.target.result.trim() || 'No text provided.';
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function handleTimeInputChange() {
+            timeLeft = parseInt(timeInput.value) || 30;
+            timerElement.textContent = timeLeft;
+        }
+
+        document.getElementById('easy-button').addEventListener('click', handleDifficultyChange);
+        document.getElementById('medium-button').addEventListener('click', handleDifficultyChange);
+        document.getElementById('hard-button').addEventListener('click', handleDifficultyChange);
+        importButton.addEventListener('click', handleCustomTextImport);
+        fileImportButton.addEventListener('click', handleFileImport);
+        setTimeButton.addEventListener('click', handleTimeInputChange);
+        startButton.addEventListener('click', startGame);
+        userInputElement.addEventListener('input', handleInput);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            color: #000000;
+            background-color: #f0f4f8;
+            margin: 2%;
+            padding: 0;
+            line-height: 1.6;
+            font-weight: bolder;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            color: #ffffff;
+            background-color: #121212;
+        }
+
+        /* Page Title */
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            background-color: #007bff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-theme h1 {
+            background-color: #4A90E2;
+            color: #000000;
+        }
+
+        /* Section Headings (h2, h3) */
+        h2,
+        h3 {
+            color: #007bff;
+            margin: 20px 0 10px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        body.dark-theme h2,
+        body.dark-theme h3 {
+            color: #4A90E2;
+            border-color: #4A90E2;
+        }
+
+        /* Paragraphs */
+        p {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        body.dark-theme p {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        p:hover {
+            transform: scale(1.02);
+            background-color: #f8f9fa;
+            font-weight: bolder;
+        }
+
+        body.dark-theme p:hover {
+            background-color: #2e2e2e;
+        }
+
+        /* Unordered List */
+        ul {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li {
+            font-size: 1em;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        body.dark-theme ul li {
+            color: #ffffff;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-theme table th,
+        body.dark-theme table td {
+            background-color: #1e1e1e;
+            border-color: #444;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        body.dark-theme table th {
+            background-color: #4A90E2;
+            color: #000000;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        body.dark-theme table tr:nth-child(even) {
+            background-color: #2e2e2e;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        body.dark-theme table tr:hover {
+            background-color: #3e3e3e;
+        }
+
+        table td:hover {
+            background-color: #e9ecef;
+        }
+
+        body.dark-theme table td:hover {
+            background-color: #4e4e4e;
+        }
+
+        /* Card Theme */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-theme .card {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-color: #444;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Miscellaneous */
+        strong {
+            color: #007bff;
+        }
+
+        body.dark-theme strong {
+            color: #4A90E2;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        body.dark-theme a {
+            color: #4A90E2;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s, color 0.3s;
+            color: #000;
+        }
+
+        body.dark-theme .theme-toggle {
+            color: #ffffff;
+        }
+
+
+
+        .icon-sun,
+        .icon-moon {
+            display: none;
+            transition: color 0.3s;
+        }
+
+        /* Light Theme Styling */
+        body.light-theme .theme-toggle {
+            color: #000000;
+        }
+
+        body.light-theme .icon-sun {
+            display: inline-block;
+        }
+
+        /* Dark Theme Styling */
+        body.dark-theme .theme-toggle {
+            color: #ffffff;
+        }
+
+        body.dark-theme .icon-moon {
+            display: inline-block;
+        }
+
+        .head {
+            display: flex;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="head">
+                <h2>Word __ </h2>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-sun icon-sun"></i>
+                    <i class="fas fa-moon icon-moon"></i>
+                </button>
+                <h2>__</h2>
+            </div>
+            <p>Microsoft Word is one of the most widely used word processing software globally, developed by Microsoft.
+                Whether you are a student, a professional, or someone who just needs to write and edit text, mastering
+                Microsoft Word is a crucial skill. In this blog, we will cover everything you need to know about
+                Microsoft Word, from basic features to advanced tips and tricks.</p>
+
+            <h2>Word</h2>
+
+            <p>Microsoft Word is part of the Microsoft Office suite and offers a range of features to create, edit,
+                format, and share documents. It's available on various platforms including Windows, macOS, and mobile
+                devices.</p>
+
+            <h3>Key Features of Microsoft Word</h3>
+            <ul>
+                <li><strong>Text Formatting:</strong> Easily change fonts, sizes, colors, and styles.</li>
+                <li><strong>Paragraph Formatting:</strong> Control alignment, spacing, and indentation.</li>
+                <li><strong>Templates:</strong> Use pre-designed templates for resumes, reports, letters, etc.</li>
+                <li><strong>Collaboration:</strong> Share documents with others and work on them simultaneously.</li>
+                <li><strong>Spell Check and Grammar:</strong> Built-in tools to enhance your writing quality.</li>
+                <li><strong>Table of Contents and Indexing:</strong> Automatically generate TOCs and indexes.</li>
+                <li><strong>Mail Merge:</strong> Send personalized bulk emails and letters.</li>
+                <li><strong>Track Changes:</strong> Review and manage changes made by collaborators.</li>
+            </ul>
+
+            <h3>Why Use Microsoft Word?</h3>
+            <ul>
+                <li><strong>User-Friendly Interface:</strong> Easy to navigate and use, even for beginners.</li>
+                <li><strong>Comprehensive Tools:</strong> Extensive range of tools for document creation and editing.
+                </li>
+                <li><strong>Cross-Platform Compatibility:</strong> Works across multiple devices and platforms.</li>
+                <li><strong>Regular Updates:</strong> Microsoft regularly updates Word with new features and security
+                    patches.</li>
+                <li><strong>Extensive Support:</strong> A vast community and official support for troubleshooting.</li>
+            </ul>
+
+            <h2>Advanced Tips for Power Users</h2>
+
+            <h3>1. Using Styles for Consistent Formatting</h3>
+            <p>Styles in Word allow you to apply consistent formatting to your text. You can define a style once and
+                apply it throughout your document, making formatting changes easy to manage.</p>
+
+            <h3>2. Creating and Customizing Templates</h3>
+            <p>Templates are pre-formatted documents that save you time. You can create your own templates or customize
+                existing ones to fit your needs. This is particularly useful for repetitive tasks like creating reports
+                or letters.</p>
+
+            <h3>3. Utilizing Keyboard Shortcuts</h3>
+            <p>Keyboard shortcuts can significantly speed up your work in Word. Here are some useful shortcuts:</p>
+
+            <h1>Microsoft Word Shortcuts</h1>
+
+
+            <h2>Basic Text Formatting Shortcuts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + B</code></td>
+                        <td>Bold the selected text or enable bold formatting.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + I</code></td>
+                        <td>Italicize the selected text or enable italic formatting.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + U</code></td>
+                        <td>Underline the selected text or enable underline formatting.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + W</code></td>
+                        <td>Underline words but not spaces.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + D</code></td>
+                        <td>Double underline the selected text.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Editing and Navigation Shortcuts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + C</code></td>
+                        <td>Copy the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + X</code></td>
+                        <td>Cut the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + V</code></td>
+                        <td>Paste the copied or cut content.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Z</code></td>
+                        <td>Undo the last action.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Y</code></td>
+                        <td>Redo the last undone action.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + A</code></td>
+                        <td>Select all content in the document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + F</code></td>
+                        <td>Open the Find dialog box to search within the document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + H</code></td>
+                        <td>Open the Replace dialog box to find and replace text.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + G</code></td>
+                        <td>Open the Go To dialog box to jump to a specific page, section, or line.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + P</code></td>
+                        <td>Open the Print dialog box to print the document.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Paragraph and Text Alignment Shortcuts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + E</code></td>
+                        <td>Center align the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + L</code></td>
+                        <td>Left align the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + R</code></td>
+                        <td>Right align the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + J</code></td>
+                        <td>Justify the selected paragraph (align text to both left and right margins).</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + M</code></td>
+                        <td>Increase the indent of the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + M</code></td>
+                        <td>Decrease the indent of the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + T</code></td>
+                        <td>Create a hanging indent in the selected paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + T</code></td>
+                        <td>Reduce a hanging indent in the selected paragraph.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Document Management Shortcuts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + N</code></td>
+                        <td>Create a new blank document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + O</code></td>
+                        <td>Open an existing document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + S</code></td>
+                        <td>Save the current document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>F12</code></td>
+                        <td>Open the Save As dialog box to save the document with a new name.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + W</code></td>
+                        <td>Close the current document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + S</code></td>
+                        <td>Open the Apply Styles task pane.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + C</code></td>
+                        <td>Copy formatting from the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + V</code></td>
+                        <td>Paste formatting to the selected text.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Advanced Shortcuts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Ctrl + Alt + M</code></td>
+                        <td>Insert a comment in the document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + P</code></td>
+                        <td>Insert a page number.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + T</code></td>
+                        <td>Insert the current time in the document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + D</code></td>
+                        <td>Insert the current date in the document.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + H</code></td>
+                        <td>Apply the Heading 1 style.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + 2</code></td>
+                        <td>Apply the Heading 2 style.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Alt + 3</code></td>
+                        <td>Apply the Heading 3 style.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Alt + F8</code></td>
+                        <td>Open the Macros dialog box to run or create macros.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Ctrl + Shift + N</code></td>
+                        <td>Create a new style based on the selected text.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h1>Step-by-Step Questions and Answers</h1>
+            <div class="questions">
+                <h3>Question 1: How to Change the Font Size in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open the document you want to
+                        edit.</li>
+                    <li><strong>Select the Text:</strong> Highlight the text whose font size you want to change.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Adjust the Font Size:</strong> In the "Font" group, click the dropdown menu next to the
+                        font size and choose the desired size. You can also type a specific size directly into the box.
+                    </li>
+                    <li><strong>Apply Changes:</strong> Click outside the text box to apply the new font size.</li>
+                </ol>
+                <h3>Question 2: How to Create a New Document in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Microsoft Word:</strong> Launch the application on your computer.</li>
+                    <li><strong>Start a New Document:</strong> Click on "File" and select "New" from the menu.</li>
+                    <li><strong>Choose a Template:</strong> Select "Blank Document" or choose a template if you prefer.
+                    </li>
+                    <li><strong>Open the Document:</strong> Click "Create" or "Open" to start working on your new
+                        document.</li>
+                </ol>
+                <h3>Question 3: How to Save a Document in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Ensure the document you want to save is open in Word.</li>
+                    <li><strong>Click on File:</strong> Go to the "File" tab on the Ribbon.</li>
+                    <li><strong>Select Save or Save As:</strong> Click "Save" to save changes to the current file, or
+                        "Save As" to create a new file with a different name or location.</li>
+                    <li><strong>Choose a Location:</strong> Select the folder where you want to save the document.</li>
+                    <li><strong>Name Your File:</strong> Enter a name for your file and click "Save."</li>
+                </ol>
+                <h3>Question 4: How to Insert a Picture in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document where you want to insert
+                        the picture.</li>
+                    <li><strong>Place the Cursor:</strong> Click at the location where you want the picture to appear.
+                    </li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Pictures:</strong> Choose "Pictures" from the "Illustrations" group.</li>
+                    <li><strong>Select Your Picture:</strong> Browse your files to select the picture you want to insert
+                        and click "Insert."</li>
+                </ol>
+                <h3>Question 5: How to Add a Page Number in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Ensure the document where you want to add page numbers is
+                        open.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Number:</strong> In the "Header &amp; Footer" group, click "Page Number."
+                    </li>
+                    <li><strong>Choose a Position:</strong> Select where you want the page number to appear (e.g., top
+                        or bottom of the page).</li>
+                    <li><strong>Select a Style:</strong> Choose a style for your page numbers from the options provided.
+                    </li>
+                </ol>
+                <h3>Question 6: How to Create a Table in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open the document where you want
+                        to insert the table.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Table:</strong> In the "Tables" group, click "Table."</li>
+                    <li><strong>Select Table Size:</strong> Drag your mouse to select the number of rows and columns you
+                        want, or click "Insert Table" for more options.</li>
+                    <li><strong>Insert the Table:</strong> Click to insert the table into your document.</li>
+                </ol>
+                <h3>Question 7: How to Add a Header in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document where you want to add a header.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Header:</strong> In the "Header &amp; Footer" group, click "Header."</li>
+                    <li><strong>Choose a Style:</strong> Select a header style from the options or click "Edit Header"
+                        to customize it.</li>
+                    <li><strong>Enter Header Text:</strong> Type your header text into the header area. Click "Close
+                        Header and Footer" when done.</li>
+                </ol>
+                <h3>Question 8: How to Use Spell Check in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document you want to check.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Spelling &amp; Grammar:</strong> In the "Proofing" group, click "Spelling &amp;
+                        Grammar."</li>
+                    <li><strong>Review Suggestions:</strong> Follow the prompts to review and correct spelling and
+                        grammar issues.</li>
+                    <li><strong>Apply Changes:</strong> Click "Change" to apply corrections or "Ignore" to skip
+                        suggestions.</li>
+                </ol>
+                <h3>Question 9: How to Create a Bullet List in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to format as a bullet list.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Bullets:</strong> In the "Paragraph" group, click the "Bullets" button.</li>
+                    <li><strong>Choose a Style:</strong> Select a bullet style from the dropdown menu.</li>
+                </ol>
+                <h3>Question 10: How to Apply a Style in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the Word document you wish to edit.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to apply a style to.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Select a Style:</strong> In the "Styles" group, choose a style from the available
+                        options.</li>
+                    <li><strong>Apply the Style:</strong> Click on the chosen style to apply it to the selected text.
+                    </li>
+                </ol>
+                <h3>Question 11: How to Use the Find Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document in which you want to find text.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Find:</strong> In the "Editing" group, click "Find" or press
+                        <code>Ctrl + F</code>.</li>
+                    <li><strong>Enter Search Term:</strong> Type the text you want to find in the search box.</li>
+                    <li><strong>Review Results:</strong> Use the navigation buttons to jump to each instance of the
+                        search term.</li>
+                </ol>
+                <h3>Question 12: How to Insert a Hyperlink in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to turn into a hyperlink.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Hyperlink:</strong> In the "Links" group, click "Hyperlink" or press
+                        <code>Ctrl + K</code>.</li>
+                    <li><strong>Enter URL:</strong> Type or paste the URL into the "Address" field and click "OK."</li>
+                </ol>
+                <h3>Question 13: How to Add a Footer in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document where you want to add a footer.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Footer:</strong> In the "Header &amp; Footer" group, click "Footer."</li>
+                    <li><strong>Choose a Style:</strong> Select a footer style from the available options.</li>
+                    <li><strong>Enter Footer Text:</strong> Type your footer text into the footer area and click "Close
+                        Header and Footer."</li>
+                </ol>
+                <h3>Question 14: How to Change Line Spacing in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the Word document you want to edit.</li>
+                    <li><strong>Select Text:</strong> Highlight the text where you want to adjust line spacing.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Line Spacing:</strong> In the "Paragraph" group, click the "Line and Paragraph
+                        Spacing" button.</li>
+                    <li><strong>Select Spacing:</strong> Choose your desired line spacing from the dropdown menu.</li>
+                </ol>
+                <h3>Question 15: How to Create a Cover Page in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Cover Page:</strong> In the "Pages" group, click "Cover Page."</li>
+                    <li><strong>Select a Template:</strong> Choose a cover page template from the options provided.</li>
+                    <li><strong>Customize:</strong> Enter your details and customize the cover page as needed.</li>
+                </ol>
+                <h3>Question 16: How to Create a Text Box in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document where you want to add a
+                        text box.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Text Box:</strong> In the "Text" group, click "Text Box."</li>
+                    <li><strong>Select a Style:</strong> Choose a text box style from the dropdown menu.</li>
+                    <li><strong>Enter Text:</strong> Type your text into the text box and adjust the formatting as
+                        needed.</li>
+                </ol>
+                <h3>Question 17: How to Use the Track Changes Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open the document you want to
+                        track changes in.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Turn on Track Changes:</strong> In the "Tracking" group, click "Track Changes."</li>
+                    <li><strong>Make Edits:</strong> Any changes you make will be tracked and marked in the document.
+                    </li>
+                    <li><strong>Review Changes:</strong> To accept or reject changes, use the options in the "Changes"
+                        group on the "Review" tab.</li>
+                </ol>
+                <h3>Question 18: How to Insert a Footnote in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document where you want to insert
+                        a footnote.</li>
+                    <li><strong>Place the Cursor:</strong> Click at the location where you want to insert the footnote.
+                    </li>
+                    <li><strong>Go to the References Tab:</strong> Click on the "References" tab on the Ribbon.</li>
+                    <li><strong>Click on Insert Footnote:</strong> In the "Footnotes" group, click "Insert Footnote."
+                    </li>
+                    <li><strong>Enter Footnote Text:</strong> Type your footnote text into the footnote area at the
+                        bottom of the page.</li>
+                </ol>
+                <h3>Question 19: How to Create a Table of Contents in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document where you want to add a Table of
+                        Contents.</li>
+                    <li><strong>Apply Heading Styles:</strong> Ensure that you have applied heading styles (e.g.,
+                        Heading 1, Heading 2) to your document sections.</li>
+                    <li><strong>Position the Cursor:</strong> Click where you want to insert the Table of Contents.</li>
+                    <li><strong>Go to the References Tab:</strong> Click on the "References" tab on the Ribbon.</li>
+                    <li><strong>Click on Table of Contents:</strong> In the "Table of Contents" group, click "Table of
+                        Contents" and choose a style.</li>
+                </ol>
+                <h3>Question 20: How to Add a Comment in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document where you want to add a
+                        comment.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to comment on.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on New Comment:</strong> In the "Comments" group, click "New Comment."</li>
+                    <li><strong>Enter Comment:</strong> Type your comment in the comment balloon that appears.</li>
+                </ol>
+                <h3>Question 21: How to Use the Format Painter in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Word and open the document you want to edit.</li>
+                    <li><strong>Select Formatted Text:</strong> Highlight the text with the formatting you want to copy.
+                    </li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Format Painter:</strong> In the "Clipboard" group, click "Format Painter."</li>
+                    <li><strong>Apply Formatting:</strong> Highlight the text you want to apply the formatting to.</li>
+                </ol>
+                <h3>Question 22: How to Convert Text to Uppercase in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and the document you want to edit.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to convert to uppercase.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Change Case:</strong> In the "Font" group, click "Change Case" (Aa).</li>
+                    <li><strong>Select Uppercase:</strong> Choose "UPPERCASE" from the dropdown menu.</li>
+                </ol>
+                <h3>Question 23: How to Insert a Shape in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Shapes:</strong> In the "Illustrations" group, click "Shapes."</li>
+                    <li><strong>Select a Shape:</strong> Choose a shape from the dropdown menu.</li>
+                    <li><strong>Draw the Shape:</strong> Click and drag to draw the shape in your document.</li>
+                </ol>
+                <h3>Question 24: How to Change Margins in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the Word document where you want to change margins.
+                    </li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab on the Ribbon.</li>
+                    <li><strong>Click on Margins:</strong> In the "Page Setup" group, click "Margins."</li>
+                    <li><strong>Select Margin Size:</strong> Choose a margin size from the list or click "Custom
+                        Margins" to enter specific values.</li>
+                </ol>
+                <h3>Question 25: How to Save a Document as a PDF in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document you want to save as a PDF.</li>
+                    <li><strong>Go to the File Tab:</strong> Click on the "File" tab on the Ribbon.</li>
+                    <li><strong>Click on Save As:</strong> Choose "Save As" from the menu.</li>
+                    <li><strong>Select PDF Format:</strong> In the "Save as type" dropdown menu, select "PDF."</li>
+                    <li><strong>Save the Document:</strong> Choose your save location and click "Save."</li>
+                </ol>
+                <h3>Question 26: How to Use the Spell Checker in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open the document you want to check.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Spelling &amp; Grammar:</strong> In the "Proofing" group, click "Spelling &amp;
+                        Grammar."</li>
+                    <li><strong>Review Suggestions:</strong> Follow the prompts to review and correct spelling and
+                        grammar errors.</li>
+                    <li><strong>Finish:</strong> Click "OK" when you have reviewed all suggestions.</li>
+                </ol>
+                <h3>Question 27: How to Change the Page Orientation in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the Word document you want to edit.</li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab on the Ribbon.</li>
+                    <li><strong>Click on Orientation:</strong> In the "Page Setup" group, click "Orientation."</li>
+                    <li><strong>Select Orientation:</strong> Choose "Portrait" or "Landscape" from the dropdown menu.
+                    </li>
+                </ol>
+                <h3>Question 28: How to Use the Find and Replace Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Word and open the document you want to edit.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Replace:</strong> In the "Editing" group, click "Replace" or press
+                        <code>Ctrl + H</code>.</li>
+                    <li><strong>Enter Search Terms:</strong> Type the text you want to find in the "Find what" field and
+                        the replacement text in the "Replace with" field.</li>
+                    <li><strong>Click Replace:</strong> Click "Replace All" to replace all instances or "Replace" to
+                        replace one at a time.</li>
+                </ol>
+                <h3>Question 29: How to Insert a Table in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Table:</strong> In the "Tables" group, click "Table."</li>
+                    <li><strong>Select Table Size:</strong> Hover over the grid to select the number of rows and columns
+                        for your table.</li>
+                    <li><strong>Insert Table:</strong> Click to insert the table into your document.</li>
+                </ol>
+                <h3>Question 30: How to Add a Watermark in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Design Tab:</strong> Click on the "Design" tab on the Ribbon.</li>
+                    <li><strong>Click on Watermark:</strong> In the "Page Background" group, click "Watermark."</li>
+                    <li><strong>Select a Watermark:</strong> Choose a watermark from the options or click "Custom
+                        Watermark" to create your own.</li>
+                    <li><strong>Apply Watermark:</strong> Click "Apply" to add the watermark to your document.</li>
+                </ol>
+                <h3>Question 31: How to Insert a Page Break in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the Word document where you want to insert a page
+                        break.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Break:</strong> In the "Pages" group, click "Page Break" or press
+                        <code>Ctrl + Enter</code>.</li>
+                    <li><strong>Review Document:</strong> The page break will be inserted and you will be taken to the
+                        next page.</li>
+                </ol>
+                <h3>Question 32: How to Set a Default Font in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Font Dialog Box:</strong> In the "Font" group, click the small arrow in the
+                        bottom-right corner to open the Font dialog box.</li>
+                    <li><strong>Set Font Preferences:</strong> Choose your preferred font, size, and style.</li>
+                    <li><strong>Set as Default:</strong> Click "Set As Default" and choose "All documents based on the
+                        Normal template."</li>
+                    <li><strong>Click OK:</strong> Confirm your changes by clicking "OK."</li>
+                </ol>
+                <h3>Question 33: How to Insert a Citation in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the References Tab:</strong> Click on the "References" tab on the Ribbon.</li>
+                    <li><strong>Click on Insert Citation:</strong> In the "Citations &amp; Bibliography" group, click
+                        "Insert Citation."</li>
+                    <li><strong>Add New Source:</strong> Click "Add New Source" and fill in the details of your source.
+                    </li>
+                    <li><strong>Insert Citation:</strong> Choose your source and click "OK" to insert the citation into
+                        your document.</li>
+                </ol>
+                <h3>Question 34: How to Create a Drop Cap in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open the document where you want to add a drop cap.</li>
+                    <li><strong>Select Text:</strong> Highlight the first letter of the paragraph where you want to add
+                        the drop cap.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Drop Cap:</strong> In the "Text" group, click "Drop Cap."</li>
+                    <li><strong>Choose Style:</strong> Select a drop cap style from the options provided.</li>
+                </ol>
+                <h3>Question 35: How to Add a Table of Contents in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the References Tab:</strong> Click on the "References" tab on the Ribbon.</li>
+                    <li><strong>Click on Table of Contents:</strong> In the "Table of Contents" group, click "Table of
+                        Contents."</li>
+                    <li><strong>Select a Style:</strong> Choose a style for your table of contents from the options
+                        provided.</li>
+                    <li><strong>Update Table:</strong> Click "Update Table" to refresh the table of contents if you make
+                        changes to your document.</li>
+                </ol>
+                <h3>Question 36: How to Add a Bookmark in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Word and open the document you want to work on.</li>
+                    <li><strong>Select Text:</strong> Highlight the text or position the cursor where you want to add a
+                        bookmark.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Bookmark:</strong> In the "Links" group, click "Bookmark."</li>
+                    <li><strong>Enter Bookmark Name:</strong> Type a name for your bookmark and click "Add."</li>
+                </ol>
+                <h3>Question 37: How to Use the Thesaurus in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and the document you want to edit.</li>
+                    <li><strong>Select Word:</strong> Highlight the word you want to find synonyms for.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Thesaurus:</strong> In the "Language" group, click "Thesaurus."</li>
+                    <li><strong>Review Suggestions:</strong> Choose from the list of synonyms and click to insert the
+                        one you want.</li>
+                </ol>
+                <h3>Question 38: How to Create a Hyperlink in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to turn into a hyperlink.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Hyperlink:</strong> In the "Links" group, click "Hyperlink."</li>
+                    <li><strong>Enter URL:</strong> Type or paste the URL you want to link to in the "Address" field and
+                        click "OK."</li>
+                </ol>
+                <h3>Question 39: How to Insert a Comment in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text or place the cursor where you want to add a
+                        comment.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on New Comment:</strong> In the "Comments" group, click "New Comment."</li>
+                    <li><strong>Type Your Comment:</strong> Enter your comment in the comment box that appears.</li>
+                </ol>
+                <h3>Question 40: How to Remove a Comment in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Select Comment:</strong> Click on the comment you want to remove.</li>
+                    <li><strong>Click on Delete:</strong> In the "Comments" group, click "Delete."</li>
+                    <li><strong>Confirm Removal:</strong> Confirm that you want to delete the comment if prompted.</li>
+                </ol>
+                <h3>Question 41: How to Protect a Document in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the File Tab:</strong> Click on the "File" tab on the Ribbon.</li>
+                    <li><strong>Click on Protect Document:</strong> Select "Protect Document" from the menu.</li>
+                    <li><strong>Choose Protection Option:</strong> Choose an option such as "Encrypt with Password" to
+                        secure your document.</li>
+                    <li><strong>Set Password:</strong> Enter and confirm your password, then click "OK."</li>
+                </ol>
+                <h3>Question 42: How to Insert a SmartArt Graphic in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on SmartArt:</strong> In the "Illustrations" group, click "SmartArt."</li>
+                    <li><strong>Select SmartArt Style:</strong> Choose a SmartArt graphic style from the options.</li>
+                    <li><strong>Enter Text:</strong> Enter your text into the SmartArt graphic and adjust as needed.
+                    </li>
+                </ol>
+                <h3>Question 43: How to Use the Zoom Function in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the View Tab:</strong> Click on the "View" tab on the Ribbon.</li>
+                    <li><strong>Click on Zoom:</strong> In the "Zoom" group, click "Zoom."</li>
+                    <li><strong>Select Zoom Level:</strong> Choose a zoom level from the options or enter a custom
+                        percentage.</li>
+                    <li><strong>Click OK:</strong> Confirm your zoom level by clicking "OK."</li>
+                </ol>
+                <h3>Question 44: How to Add a Shape in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Shapes:</strong> In the "Illustrations" group, click "Shapes."</li>
+                    <li><strong>Select Shape:</strong> Choose a shape from the dropdown menu and draw it on your
+                        document.</li>
+                    <li><strong>Customize Shape:</strong> Adjust the shape’s size, color, and other properties as
+                        needed.</li>
+                </ol>
+                <h3>Question 45: How to Add a Page Border in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Design Tab:</strong> Click on the "Design" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Borders:</strong> In the "Page Background" group, click "Page Borders."
+                    </li>
+                    <li><strong>Customize Border:</strong> Choose your border style, color, and width from the options.
+                    </li>
+                    <li><strong>Apply Border:</strong> Click "OK" to apply the page border to your document.</li>
+                </ol>
+                <h3>Question 46: How to Insert an Image from a File in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Pictures:</strong> In the "Illustrations" group, click "Pictures."</li>
+                    <li><strong>Select Image File:</strong> Browse for the image file you want to insert and click
+                        "Insert."</li>
+                    <li><strong>Adjust Image:</strong> Resize and position the image as needed.</li>
+                </ol>
+                <h3>Question 47: How to Set a Document’s Language in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Language:</strong> In the "Language" group, click "Language" and then "Set
+                        Proofing Language."</li>
+                    <li><strong>Select Language:</strong> Choose the language you want to set for your document.</li>
+                    <li><strong>Click OK:</strong> Confirm your language selection by clicking "OK."</li>
+                </ol>
+                <h3>Question 48: How to Insert a Header and Footer in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Header or Footer:</strong> In the "Header &amp; Footer" group, click "Header"
+                        or "Footer."</li>
+                    <li><strong>Select Style:</strong> Choose a style from the dropdown menu.</li>
+                    <li><strong>Edit Header/Footer:</strong> Enter your text or information into the header or footer.
+                    </li>
+                </ol>
+                <h3>Question 49: How to Use the Styles Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Styles:</strong> In the "Styles" group, choose a style from the options.</li>
+                    <li><strong>Apply Style:</strong> Click on the style to apply it to the selected text.</li>
+                    <li><strong>Modify Style:</strong> Right-click on a style and select "Modify" to customize it.</li>
+                </ol>
+                <h3>Question 50: How to Insert a Page Number in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Number:</strong> In the "Header &amp; Footer" group, click "Page Number."
+                    </li>
+                    <li><strong>Select Position:</strong> Choose a position for the page number from the dropdown menu.
+                    </li>
+                    <li><strong>Format Page Number:</strong> Click "Format Page Numbers" to adjust number format and
+                        other settings.</li>
+                </ol>
+                <h3>Question 51: How to Add a Text Box in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Text Box:</strong> In the "Text" group, click "Text Box."</li>
+                    <li><strong>Select Style:</strong> Choose a style from the dropdown menu or draw a text box.</li>
+                    <li><strong>Enter Text:</strong> Type your text into the text box and format as needed.</li>
+                </ol>
+                <h3>Question 52: How to Print a Document in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the File Tab:</strong> Click on the "File" tab on the Ribbon.</li>
+                    <li><strong>Click on Print:</strong> Select "Print" from the menu.</li>
+                    <li><strong>Select Printer:</strong> Choose your printer from the list of available printers.</li>
+                    <li><strong>Click Print:</strong> Adjust print settings as needed and click "Print."</li>
+                </ol>
+                <h3>Question 53: How to Create a Table of Authorities in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the References Tab:</strong> Click on the "References" tab on the Ribbon.</li>
+                    <li><strong>Click on Insert Table of Authorities:</strong> In the "Table of Authorities" group,
+                        click "Insert Table of Authorities."</li>
+                    <li><strong>Mark Citations:</strong> Mark citations in your document using "Mark Citation."</li>
+                    <li><strong>Insert Table:</strong> Click "OK" to insert the table of authorities.</li>
+                </ol>
+                <h3>Question 54: How to Insert a Text Box in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Text Box:</strong> In the "Text" group, click "Text Box."</li>
+                    <li><strong>Select Style:</strong> Choose a style or draw a text box.</li>
+                    <li><strong>Enter and Format Text:</strong> Type text into the text box and format as needed.</li>
+                </ol>
+                <h3>Question 55: How to Add a Page Break in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Place Cursor:</strong> Position your cursor where you want the page break to occur.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Break:</strong> In the "Pages" group, click "Page Break."</li>
+                </ol>
+                <h3>Question 56: How to Change the Page Margins in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab on the Ribbon.</li>
+                    <li><strong>Click on Margins:</strong> In the "Page Setup" group, click "Margins."</li>
+                    <li><strong>Select Margin Size:</strong> Choose a predefined margin size or click "Custom Margins"
+                        to set your own.</li>
+                </ol>
+                <h3>Question 57: How to Add a Border to a Page in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Start Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Design Tab:</strong> Click on the "Design" tab on the Ribbon.</li>
+                    <li><strong>Click on Page Borders:</strong> In the "Page Background" group, click "Page Borders."
+                    </li>
+                    <li><strong>Select Border Style:</strong> Choose the style, color, and width of the border.</li>
+                    <li><strong>Apply Border:</strong> Click "OK" to apply the border to your page.</li>
+                </ol>
+                <h3>Question 58: How to Insert a Signature Line in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Signature Line:</strong> In the "Text" group, click "Signature Line."</li>
+                    <li><strong>Fill in Details:</strong> Enter details for the signature line and click "OK."</li>
+                    <li><strong>Signature Line Inserted:</strong> A signature line will appear in your document.</li>
+                </ol>
+                <h3>Question 59: How to Use Track Changes in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Track Changes:</strong> In the "Tracking" group, click "Track Changes."</li>
+                    <li><strong>Make Edits:</strong> Any edits made will be tracked and highlighted.</li>
+                    <li><strong>Review Changes:</strong> Review and accept or reject changes as needed.</li>
+                </ol>
+                <h3>Question 60: How to Insert a Date in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Date &amp; Time:</strong> In the "Text" group, click "Date &amp; Time."</li>
+                    <li><strong>Select Format:</strong> Choose a date format from the list and click "OK."</li>
+                </ol>
+                <h3>Question 61: How to Change the Line Spacing in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Select Text:</strong> Highlight the text where you want to change the line spacing.</li>
+                    <li><strong>Click on Line and Paragraph Spacing:</strong> In the "Paragraph" group, click on the
+                        line spacing icon.</li>
+                    <li><strong>Select Spacing:</strong> Choose the desired line spacing option from the dropdown menu.
+                    </li>
+                </ol>
+                <h3>Question 62: How to Merge Cells in a Table in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document with the table.</li>
+                    <li><strong>Select Cells:</strong> Highlight the cells you want to merge.</li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab under "Table Tools" on the
+                        Ribbon.</li>
+                    <li><strong>Click on Merge Cells:</strong> In the "Merge" group, click "Merge Cells."</li>
+                </ol>
+                <h3>Question 63: How to Split a Table in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document with the table.</li>
+                    <li><strong>Select Cell:</strong> Click in the cell where you want to split the table.</li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab under "Table Tools" on the
+                        Ribbon.</li>
+                    <li><strong>Click on Split Table:</strong> In the "Merge" group, click "Split Table."</li>
+                </ol>
+                <h3>Question 64: How to Insert a Screenshot in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Screenshot:</strong> In the "Illustrations" group, click "Screenshot."</li>
+                    <li><strong>Select Screenshot:</strong> Choose a screenshot from the available windows or click
+                        "Screen Clipping" to capture a specific area.</li>
+                </ol>
+                <h3>Question 65: How to Use the Find and Replace Function in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Find:</strong> In the "Editing" group, click "Find."</li>
+                    <li><strong>Enter Text:</strong> Type the text you want to find in the "Find what" box.</li>
+                    <li><strong>Click on Replace:</strong> Click the "Replace" tab, type the replacement text in the
+                        "Replace with" box.</li>
+                    <li><strong>Replace Text:</strong> Click "Replace" to replace one instance or "Replace All" to
+                        replace all instances.</li>
+                </ol>
+                <h3>Question 66: How to Use the Ruler in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the View Tab:</strong> Click on the "View" tab on the Ribbon.</li>
+                    <li><strong>Check Ruler Box:</strong> In the "Show" group, check the "Ruler" box.</li>
+                    <li><strong>Use Ruler:</strong> The ruler will appear at the top and left of your document to help
+                        with alignment and margins.</li>
+                </ol>
+                <h3>Question 67: How to Adjust Paragraph Indents in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Select Paragraph:</strong> Highlight the paragraph you want to adjust.</li>
+                    <li><strong>Click on Increase/Decrease Indent:</strong> In the "Paragraph" group, click "Increase
+                        Indent" or "Decrease Indent" as needed.</li>
+                </ol>
+                <h3>Question 68: How to Add a Table in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Table:</strong> In the "Tables" group, click "Table."</li>
+                    <li><strong>Select Table Size:</strong> Drag to select the number of rows and columns or click
+                        "Insert Table" for more options.</li>
+                </ol>
+                <h3>Question 69: How to Insert a Chart in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Chart:</strong> In the "Illustrations" group, click "Chart."</li>
+                    <li><strong>Select Chart Type:</strong> Choose the chart type from the options available and click
+                        "OK."</li>
+                    <li><strong>Enter Data:</strong> The chart will open in Excel where you can enter your data.</li>
+                </ol>
+                <h3>Question 70: How to Add a Hyperlink in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to use as a hyperlink.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Hyperlink:</strong> In the "Links" group, click "Hyperlink."</li>
+                    <li><strong>Enter URL:</strong> Type or paste the URL in the "Address" field and click "OK."</li>
+                </ol>
+                <h3>Question 71: How to Remove a Header or Footer in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Header or Footer:</strong> In the "Header &amp; Footer" group, click "Header"
+                        or "Footer."</li>
+                    <li><strong>Select Remove Header/Footer:</strong> Click "Remove Header" or "Remove Footer" from the
+                        dropdown menu.</li>
+                </ol>
+                <h3>Question 72: How to Track Changes in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Click on Track Changes:</strong> In the "Tracking" group, click "Track Changes."</li>
+                    <li><strong>Make Changes:</strong> Any changes you make will now be tracked and displayed.</li>
+                </ol>
+                <h3>Question 73: How to Add Comments in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Select Text:</strong> Highlight the text where you want to add a comment.</li>
+                    <li><strong>Click on New Comment:</strong> In the "Comments" group, click "New Comment."</li>
+                    <li><strong>Enter Comment:</strong> Type your comment in the comment box that appears.</li>
+                </ol>
+                <h3>Question 74: How to Adjust Page Margins in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Layout Tab:</strong> Click on the "Layout" tab on the Ribbon.</li>
+                    <li><strong>Click on Margins:</strong> In the "Page Setup" group, click "Margins."</li>
+                    <li><strong>Select Margin Size:</strong> Choose one of the preset margin sizes or click "Custom
+                        Margins" to set your own.</li>
+                </ol>
+                <h3>Question 75: How to Use WordArt in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on WordArt:</strong> In the "Text" group, click "WordArt."</li>
+                    <li><strong>Select Style:</strong> Choose a WordArt style from the list.</li>
+                    <li><strong>Enter Text:</strong> Type your text and format it as desired.</li>
+                </ol>
+                <h3>Question 76: How to Create a Header with Different First Page in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Header:</strong> In the "Header &amp; Footer" group, click "Header."</li>
+                    <li><strong>Select Different First Page:</strong> Check the "Different First Page" option in the
+                        "Header &amp; Footer Tools" tab.</li>
+                    <li><strong>Customize Header:</strong> Modify the header for the first page as needed.</li>
+                </ol>
+                <h3>Question 77: How to Create a Custom Bullet in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text where you want to add custom bullets.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Bullets:</strong> In the "Paragraph" group, click the dropdown arrow next to
+                        "Bullets."</li>
+                    <li><strong>Select Define New Bullet:</strong> Click "Define New Bullet" and choose "Symbol" or
+                        "Picture" to create a custom bullet.</li>
+                </ol>
+                <h3>Question 78: How to Insert a Comment in a PDF Document Using Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your PDF document.</li>
+                    <li><strong>Go to the Review Tab:</strong> Click on the "Review" tab on the Ribbon.</li>
+                    <li><strong>Select Text:</strong> Highlight the text where you want to add a comment.</li>
+                    <li><strong>Click on New Comment:</strong> In the "Comments" group, click "New Comment."</li>
+                    <li><strong>Enter Comment:</strong> Type your comment in the comment box that appears.</li>
+                </ol>
+                <h3>Question 79: How to Apply a Style to Text in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to style.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Choose a Style:</strong> In the "Styles" group, select the desired style from the
+                        gallery.</li>
+                </ol>
+                <h3>Question 80: How to Protect a Document with a Password in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the File Tab:</strong> Click on the "File" tab on the Ribbon.</li>
+                    <li><strong>Select Info:</strong> Click "Info" from the sidebar menu.</li>
+                    <li><strong>Click on Protect Document:</strong> Click "Protect Document" and select "Encrypt with
+                        Password."</li>
+                    <li><strong>Set Password:</strong> Enter and confirm the password, then click "OK."</li>
+                </ol>
+                <h3>Question 81: How to Add a Signature Line in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Signature Line:</strong> In the "Text" group, click "Signature Line."</li>
+                    <li><strong>Enter Details:</strong> Fill out the details in the Signature Setup box and click "OK."
+                    </li>
+                </ol>
+                <h3>Question 82: How to Format Text as Superscript or Subscript in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to format.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Superscript/Subscript:</strong> In the "Font" group, click "Superscript" or
+                        "Subscript."</li>
+                </ol>
+                <h3>Question 83: How to Use Mail Merge in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and create or open a document.</li>
+                    <li><strong>Go to the Mailings Tab:</strong> Click on the "Mailings" tab on the Ribbon.</li>
+                    <li><strong>Start Mail Merge:</strong> Click "Start Mail Merge" and choose the type of document.
+                    </li>
+                    <li><strong>Select Recipients:</strong> Click "Select Recipients" and choose "Use an Existing List"
+                        or "Type a New List."</li>
+                    <li><strong>Complete Merge:</strong> Click "Finish &amp; Merge" to print or create a new document
+                        with the merged information.</li>
+                </ol>
+                <h3>Question 84: How to Insert a Drop Cap in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Drop Cap:</strong> In the "Text" group, click "Drop Cap."</li>
+                    <li><strong>Select Style:</strong> Choose a style for your drop cap from the options provided.</li>
+                </ol>
+                <h3>Question 85: How to Create a Bookmark in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Go to the Insert Tab:</strong> Click on the "Insert" tab on the Ribbon.</li>
+                    <li><strong>Click on Bookmark:</strong> In the "Links" group, click "Bookmark."</li>
+                    <li><strong>Enter Name:</strong> Type a name for your bookmark and click "Add."</li>
+                </ol>
+                <h3>Question 86: How to Remove All Formatting in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text from which you want to remove formatting.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Clear All Formatting:</strong> In the "Font" group, click the "Clear All
+                        Formatting" button (an eraser icon).</li>
+                </ol>
+                <h3>Question 87: How to Use the Dictation Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the Home Tab:</strong> Click on the "Home" tab on the Ribbon.</li>
+                    <li><strong>Click on Dictate:</strong> In the "Voice" group, click "Dictate."</li>
+                    <li><strong>Start Speaking:</strong> Speak into your microphone to dictate your text. Microsoft Word
+                        will transcribe your speech.</li>
+                </ol>
+                <h3>Question 88: How to Use the Smart Lookup Feature in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Open Microsoft Word and your document.</li>
+                    <li><strong>Select Text:</strong> Highlight the text you want to look up.</li>
+                    <li><strong>Right-Click:</strong> Right-click the selected text.</li>
+                    <li><strong>Click on Smart Lookup:</strong> From the context menu, click "Smart Lookup."</li>
+                    <li><strong>Review Information:</strong> Review the information and definitions provided in the pane
+                        that appears.</li>
+                </ol>
+                <h3>Question 89: How to Create a Macro in Microsoft Word?</h3>
+                <ol>
+                    <li><strong>Open Your Document:</strong> Launch Microsoft Word and open your document.</li>
+                    <li><strong>Go to the View Tab:</strong> Click on the "View" tab on the Ribbon.</li>
+                    <li><strong>Click on Macros:</strong> In the "Macros" group, click "Macros" and select "Record
+                        Macro."</li>
+                    <li><strong>Name Your Macro:</strong> Enter a name for your macro and choose where to store it.</li>
+                    <li><strong>Record Actions:</strong> Perform the actions you want to include in the macro. Click
+                        "Stop Recording" when done.</li>
+                </ol>
+            </div>
+            <h1>The Magical World of Microsoft Word</h1>
+
+            <p>Once upon a time, in the bustling town of Techville, there was a magical library known as the "Word
+                Wizard's Library." This library wasn't like any ordinary library. It was home to a magical book named
+                "Microsoft Word."</p>
+
+            <p>Microsoft Word was no ordinary book. It had the power to transform plain text into beautifully formatted
+                documents. People from all over Techville came to visit Microsoft Word to write letters, create stories,
+                design flyers, and much more.</p>
+
+            <h2>For the Young Explorers:</h2>
+            <p>One sunny day, a young explorer named Timmy came to the library. Timmy loved writing stories about
+                dragons and knights. He discovered that Microsoft Word could help him write his stories with amazing
+                flair. He could choose from different fonts, add colorful headings, and even insert pictures of dragons
+                to make his stories come alive. With a few clicks, Timmy's stories were no longer just words on a
+                page—they were magical adventures!</p>
+
+            <h2>For the School Kids:</h2>
+            <p>Next, it was Lucy’s turn. Lucy was a student who needed to create a report about her summer vacation. She
+                learned that Microsoft Word could help her organize her report neatly. She used the "Heading" styles to
+                create sections for each part of her vacation, and she added bullet points to list her favorite
+                activities. When she needed to share her report with her friends, she used the "Save As" feature to save
+                it as a PDF so everyone could read it, even if they didn’t have Microsoft Word.</p>
+
+            <h2>For the Teenagers:</h2>
+            <p>Teenager Jake was working on a group project for school. He needed to collaborate with his friends and
+                make sure their work looked professional. Jake discovered that Microsoft Word’s "Track Changes" feature
+                allowed his group to make edits and suggestions, while the "Comments" feature let them discuss their
+                ideas without changing the original text. They used "Tables" and "Charts" to present their data clearly,
+                and with Microsoft Word’s "Styles," their project looked polished and impressive.</p>
+
+            <h2>For the Adults:</h2>
+            <p>Ms. Johnson, a professional writer, frequently used Microsoft Word for her job. She loved the "Mail
+                Merge" feature to send personalized letters to her clients. With "Templates," she could create beautiful
+                newsletters and reports effortlessly. She also appreciated the "Review" tools, which allowed her to
+                check for spelling and grammar mistakes, and the "References" tool, which helped her create
+                bibliographies and citations with ease.</p>
+
+            <h2>For the Elders:</h2>
+            <p>Finally, Mr. Thompson, a retired teacher, used Microsoft Word to compile his family history into a book.
+                He found that "Page Borders" and "Header & Footer" options helped him give his family book a
+                professional look. He could also use the "Table of Contents" feature to organize the chapters and make
+                it easy for his family to find their favorite stories. Mr. Thompson enjoyed how Microsoft Word helped
+                him preserve his family’s legacy in a beautifully formatted document.</p>
+
+            <p>And so, the magical book named Microsoft Word continued to help people of all ages in Techville with
+                their writing and creative needs. It was more than just a tool—it was a gateway to endless
+                possibilities, transforming ordinary words into extraordinary documents.</p>
+
+
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><a href="https://support.microsoft.com/en-us/word">Official Microsoft Word Support</a></li>
+                <li><a href="https://www.office.com/launch/word">Microsoft Word Online</a></li>
+                <li><a href="https://templates.office.com/">Microsoft Word Templates</a></li>
+                <li><a href="https://docs.microsoft.com/en-us/office/vba/api/overview/word">Microsoft Word VBA
+                        Documentation</a></li>
+            </ul>
+            <script>
+                const toggleButton = document.getElementById('theme-toggle');
+                const body = document.body;
+
+                toggleButton.addEventListener('click', () => {
+                    body.classList.toggle('dark-theme');
+                    body.classList.toggle('light-theme');
+                });
+
+                // Default theme
+                if (!body.classList.contains('dark-theme') && !body.classList.contains('light-theme')) {
+                    body.classList.add('light-theme');
+                }
+            </script>
+
+</body>
+
+</html>

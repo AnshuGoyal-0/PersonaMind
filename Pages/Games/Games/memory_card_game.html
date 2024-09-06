@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            margin: 0 auto;
+            max-width: 450px;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+        .card.flipped {
+            background-color: #ddd;
+        }
+        .card img {
+            width: 80%;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Memory Card Game</h1>
+    <div class="grid" id="grid"></div>
+    <div id="result"></div>
+
+    <script>
+        const cards = [
+            'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D',
+            'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'
+        ];
+        let shuffledCards = shuffle(cards);
+        let flippedCards = [];
+        let matchedCards = 0;
+        let attempts = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createCardElement(cardValue, index) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.value = cardValue;
+            card.dataset.index = index;
+            card.addEventListener('click', () => flipCard(card));
+            return card;
+        }
+
+        function initializeGame() {
+            const grid = document.getElementById('grid');
+            shuffledCards.forEach((cardValue, index) => {
+                grid.appendChild(createCardElement(cardValue, index));
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length === 2) return;
+            card.classList.add('flipped');
+            card.textContent = card.dataset.value;
+
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                attempts++;
+                setTimeout(checkMatch, 1000);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.value === card2.dataset.value) {
+                matchedCards += 2;
+                if (matchedCards === cards.length) {
+                    document.getElementById('result').textContent = `You won in ${attempts} attempts!`;
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '';
+                card2.textContent = '';
+            }
+            flippedCards = [];
+        }
+
+        // Initialize the game
+        initializeGame();
+    </script>
+</body>
+</html>

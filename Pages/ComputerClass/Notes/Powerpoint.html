@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerPoint</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 10px;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark theme body */
+        body.dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        /* Header styles */
+        header {
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        body.dark-theme header {
+            background-color: #1a1a1a;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Navigation styles */
+        nav {
+            background: #444;
+            color: #fff;
+            padding: 0.5rem 0;
+        }
+
+        body.dark-theme nav {
+            background: #2c2c2c;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content styles */
+        .content {
+            padding: 2rem;
+            width: auto;
+        }
+
+        .content section {
+            margin-bottom: 2rem;
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-theme .content h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .content ul {
+            padding-left: 1.5rem;
+        }
+
+        .content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Card Theme for .question */
+        .question {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 60px;
+            font-weight: bolder;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-theme .question {
+            background: #1e1e1e;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2 {
+            color: #4A90E2;
+        }
+
+        h2 {
+            color: #007BFF;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: square;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-weight: bold;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #1784ff;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        body.dark-theme th {
+            background-color: #4A90E2;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        body.dark-theme td {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .question li:hover {
+            font-size: large;
+            color: #ff0000;
+        }
+
+        body.dark-theme .question li:hover {
+            color: #ff4f4f;
+        }
+
+        .question h3 {
+            font-weight: bold;
+            margin: 5px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .answer {
+            margin-left: 5px;
+        }
+
+        td:hover {
+            font-size: 20px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s, color 0.3s;
+            color: #000;
+        }
+
+
+        .icon-sun,
+        .icon-moon {
+            display: none;
+            transition: color 0.3s;
+        }
+
+        /* Light Theme Styling */
+        body.light-theme .theme-toggle {
+            color: #000000;
+        }
+
+        body.light-theme .icon-sun {
+            display: inline-block;
+        }
+
+        /* Dark Theme Styling */
+        body.dark-theme .theme-toggle {
+            color: #ffffff;
+        }
+
+        body.dark-theme .icon-moon {
+            display: inline-block;
+        }
+
+        .head {
+            display: flex;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <div class="head">
+                <h2>PowerPoint __ </h2>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-sun icon-sun"></i>
+                    <i class="fas fa-moon icon-moon"></i>
+                </button>
+                <h2>__</h2>
+            </div>
+            <h2>Why We Use PowerPoint</h2>
+            <ul>
+                <li><strong>Educational Settings</strong>: To create engaging lectures and visual aids for enhanced
+                    learning.</li>
+                <li><strong>Business Presentations</strong>: For presenting ideas, reports, and proposals effectively in
+                    meetings.</li>
+                <li><strong>Public Speaking</strong>: To support speeches with visual elements for a more compelling
+                    presentation.</li>
+                <li><strong>Training and Workshops</strong>: To provide structured and interactive content to attendees.
+                </li>
+                <li><strong>Marketing and Sales</strong>: For creating visually appealing pitches and product showcases.
+                </li>
+            </ul>
+
+            <h2>Key Features of PowerPoint</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Slide Layouts</td>
+                        <td>Customizable designs to organize content effectively.</td>
+                    </tr>
+                    <tr>
+                        <td>Multimedia Integration</td>
+                        <td>Ability to add videos, audio, and images to slides.</td>
+                    </tr>
+                    <tr>
+                        <td>Animations and Transitions</td>
+                        <td>Tools for animating text and images and creating smooth transitions between slides.</td>
+                    </tr>
+                    <tr>
+                        <td>Templates</td>
+                        <td>Pre-designed templates for creating professional-looking presentations quickly.</td>
+                    </tr>
+                    <tr>
+                        <td>Collaboration Tools</td>
+                        <td>Options for sharing and collaborating on presentations in real-time.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h1>PowerPoint Shortcuts</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Shortcut</th>
+                        <th>Action</th>
+                        <th>Usefulness</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ctrl + N</strong></td>
+                        <td>New Presentation</td>
+                        <td>Quickly create a new presentation without navigating through menus.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + O</strong></td>
+                        <td>Open Presentation</td>
+                        <td>Quickly open an existing presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + S</strong></td>
+                        <td>Save Presentation</td>
+                        <td>Save your current presentation, reducing the risk of losing work.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + P</strong></td>
+                        <td>Print Presentation</td>
+                        <td>Quickly open the print dialog to print your slides.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + M</strong></td>
+                        <td>Add New Slide</td>
+                        <td>Insert a new slide into your presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F5</strong></td>
+                        <td>Start Slide Show</td>
+                        <td>Begin the slideshow from the first slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shift + F5</strong></td>
+                        <td>Start Slide Show from Current Slide</td>
+                        <td>Begin the slideshow from the current slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + C</strong></td>
+                        <td>Copy Formatting</td>
+                        <td>Copy the formatting of a selected object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + V</strong></td>
+                        <td>Paste Formatting</td>
+                        <td>Apply copied formatting to a selected object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + K</strong></td>
+                        <td>Insert Hyperlink</td>
+                        <td>Insert a hyperlink into the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + N</strong></td>
+                        <td>Insert Tab</td>
+                        <td>Access the Insert tab in the Ribbon.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + H</strong></td>
+                        <td>Home Tab</td>
+                        <td>Access the Home tab in the Ribbon.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + D</strong></td>
+                        <td>Duplicate Slide</td>
+                        <td>Create a copy of the currently selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Z</strong></td>
+                        <td>Undo</td>
+                        <td>Undo the last action.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Y</strong></td>
+                        <td>Redo</td>
+                        <td>Redo the last undone action.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + E</strong></td>
+                        <td>Center Align Text</td>
+                        <td>Quickly center-align the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + L</strong></td>
+                        <td>Left Align Text</td>
+                        <td>Quickly left-align the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + R</strong></td>
+                        <td>Right Align Text</td>
+                        <td>Quickly right-align the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + G</strong></td>
+                        <td>Group Objects</td>
+                        <td>Group selected objects together for easier manipulation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + G</strong></td>
+                        <td>Ungroup Objects</td>
+                        <td>Ungroup previously grouped objects.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + F4</strong></td>
+                        <td>Close Presentation</td>
+                        <td>Close the current presentation window.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + T</strong></td>
+                        <td>Open Font Dialog</td>
+                        <td>Open the Font dialog to change font properties.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + > or << /strong>
+                        </td>
+                        <td>Increase or Decrease Font Size</td>
+                        <td>Quickly adjust the font size of the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 1</strong></td>
+                        <td>Open Format Cells Dialog</td>
+                        <td>Open the Format Cells dialog to adjust cell formatting (applies to tables).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F7</strong></td>
+                        <td>Spell Check</td>
+                        <td>Run a spell check on the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Shift + D</strong></td>
+                        <td>Insert Date</td>
+                        <td>Insert the current date into the slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Shift + T</strong></td>
+                        <td>Insert Time</td>
+                        <td>Insert the current time into the slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F</strong></td>
+                        <td>Find Text</td>
+                        <td>Open the Find dialog to search for specific text within the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + H</strong></td>
+                        <td>Replace Text</td>
+                        <td>Open the Replace dialog to find and replace text within the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + C</strong></td>
+                        <td>Copy Object Format</td>
+                        <td>Copy the formatting of a selected object (similar to Copy Formatting).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + V</strong></td>
+                        <td>Paste Object Format</td>
+                        <td>Paste the copied formatting onto a different object (similar to Paste Formatting).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + V</strong></td>
+                        <td>Paste Special</td>
+                        <td>Open the Paste Special dialog to choose a specific format for pasting.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F5</strong></td>
+                        <td>Start Slide Show from Current Slide</td>
+                        <td>Begin the slideshow from the currently selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Q</strong></td>
+                        <td>Quick Access Toolbar</td>
+                        <td>Access the Quick Access Toolbar to quickly use frequently used commands.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + E</strong></td>
+                        <td>Export Presentation</td>
+                        <td>Open the Export dialog to save the presentation in different formats.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + N</strong></td>
+                        <td>New Slide with Same Layout</td>
+                        <td>Add a new slide with the same layout as the current slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + 1, 2, 3, etc.</strong></td>
+                        <td>Access Ribbon Tabs</td>
+                        <td>Quickly access different Ribbon tabs by pressing Alt followed by the number of the tab.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + F</strong></td>
+                        <td>Change Font Style</td>
+                        <td>Open the font style menu to change the font style of the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 8</strong></td>
+                        <td>Show/Hide Outline Pane</td>
+                        <td>Toggle the visibility of the Outline pane to view slide titles and text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 9</strong></td>
+                        <td>Show/Hide Slides Pane</td>
+                        <td>Toggle the visibility of the Slides pane to manage slide thumbnails.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + M</strong></td>
+                        <td>Zoom In</td>
+                        <td>Zoom in on the slide to view details more clearly.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + -</strong></td>
+                        <td>Zoom Out</td>
+                        <td>Zoom out on the slide to see a broader view.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F1</strong></td>
+                        <td>Help</td>
+                        <td>Open the Help pane to access PowerPoint’s help resources.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F2</strong></td>
+                        <td>Edit Text</td>
+                        <td>Enter text editing mode for the selected text object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F3</strong></td>
+                        <td>Repeat Last Action</td>
+                        <td>Repeat the last action performed in the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + F</strong></td>
+                        <td>File Menu</td>
+                        <td>Open the File menu to access file-related commands like Save and Print.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + H</strong></td>
+                        <td>Home Tab</td>
+                        <td>Access the Home tab on the Ribbon for common editing tools.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + N</strong></td>
+                        <td>Insert Tab</td>
+                        <td>Access the Insert tab on the Ribbon to insert objects and media.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + G</strong></td>
+                        <td>Design Tab</td>
+                        <td>Access the Design tab on the Ribbon to apply themes and styles.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + K</strong></td>
+                        <td>Transitions Tab</td>
+                        <td>Access the Transitions tab to set slide transitions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + A</strong></td>
+                        <td>Animations Tab</td>
+                        <td>Access the Animations tab to apply animations to slide elements.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + R</strong></td>
+                        <td>Review Tab</td>
+                        <td>Access the Review tab for proofing tools and comments.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + W</strong></td>
+                        <td>View Tab</td>
+                        <td>Access the View tab to change the presentation’s view mode.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + K</strong></td>
+                        <td>Insert Slide Number</td>
+                        <td>Open the Slide Number dialog to add slide numbers to slides.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + S</strong></td>
+                        <td>Save As</td>
+                        <td>Open the Save As dialog to save the presentation under a new name or format.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + D</strong></td>
+                        <td>Duplicate Slide</td>
+                        <td>Create a duplicate of the currently selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 0 (zero)</strong></td>
+                        <td>Fit Slide to Window</td>
+                        <td>Adjust the slide view to fit the window size.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + F5</strong></td>
+                        <td>Start Slide Show from Current Slide</td>
+                        <td>Begin the slideshow from the currently selected slide, similar to F5 but from the current
+                            slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + T</strong></td>
+                        <td>Insert Text Box</td>
+                        <td>Insert a new text box onto the slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + C</strong></td>
+                        <td>Copy Object Format</td>
+                        <td>Copy the formatting of a selected object to apply it elsewhere.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + V</strong></td>
+                        <td>Paste Object Format</td>
+                        <td>Paste the copied formatting onto a selected object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + F9</strong></td>
+                        <td>Toggle Field Codes</td>
+                        <td>Show or hide field codes, such as hyperlinks, within the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + F5</strong></td>
+                        <td>Start Slide Show from Current Slide (Advanced)</td>
+                        <td>Start the slideshow from the current slide with additional options.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + U</strong></td>
+                        <td>Toggle Underline</td>
+                        <td>Toggle underline formatting on the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Shift + L</strong></td>
+                        <td>Insert Bullet Point</td>
+                        <td>Quickly insert a bullet point into the selected text or list.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + N</strong></td>
+                        <td>Create New Presentation</td>
+                        <td>Open a new, blank presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + M</strong></td>
+                        <td>Insert New Slide</td>
+                        <td>Add a new slide to the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + K</strong></td>
+                        <td>Insert Hyperlink</td>
+                        <td>Open the Insert Hyperlink dialog to add a hyperlink to the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + R</strong></td>
+                        <td>Reapply Master Layout</td>
+                        <td>Reapply the master slide layout to the selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + P</strong></td>
+                        <td>Print Presentation</td>
+                        <td>Open the Print dialog to print the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F1</strong></td>
+                        <td>Collapse or Expand Ribbon</td>
+                        <td>Toggle the visibility of the Ribbon to maximize screen space.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + F5</strong></td>
+                        <td>Presenter View</td>
+                        <td>Start the slide show in Presenter View, which shows speaker notes and upcoming slides.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + E</strong></td>
+                        <td>Export Presentation</td>
+                        <td>Open the Export dialog to choose export options and formats.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + K</strong></td>
+                        <td>Insert Hyperlink</td>
+                        <td>Open the Insert Hyperlink dialog to add a hyperlink to the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + J</strong></td>
+                        <td>Justify Text</td>
+                        <td>Align the selected text to both the left and right margins.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + 1</strong></td>
+                        <td>Apply Heading 1 Style</td>
+                        <td>Apply the Heading 1 style to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + 2</strong></td>
+                        <td>Apply Heading 2 Style</td>
+                        <td>Apply the Heading 2 style to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + 3</strong></td>
+                        <td>Apply Heading 3 Style</td>
+                        <td>Apply the Heading 3 style to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + E</strong></td>
+                        <td>Export Presentation</td>
+                        <td>Open the Export dialog to choose export options and formats.</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Ctrl + Shift + C</strong></td>
+                        <td>Copy Object Formatting</td>
+                        <td>Copy the formatting of a selected object to apply it elsewhere.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + V</strong></td>
+                        <td>Paste Object Formatting</td>
+                        <td>Paste the copied formatting onto a selected object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + D</strong></td>
+                        <td>Duplicate Current Slide</td>
+                        <td>Create a duplicate of the currently selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Shift + F</strong></td>
+                        <td>Insert Footer</td>
+                        <td>Open the Footer dialog to add or edit footers in slides.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Shift + H</strong></td>
+                        <td>Insert Header</td>
+                        <td>Open the Header dialog to add or edit headers in slides.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + M</strong></td>
+                        <td>Insert Comment</td>
+                        <td>Add a comment to the current slide or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + A</strong></td>
+                        <td>Align Objects</td>
+                        <td>Open the Align Objects dialog to align multiple selected objects.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F</strong></td>
+                        <td>Find</td>
+                        <td>Open the Find dialog to search for specific text or objects in the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + H</strong></td>
+                        <td>Replace</td>
+                        <td>Open the Replace dialog to replace text or objects in the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + D</strong></td>
+                        <td>Display Tab</td>
+                        <td>Open the Display tab on the Ribbon to adjust the view settings of the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + Q</strong></td>
+                        <td>Quick Access Toolbar</td>
+                        <td>Open the Quick Access Toolbar menu to customize toolbar options.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + K</strong></td>
+                        <td>Insert Hyperlink</td>
+                        <td>Open the Insert Hyperlink dialog to create or edit hyperlinks.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + 5</strong></td>
+                        <td>Apply Text Highlight</td>
+                        <td>Highlight the selected text in the current presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 1</strong></td>
+                        <td>Format Text Dialog</td>
+                        <td>Open the Format Text dialog to adjust text formatting.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 2</strong></td>
+                        <td>Format Slide Layout</td>
+                        <td>Open the Format Slide Layout dialog to modify slide layout settings.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + 3</strong></td>
+                        <td>Format Object Dialog</td>
+                        <td>Open the Format Object dialog to adjust object formatting.</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Ctrl + Shift + L</strong></td>
+                        <td>Insert Bullet</td>
+                        <td>Add a bullet point to the selected text or list.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + S</strong></td>
+                        <td>Save As</td>
+                        <td>Open the Save As dialog to save the presentation under a different name or format.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + Q</strong></td>
+                        <td>Apply Theme</td>
+                        <td>Apply a theme to the entire presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + F4</strong></td>
+                        <td>Close Application</td>
+                        <td>Close the PowerPoint application.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + P</strong></td>
+                        <td>Print</td>
+                        <td>Open the Print dialog to print the current presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + B</strong></td>
+                        <td>Bold Text</td>
+                        <td>Apply bold formatting to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + I</strong></td>
+                        <td>Italicize Text</td>
+                        <td>Apply italic formatting to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + U</strong></td>
+                        <td>Underline Text</td>
+                        <td>Apply underline formatting to the selected text.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + E</strong></td>
+                        <td>Center Align Text</td>
+                        <td>Center-align the selected text or paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + L</strong></td>
+                        <td>Left Align Text</td>
+                        <td>Left-align the selected text or paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + R</strong></td>
+                        <td>Right Align Text</td>
+                        <td>Right-align the selected text or paragraph.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + J</strong></td>
+                        <td>Justify Text</td>
+                        <td>Justify the selected text or paragraph, aligning text to both left and right margins.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + G</strong></td>
+                        <td>Group Objects</td>
+                        <td>Group selected objects together to move or format them as a single unit.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + G</strong></td>
+                        <td>Ungroup Objects</td>
+                        <td>Ungroup previously grouped objects to edit them individually.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + T</strong></td>
+                        <td>Open Font Dialog</td>
+                        <td>Open the Font dialog to change font style, size, and effects.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + N</strong></td>
+                        <td>Create New Presentation</td>
+                        <td>Create a new, blank presentation.</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Ctrl + Shift + F</strong></td>
+                        <td>Open Find and Replace</td>
+                        <td>Open the Find and Replace dialog to search for and replace text or objects.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + 8</strong></td>
+                        <td>Show/Hide Formatting Marks</td>
+                        <td>Toggle visibility of formatting marks like paragraph symbols and spaces.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + N</strong></td>
+                        <td>Insert Tab</td>
+                        <td>Access the Insert tab on the Ribbon to add elements like images, shapes, and text boxes.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + H</strong></td>
+                        <td>Home Tab</td>
+                        <td>Access the Home tab on the Ribbon to use basic formatting and editing options.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + C</strong></td>
+                        <td>Copy Format</td>
+                        <td>Copy the formatting of the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + V</strong></td>
+                        <td>Paste Format</td>
+                        <td>Apply copied formatting to the selected text or object.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + Z</strong></td>
+                        <td>Undo</td>
+                        <td>Undo the last action performed.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + Y</strong></td>
+                        <td>Redo</td>
+                        <td>Redo the last undone action.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + M</strong></td>
+                        <td>New Slide</td>
+                        <td>Insert a new slide into the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + M</strong></td>
+                        <td>Insert New Slide Master</td>
+                        <td>Add a new Slide Master to the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alt + T</strong></td>
+                        <td>Transitions Tab</td>
+                        <td>Access the Transitions tab on the Ribbon to apply slide transitions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Alt + C</strong></td>
+                        <td>Insert Chart</td>
+                        <td>Open the Insert Chart dialog to add a chart to the slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + Shift + E</strong></td>
+                        <td>Export Presentation</td>
+                        <td>Open the Export dialog to choose options and formats for exporting the presentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F5</strong></td>
+                        <td>Start Slide Show from Current Slide</td>
+                        <td>Begin the slide show from the currently selected slide.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ctrl + F12</strong></td>
+                        <td>Open File Dialog</td>
+                        <td>Open the File dialog to browse and open existing presentations.</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <h1>PowerPoint Questions</h1>
+        <section class="Questions-Answere">
+            <div class="question">
+                <h3>Question 1: What is the first step to open a PowerPoint presentation?</h3>
+                <ol>
+                    <li>1. Open Microsoft PowerPoint.</li>
+                    <li>2. Click on 'File' and then 'Open'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 2: How do I add a new slide to a presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Home' tab.</li>
+                    <li>2. Click 'New Slide' in the Slides section.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 3: How do I insert an image into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Pictures' and choose the image file.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 4: How can I add a transition effect between slides?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Choose a transition effect from the options provided.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 5: How do I change the background color of a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the slide.</li>
+                    <li>2. Select 'Format Background' and choose a color.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 6: How can I add text to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Text Box' and click on the slide to add text.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 7: How do I apply a design theme to my presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Design' tab.</li>
+                    <li>2. Choose a theme from the gallery.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 8: How can I set a slide to be automatically timed?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Set the 'Advance Slide' option to 'After' and enter the time.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 9: How do I create a hyperlink in a slide?</h3>
+                <ol>
+                    <li>1. Select the text or object you want to link.</li>
+                    <li>2. Right-click and choose 'Hyperlink', then enter the URL.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 10: How can I add a video to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Video' and choose a video file or online video.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 11: How do I insert a table into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Table' and specify the number of rows and columns.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 12: How can I use the 'Slide Master' to make global changes?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab.</li>
+                    <li>2. Select 'Slide Master' to make changes that apply to all slides.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 13: How do I add speaker notes to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Notes' button at the bottom of the screen.</li>
+                    <li>2. Enter your notes in the 'Notes' pane.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 14: How can I align objects on a slide?</h3>
+                <ol>
+                    <li>1. Select the objects you want to align.</li>
+                    <li>2. Use the 'Arrange' options in the 'Format' tab to align them.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 15: How do I apply animations to objects?</h3>
+                <ol>
+                    <li>1. Click on the 'Animations' tab.</li>
+                    <li>2. Select an animation effect and apply it to the chosen object.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 16: How can I set up a custom slide show?</h3>
+                <ol>
+                    <li>1. Click on the 'Slide Show' tab.</li>
+                    <li>2. Select 'Custom Slide Show' and choose the slides you want to include.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 17: How do I save a presentation as a PDF?</h3>
+                <ol>
+                    <li>1. Click on 'File' and select 'Save As'.</li>
+                    <li>2. Choose 'PDF' from the 'Save as type' dropdown menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 18: How can I insert a chart into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Chart' and choose the type of chart you want to insert.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 19: How do I customize slide layouts?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Modify the layouts as needed and save changes.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 20: How can I add a header or footer to all slides?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Header &amp; Footer' and choose the content to add.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 21: How do I change the slide orientation?</h3>
+                <ol>
+                    <li>1. Click on the 'Design' tab.</li>
+                    <li>2. Select 'Slide Size' and choose 'Custom Slide Size'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 22: How can I group objects on a slide?</h3>
+                <ol>
+                    <li>1. Select the objects you want to group.</li>
+                    <li>2. Right-click and choose 'Group' from the context menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 23: How do I remove a slide from the presentation?</h3>
+                <ol>
+                    <li>1. Select the slide you want to remove.</li>
+                    <li>2. Right-click and choose 'Delete Slide'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 24: How can I create a chart from data in Excel?</h3>
+                <ol>
+                    <li>1. Copy the data from Excel.</li>
+                    <li>2. Paste it into a chart in PowerPoint.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 25: How do I add a background image to a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the slide background.</li>
+                    <li>2. Select 'Format Background' and choose 'Picture or texture fill'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 26: How can I add a shape to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Shapes' and choose the desired shape.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 27: How do I use the 'Find' function in PowerPoint?</h3>
+                <ol>
+                    <li>1. Press 'Ctrl + F' to open the 'Find' dialog box.</li>
+                    <li>2. Enter the text you want to find and click 'Find Next'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 28: How can I export a presentation as a video?</h3>
+                <ol>
+                    <li>1. Click on 'File' and select 'Export'.</li>
+                    <li>2. Choose 'Create a Video' and configure the settings.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 29: How do I use 'Presenter View' during a presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Slide Show' tab.</li>
+                    <li>2. Check 'Use Presenter View' and start the presentation.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 30: How can I add a watermark to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Text Box' and type the watermark text. Adjust transparency as needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 31: How do I make a slide appear on a specific time during a presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Set the 'Advance Slide' timing to the desired duration.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 32: How can I add a comment to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Review' tab.</li>
+                    <li>2. Select 'New Comment' and type your comment in the pane that appears.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 33: How do I change the font size on a slide?</h3>
+                <ol>
+                    <li>1. Select the text you want to modify.</li>
+                    <li>2. Use the 'Font Size' dropdown in the 'Home' tab to adjust the size.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 34: How can I lock objects on a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the object.</li>
+                    <li>2. Select 'Lock' from the context menu to prevent moving or editing.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 35: How do I enable 'Gridlines' on a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab.</li>
+                    <li>2. Check the 'Gridlines' box in the Show group.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 36: How can I add a logo to every slide?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Insert the logo into the Slide Master so it appears on every slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 37: How do I remove the date from a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Header &amp; Footer' and uncheck 'Date and time'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 38: How can I use 'Smart Guides' to align objects?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab.</li>
+                    <li>2. Check the 'Smart Guides' box to enable alignment aids.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 39: How do I change the slide layout?</h3>
+                <ol>
+                    <li>1. Click on the 'Home' tab.</li>
+                    <li>2. Select 'Layout' and choose the desired layout for your slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 40: How can I add a hyperlink to an image?</h3>
+                <ol>
+                    <li>1. Click on the image to select it.</li>
+                    <li>2. Right-click and choose 'Hyperlink', then enter the URL.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 41: How do I create a new presentation from a template?</h3>
+                <ol>
+                    <li>1. Open PowerPoint and click on 'File'.</li>
+                    <li>2. Select 'New' and choose a template from the available options.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 42: How can I edit a slide's master layout?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Make changes to the master layout, such as adding elements or changing formatting.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 43: How do I format a chart in a slide?</h3>
+                <ol>
+                    <li>1. Click on the chart to select it.</li>
+                    <li>2. Use the 'Chart Tools' tabs to format the chart as needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 44: How can I add a shape effect to an object?</h3>
+                <ol>
+                    <li>1. Select the shape you want to format.</li>
+                    <li>2. Click on the 'Format' tab and choose an effect from the 'Shape Effects' menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 45: How do I change the theme color of a presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Design' tab.</li>
+                    <li>2. Select 'Colors' and choose a new color scheme.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 46: How can I reorder slides in a presentation?</h3>
+                <ol>
+                    <li>1. In the slide sorter view, click and drag slides to reorder them.</li>
+                    <li>2. Release the mouse button to drop the slide in the new position.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 47: How do I insert a text box in a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Text Box' and click on the slide where you want to add the text box.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 48: How can I duplicate a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the slide you want to duplicate.</li>
+                    <li>2. Choose 'Duplicate Slide' from the context menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 49: How do I use a custom font in a presentation?</h3>
+                <ol>
+                    <li>1. Install the custom font on your computer.</li>
+                    <li>2. Select the text and choose the custom font from the font dropdown menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 50: How can I add a gradient fill to a shape?</h3>
+                <ol>
+                    <li>1. Select the shape you want to format.</li>
+                    <li>2. Click on the 'Format' tab and choose 'Gradient Fill' under 'Shape Fill'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 51: How do I change the background color of a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the slide and select 'Format Background'.</li>
+                    <li>2. Choose 'Solid Fill' and select a color from the palette.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 52: How can I insert a video into a presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Video' and choose 'Video on My PC' or 'Online Video'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 53: How do I add a slide transition effect?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Choose a transition effect from the gallery and apply it to your slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 54: How can I apply a theme to a presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Design' tab.</li>
+                    <li>2. Select a theme from the available options or browse for more themes.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 55: How do I create a custom slide layout?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Click 'Insert Layout' and customize it as needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 56: How can I set up automatic slide timings?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Check 'After' and set the timing for each slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 57: How do I add a chart to a slide?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Click 'Chart' and select the type of chart you want to insert.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 58: How can I insert a hyperlink to a website?</h3>
+                <ol>
+                    <li>1. Select the text or object you want to hyperlink.</li>
+                    <li>2. Right-click and choose 'Hyperlink', then enter the URL.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 59: How do I add speaker notes to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Notes' section below the slide.</li>
+                    <li>2. Type your speaker notes into the text box that appears.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 60: How can I change the font color in a presentation?</h3>
+                <ol>
+                    <li>1. Select the text you want to change.</li>
+                    <li>2. Click on the 'Font Color' button in the 'Home' tab and choose a color.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 61: How do I add a hyperlink to a slide?</h3>
+                <ol>
+                    <li>1. Select the text or object you want to link.</li>
+                    <li>2. Click on 'Insert' and then 'Hyperlink', and enter the link address.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 62: How can I use a custom color in my presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Design' tab.</li>
+                    <li>2. Choose 'Colors' and select 'Customize Colors' to create a new color scheme.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 63: How do I insert a picture from a file?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Click 'Pictures' and select 'This Device' to choose a file from your computer.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 64: How can I add a footer to every slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab and select 'Header &amp; Footer'.</li>
+                    <li>2. Check 'Footer' and enter your text. Click 'Apply to All'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 65: How do I adjust the alignment of text in a text box?</h3>
+                <ol>
+                    <li>1. Select the text box.</li>
+                    <li>2. Use the alignment options in the 'Home' tab to adjust the text alignment.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 66: How can I apply a design template to an existing presentation?</h3>
+                <ol>
+                    <li>1. Click on the 'Design' tab.</li>
+                    <li>2. Choose a design template and apply it to your presentation.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 67: How do I insert a table into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Table' and choose the number of rows and columns.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 68: How can I insert an audio file into a presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Click 'Audio' and select 'Audio on My PC' or 'Record Audio'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 69: How do I change the slide transition speed?</h3>
+                <ol>
+                    <li>1. Go to the 'Transitions' tab.</li>
+                    <li>2. Adjust the 'Duration' slider to set the speed of the transition.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 70: How can I delete a slide from a presentation?</h3>
+                <ol>
+                    <li>1. Right-click on the slide you want to delete.</li>
+                    <li>2. Choose 'Delete Slide' from the context menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 71: How do I use 'Slide Zoom' to focus on specific content?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Zoom' and choose 'Slide Zoom'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 72: How can I set a slide to advance automatically?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. In the 'Advance Slide' section, check 'After' and set the time.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 73: How do I add a 3D effect to a shape?</h3>
+                <ol>
+                    <li>1. Select the shape.</li>
+                    <li>2. Click on the 'Format' tab and choose '3D Effects' from the 'Shape Effects' menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 74: How can I apply a color gradient to text?</h3>
+                <ol>
+                    <li>1. Select the text.</li>
+                    <li>2. Click on the 'Format' tab and choose 'Text Fill' and then 'Gradient Fill'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 75: How do I create a new slide layout?</h3>
+                <ol>
+                    <li>1. Go to the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Click 'Insert Layout' and customize it as needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 76: How can I add a shape to a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Shapes' and choose the desired shape to add to the slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 77: How do I use the 'Format Painter'?</h3>
+                <ol>
+                    <li>1. Select the text or object with the formatting you want to copy.</li>
+                    <li>2. Click 'Format Painter' in the 'Home' tab and apply it to the target text or object.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 78: How can I set a custom slide background image?</h3>
+                <ol>
+                    <li>1. Right-click on the slide and select 'Format Background'.</li>
+                    <li>2. Choose 'Picture or Texture Fill' and upload your image.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 79: How do I add a watermark to a slide?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Select 'Text Box' and enter your watermark text. Format as needed and adjust transparency.
+                    </li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 80: How can I insert a shape with a text box inside?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Select 'Shapes' and draw the shape.</li>
+                    <li>3. Right-click the shape and choose 'Edit Text' to add text inside the shape.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 81: How do I create a bulleted list?</h3>
+                <ol>
+                    <li>1. Select the text you want to bullet.</li>
+                    <li>2. Click on the 'Home' tab and choose the 'Bullets' icon in the 'Paragraph' section.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 82: How can I insert a smart art graphic?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'SmartArt' and choose a graphic from the options provided.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 83: How do I change the slide layout?</h3>
+                <ol>
+                    <li>1. Click on the 'Home' tab.</li>
+                    <li>2. Choose 'Layout' and select a new layout from the drop-down menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 84: How can I animate an object on a slide?</h3>
+                <ol>
+                    <li>1. Select the object you want to animate.</li>
+                    <li>2. Go to the 'Animations' tab and choose an animation effect.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 85: How do I create a hyperlink to a specific slide?</h3>
+                <ol>
+                    <li>1. Select the text or object for the hyperlink.</li>
+                    <li>2. Click 'Insert' and choose 'Hyperlink'.</li>
+                    <li>3. In the 'Link to' section, select 'Place in This Document' and choose the slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 86: How can I add a slide number?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab and select 'Slide Number'.</li>
+                    <li>2. Check the 'Slide Number' box and click 'Apply to All'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 87: How do I create a hyperlink to a file?</h3>
+                <ol>
+                    <li>1. Select the text or object to hyperlink.</li>
+                    <li>2. Click 'Insert' and choose 'Hyperlink'.</li>
+                    <li>3. In the 'Link to' section, select 'Existing File or Web Page' and choose your file.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 88: How can I add a comment to a slide?</h3>
+                <ol>
+                    <li>1. Go to the 'Review' tab.</li>
+                    <li>2. Click 'New Comment' and type your comment in the text box that appears.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 89: How do I duplicate a slide?</h3>
+                <ol>
+                    <li>1. Right-click on the slide you want to duplicate.</li>
+                    <li>2. Choose 'Duplicate Slide' from the context menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 90: How can I use the 'Align' tool for objects?</h3>
+                <ol>
+                    <li>1. Select the objects you want to align.</li>
+                    <li>2. Go to the 'Format' tab and choose 'Align' from the 'Arrange' section.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 91: How do I add a background music track?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Audio' and choose 'Audio on My PC'.</li>
+                    <li>3. Adjust the audio settings to play across slides if needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 92: How can I use 'Slide Sorter' view?</h3>
+                <ol>
+                    <li>1. Go to the 'View' tab and select 'Slide Sorter'.</li>
+                    <li>2. Rearrange your slides by dragging them into the desired order.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 93: How do I insert a new slide with a specific layout?</h3>
+                <ol>
+                    <li>1. Click on the 'Home' tab.</li>
+                    <li>2. Click 'New Slide' and select the layout you want from the drop-down menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 94: How can I add a table of contents?</h3>
+                <ol>
+                    <li>1. Create a new slide for the table of contents.</li>
+                    <li>2. Manually list the titles of your slides with hyperlinks to each slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 95: How do I use the 'Remove Background' tool?</h3>
+                <ol>
+                    <li>1. Select the image.</li>
+                    <li>2. Click on the 'Format' tab and choose 'Remove Background' from the 'Adjust' section.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 96: How can I set a slide to loop during the presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Slide Show' tab.</li>
+                    <li>2. Click 'Set Up Slide Show' and check 'Loop continuously until 'Esc'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 97: How do I add a new section to a presentation?</h3>
+                <ol>
+                    <li>1. Right-click between the slides where you want to add a new section.</li>
+                    <li>2. Choose 'Add Section' and name your section.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 98: How can I apply a transition to all slides?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Choose a transition and click 'Apply To All'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 99: How do I use the 'Slide Master' feature?</h3>
+                <ol>
+                    <li>1. Click on the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Make changes to the master slides to affect the entire presentation.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 100: How can I check the spelling in my presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Review' tab.</li>
+                    <li>2. Click 'Spelling' to start the spell check process.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 101: How do I create a custom slide layout?</h3>
+                <ol>
+                    <li>1. Go to the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Click 'Insert Layout' and customize the layout as needed.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 102: How can I add an image from an online source?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Online Pictures' and search for the image you want to add.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 103: How do I change the theme of a presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Design' tab.</li>
+                    <li>2. Choose a theme from the options available.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 104: How can I add a slide transition effect?</h3>
+                <ol>
+                    <li>1. Click on the 'Transitions' tab.</li>
+                    <li>2. Select a transition effect from the list and apply it to your slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 105: How do I insert a video into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Video' and choose 'Video on My PC' or 'Online Video'.</li>
+                    <li>3. Browse and select the video file to insert it into the slide.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 106: How can I make a slide show automatically advance?</h3>
+                <ol>
+                    <li>1. Go to the 'Transitions' tab.</li>
+                    <li>2. Check 'After' and set the time for automatic advancement.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 107: How do I use the 'Slide Zoom' feature?</h3>
+                <ol>
+                    <li>1. Go to the 'Insert' tab.</li>
+                    <li>2. Select 'Zoom' and choose 'Slide Zoom'.</li>
+                    <li>3. Select the slides you want to zoom in on during the presentation.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 108: How can I add a hyperlink to an external website?</h3>
+                <ol>
+                    <li>1. Select the text or object for the hyperlink.</li>
+                    <li>2. Click 'Insert' and choose 'Hyperlink'.</li>
+                    <li>3. In the 'Link to' section, enter the URL of the external website.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 109: How do I hide a slide from the presentation?</h3>
+                <ol>
+                    <li>1. Right-click on the slide you want to hide.</li>
+                    <li>2. Select 'Hide Slide'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 110: How can I group multiple objects together?</h3>
+                <ol>
+                    <li>1. Select the objects you want to group.</li>
+                    <li>2. Right-click and choose 'Group' from the context menu.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 111: How do I add a footer to all slides?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab and select 'Header &amp; Footer'.</li>
+                    <li>2. Check 'Footer' and enter the text you want to appear.</li>
+                    <li>3. Click 'Apply to All' to add the footer to all slides.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 112: How can I change the default font for the presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'View' tab and select 'Slide Master'.</li>
+                    <li>2. Choose 'Fonts' and select 'Customize Fonts' to change the default font settings.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 113: How do I create a new presentation from a template?</h3>
+                <ol>
+                    <li>1. Open PowerPoint and select 'New'.</li>
+                    <li>2. Browse and choose a template from the available options.</li>
+                    <li>3. Click 'Create' to start your new presentation with the selected template.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 114: How can I add a footer with the date and time?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab and select 'Header &amp; Footer'.</li>
+                    <li>2. Check 'Date and Time' and select the format you prefer.</li>
+                    <li>3. Click 'Apply to All' to add it to all slides.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 115: How do I insert a chart into a slide?</h3>
+                <ol>
+                    <li>1. Click on the 'Insert' tab.</li>
+                    <li>2. Select 'Chart' and choose the type of chart you want to insert.</li>
+                    <li>3. Enter your data into the Excel sheet that appears and close it to update the chart.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 116: How can I add an interactive quiz to my presentation?</h3>
+                <ol>
+                    <li>1. Insert a new slide for the quiz.</li>
+                    <li>2. Add questions and answer options using text boxes or shapes.</li>
+                    <li>3. Use hyperlinks or action buttons to link to the correct or incorrect answer slides.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 117: How do I create a slide with a specific background color?</h3>
+                <ol>
+                    <li>1. Right-click on the slide and select 'Format Background'.</li>
+                    <li>2. Choose 'Solid Fill' and select your desired background color.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 118: How can I use 'Presenter View' during a presentation?</h3>
+                <ol>
+                    <li>1. Go to the 'Slide Show' tab.</li>
+                    <li>2. Check 'Use Presenter View'.</li>
+                    <li>3. Connect your computer to a second monitor to use Presenter View.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 119: How do I save a presentation as a PDF?</h3>
+                <ol>
+                    <li>1. Go to the 'File' tab and select 'Save As'.</li>
+                    <li>2. Choose the location where you want to save the file.</li>
+                    <li>3. In the 'Save as type' dropdown menu, select 'PDF' and click 'Save'.</li>
+                </ol>
+            </div>
+            <div class="question">
+                <h3>Question 120: How can I add a custom animation to text?</h3>
+                <ol>
+                    <li>1. Select the text you want to animate.</li>
+                    <li>2. Go to the 'Animations' tab.</li>
+                    <li>3. Choose an animation effect and adjust the settings as needed.</li>
+                </ol>
+            </div>
+        </section>
+        <script>
+            const toggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                body.classList.toggle('light-theme');
+            });
+
+            // Default theme
+            if (!body.classList.contains('dark-theme') && !body.classList.contains('light-theme')) {
+                body.classList.add('light-theme');
+            }
+        </script>
+
+</body>
+
+</html>
