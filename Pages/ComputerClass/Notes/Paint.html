@@ -1,35 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        window.onload = function() {
-            function removeDuplicateQuestions() {
-                // Get all questions (h3 elements)
-                let questions = document.querySelectorAll('h3');
-                let seenQuestions = new Set();
-                
-                questions.forEach(question => {
-                    let questionText = question.textContent.trim();
-                    if (seenQuestions.has(questionText)) {
-                        // Remove the question and its list if it's a duplicate
-                        question.nextElementSibling.remove(); // Remove the associated <ol>
-                        question.remove(); // Remove the <h3>
-                    } else {
-                        // Add the question to the set
-                        seenQuestions.add(questionText);
-                    }
-                });
-            }
-
-            // Call the function to remove duplicates
-            removeDuplicateQuestions();
-        }
-    </script>
     <style>
         /* General styles */
         body {
@@ -40,7 +15,6 @@
             background-color: #f4f4f4;
             transition: background-color 0.3s, color 0.3s;
         }
-
         /* Story Section */
         .story {
             background-color: #e9f7ff;
@@ -57,7 +31,6 @@ body.dark-theme .story {
             background-color: #1e1e1e;
             border-color: #0077ff;
         }
-    
         /* Strong Emphasis in Paragraphs */
         p strong {
             color: #ff554f;
@@ -69,34 +42,28 @@ body.dark-theme .story {
             background-color: #121212;
             color: #ffffff;
         }
-
         /* Header styles */
         header {
             color: #fff;
             padding: 1rem 0;
             text-align: center;
         }
-
         body.dark-theme header {
             background-color: #1a1a1a;
         }
-
         header h1 {
             margin: 0;
             font-size: 2rem;
         }
-
         /* Navigation styles */
         nav {
             background: #444;
             color: #fff;
             padding: 0.5rem 0;
         }
-
         body.dark-theme nav {
             background: #2c2c2c;
         }
-
         nav ul {
             list-style: none;
             margin: 0;
@@ -104,31 +71,25 @@ body.dark-theme .story {
             display: flex;
             justify-content: center;
         }
-
         nav ul li {
             margin: 0 1rem;
         }
-
         nav ul li a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
         }
-
         nav ul li a:hover {
             text-decoration: underline;
         }
-
         /* Content styles */
         .content {
             padding: 2rem;
             width: auto;
         }
-
         .content section {
             margin-bottom: 2rem;
         }
-
         .content h2 {
             font-size: 1.5rem;
             color: #333;
@@ -136,36 +97,29 @@ body.dark-theme .story {
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
         }
-
         body.dark-theme .content h2 {
             color: #ffffff;
             border-bottom: 2px solid #ffffff;
         }
-
         .content ul {
             padding-left: 1.5rem;
         }
-
         .content ul li {
             margin-bottom: 0.5rem;
         }
-
         .content p {
             margin-bottom: 1rem;
         }
-
         /* Responsive design */
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
                 align-items: center;
             }
-
             nav ul li {
                 margin: 0.5rem 0;
             }
         }
-
         /* Card Theme for .question */
         .question {
             background: #fff;
@@ -176,98 +130,79 @@ body.dark-theme .story {
             font-weight: bolder;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .question:hover {
             transform: scale(1.02);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
-
         body.dark-theme .question {
             background: #1e1e1e;
             color: #ffffff;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
-
         h1 {
             text-align: center;
             color: #007BFF;
         }
-
         body.dark-theme h1,
         body.dark-theme h2 {
             color: #4A90E2;
         }
-
         h2 {
             color: #007BFF;
         }
-
         ul {
             list-style-type: square;
             font-weight: bold;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             font-weight: bold;
         }
-
         table,
         th,
         td {
             border: 1px solid #1784ff;
             font-weight: bold;
         }
-
         th,
         td {
             padding: 0.5rem;
             text-align: left;
         }
-
         th {
             background-color: #007BFF;
             color: #fff;
         }
-
         body.dark-theme th {
             background-color: #4A90E2;
         }
-
         td {
             background-color: #ffffff;
         }
-
         body.dark-theme td {
             background-color: #1e1e1e;
             color: #ffffff;
         }
-
         .question li:hover {
             font-size: large;
             color: #ff0000;
         }
-
         body.dark-theme .question li:hover {
             color: #ff4f4f;
         }
-
         .question h3 {
             font-weight: bold;
             margin: 5px;
             text-align: center;
             font-size: 20px;
         }
-
         .answer {
             margin-left: 5px;
         }
-
         td:hover {
             font-size: 20px;
         }
-
         /* Theme Toggle Button */
         .theme-toggle {
             background-color: transparent;
@@ -284,39 +219,30 @@ body.dark-theme .story {
             transition: background-color 0.3s, transform 0.3s, color 0.3s;
             color: #000;
         }
-
-
         .icon-sun,
         .icon-moon {
             display: none;
             transition: color 0.3s;
         }
-
         /* Light Theme Styling */
         body.light-theme .theme-toggle {
             color: #000000;
         }
-
         body.light-theme .icon-sun {
             display: inline-block;
         }
-
         /* Dark Theme Styling */
         body.dark-theme .theme-toggle {
             color: #ffffff;
         }
-
         body.dark-theme .icon-moon {
             display: inline-block;
         }
-
         .head {
             display: flex;
         }
     </style>
-
 </head>
-
 <body>
     <div>
         <div class="head">
@@ -327,11 +253,9 @@ body.dark-theme .story {
             </button>
             <h2>__</h2>
         </div>
-
-
-        <div class="container">
+        <div class="container"></div>
             <div class="question">
-                <h3>Question 1: How do I open MS Paint?</h3>
+                <h3>How do I open MS Paint?</h3>
                 <ol>
                     <li>1. Click on the Start menu.</li>
                     <li>2. Type "Paint" in the search bar.</li>
@@ -339,21 +263,21 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 2: How do I draw a straight line?</h3>
+                <h3>How do I draw a straight line?</h3>
                 <ol>
                     <li>1. Select the 'Line' tool from the toolbar.</li>
                     <li>2. Click and drag on the canvas to draw a line.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 3: How do I use the 'Fill' tool?</h3>
+                <h3>How do I use the 'Fill' tool?</h3>
                 <ol>
                     <li>1. Select the 'Fill with color' tool from the toolbar.</li>
                     <li>2. Click inside the area you want to fill.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 4: How do I change the brush size?</h3>
+                <h3>How do I change the brush size?</h3>
                 <ol>
                     <li>1. Select the 'Brush' tool from the toolbar.</li>
                     <li>2. Click on the 'Size' option in the toolbar.</li>
@@ -361,7 +285,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 5: How do I add text to my drawing?</h3>
+                <h3>How do I add text to my drawing?</h3>
                 <ol>
                     <li>1. Select the 'Text' tool from the toolbar.</li>
                     <li>2. Click on the canvas where you want to add text.</li>
@@ -369,7 +293,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 6: How do I resize an image?</h3>
+                <h3>How do I resize an image?</h3>
                 <ol>
                     <li>1. Click on 'Resize' in the toolbar.</li>
                     <li>2. Choose the percentage or pixel size for the new dimensions.</li>
@@ -377,21 +301,21 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 7: How do I crop an image?</h3>
+                <h3>How do I crop an image?</h3>
                 <ol>
                     <li>1. Use the 'Select' tool to outline the area you want to keep.</li>
                     <li>2. Click 'Crop' in the toolbar.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 8: How do I use the 'Eraser' tool?</h3>
+                <h3>How do I use the 'Eraser' tool?</h3>
                 <ol>
                     <li>1. Select the 'Eraser' tool from the toolbar.</li>
                     <li>2. Click and drag over the areas you want to erase.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 9: How do I save my work?</h3>
+                <h3>How do I save my work?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Save As' from the dropdown menu.</li>
@@ -399,7 +323,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 10: How do I draw a circle?</h3>
+                <h3>How do I draw a circle?</h3>
                 <ol>
                     <li>1. Select the 'Ellipse' tool from the toolbar.</li>
                     <li>2. Hold down the 'Shift' key to draw a perfect circle.</li>
@@ -407,14 +331,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 11: How do I draw a rectangle?</h3>
+                <h3>How do I draw a rectangle?</h3>
                 <ol>
                     <li>1. Select the 'Rectangle' tool from the toolbar.</li>
                     <li>2. Click and drag on the canvas to draw the rectangle.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 12: How do I use the 'Pick Color' tool?</h3>
+                <h3>How do I use the 'Pick Color' tool?</h3>
                 <ol>
                     <li>1. Select the 'Pick Color' tool from the toolbar.</li>
                     <li>2. Click on the color in the canvas you want to pick.</li>
@@ -422,21 +346,21 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 13: How do I undo an action?</h3>
+                <h3>How do I undo an action?</h3>
                 <ol>
                     <li>1. Click on 'Edit' in the top menu.</li>
                     <li>2. Select 'Undo' from the dropdown menu or press 'Ctrl + Z'.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 14: How do I redo an action?</h3>
+                <h3>How do I redo an action?</h3>
                 <ol>
                     <li>1. Click on 'Edit' in the top menu.</li>
                     <li>2. Select 'Redo' from the dropdown menu or press 'Ctrl + Y'.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 15: How do I draw a polygon?</h3>
+                <h3>How do I draw a polygon?</h3>
                 <ol>
                     <li>1. Select the 'Polygon' tool from the toolbar.</li>
                     <li>2. Click on the canvas to define the shape.</li>
@@ -444,7 +368,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 16: How do I use the 'Color Picker'?</h3>
+                <h3>How do I use the 'Color Picker'?</h3>
                 <ol>
                     <li>1. Select the 'Color Picker' tool from the toolbar.</li>
                     <li>2. Click on the color you want to pick from the canvas.</li>
@@ -452,7 +376,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 17: How do I adjust the color palette?</h3>
+                <h3>How do I adjust the color palette?</h3>
                 <ol>
                     <li>1. Click on 'Edit Colors' in the toolbar.</li>
                     <li>2. Adjust the color sliders to create a new color.</li>
@@ -460,14 +384,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 18: How do I draw freehand?</h3>
+                <h3>How do I draw freehand?</h3>
                 <ol>
                     <li>1. Select the 'Pencil' tool from the toolbar.</li>
                     <li>2. Click and drag on the canvas to draw freehand.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 19: How do I add a shape to my drawing?</h3>
+                <h3>How do I add a shape to my drawing?</h3>
                 <ol>
                     <li>1. Select the shape tool (e.g., rectangle, ellipse) from the toolbar.</li>
                     <li>2. Click and drag on the canvas to add the shape.</li>
@@ -483,7 +407,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 21: How do I print my drawing?</h3>
+                <h3>How do I print my drawing?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Print' from the dropdown menu.</li>
@@ -491,7 +415,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 22: How do I create a custom color in MS Paint?</h3>
+                <h3>How do I create a custom color in MS Paint?</h3>
                 <ol>
                     <li>1. Click on 'Edit Colors' in the toolbar.</li>
                     <li>2. Adjust the color sliders to create your desired color.</li>
@@ -499,7 +423,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 23: How do I draw with different colors?</h3>
+                <h3>How do I draw with different colors?</h3>
                 <ol>
                     <li>1. Select the 'Brush' or 'Pencil' tool from the toolbar.</li>
                     <li>2. Choose a color from the color palette.</li>
@@ -507,7 +431,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 24: How do I add a border to a shape?</h3>
+                <h3>How do I add a border to a shape?</h3>
                 <ol>
                     <li>1. Select the 'Shape' tool and draw the shape.</li>
                     <li>2. Choose the 'Outline' color from the color palette.</li>
@@ -515,7 +439,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 25: How do I copy and paste an image?</h3>
+                <h3>How do I copy and paste an image?</h3>
                 <ol>
                     <li>1. Use the 'Select' tool to outline the area you want to copy.</li>
                     <li>2. Right-click and choose 'Copy' or press 'Ctrl + C.'</li>
@@ -524,7 +448,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 26: How do I use the 'Magnifier' tool?</h3>
+                <h3>How do I use the 'Magnifier' tool?</h3>
                 <ol>
                     <li>1. Select the 'Magnifier' tool from the toolbar.</li>
                     <li>2. Click and drag over the area you want to magnify.</li>
@@ -532,30 +456,29 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 27: How do I draw a perfect square?</h3>
+                <h3>How do I draw a perfect square?</h3>
                 <ol>
                     <li>1. Select the 'Rectangle' tool from the toolbar.</li>
                     <li>2. Hold down the 'Shift' key while dragging to draw a perfect square.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 28: How do I draw a line at a specific angle?</h3>
+                <h3>How do I draw a line at a specific angle?</h3>
                 <ol>
                     <li>1. Select the 'Line' tool from the toolbar.</li>
                     <li>2. Click and drag while holding down the 'Shift' key to constrain the line to specific angles.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 29: How do I use the 'Text' tool to format text?</h3>
+                <h3>How do I use the 'Text' tool to format text?</h3>
                 <ol>
                     <li>1. Select the 'Text' tool from the toolbar.</li>
                     <li>2. Click on the canvas and type your text.</li>
                     <li>3. Use the options in the text toolbar to change font, size, and style.</li>
                 </ol>
             </div>
-           
             <div class="question">
-                <h3>Question 31: How do I draw a curved line?</h3>
+                <h3>How do I draw a curved line?</h3>
                 <ol>
                     <li>1. Select the 'Curve' tool from the toolbar.</li>
                     <li>2. Click and drag to draw the initial line.</li>
@@ -563,7 +486,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 32: How do I rotate an image?</h3>
+                <h3>How do I rotate an image?</h3>
                 <ol>
                     <li>1. Select the 'Select' tool and outline the area you want to rotate.</li>
                     <li>2. Click 'Rotate' in the toolbar.</li>
@@ -571,17 +494,15 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 33: How do I flip an image?</h3>
+                <h3>How do I flip an image?</h3>
                 <ol>
                     <li>1. Select the 'Select' tool and outline the area you want to flip.</li>
                     <li>2. Click 'Rotate' in the toolbar.</li>
                     <li>3. Choose 'Flip Horizontal' or 'Flip Vertical' from the options provided.</li>
                 </ol>
             </div>
-           
-            
             <div class="question">
-                <h3>Question 37: How do I change the background color?</h3>
+                <h3>How do I change the background color?</h3>
                 <ol>
                     <li>1. Select the 'Fill' tool from the toolbar.</li>
                     <li>2. Choose the background color from the color palette.</li>
@@ -589,7 +510,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 38: How do I create a new canvas?</h3>
+                <h3>How do I create a new canvas?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'New' from the dropdown menu.</li>
@@ -597,16 +518,15 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 39: How do I open an existing image?</h3>
+                <h3>How do I open an existing image?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Open' from the dropdown menu.</li>
                     <li>3. Browse to the image file and click 'Open.'</li>
                 </ol>
             </div>
-            
             <div class="question">
-                <h3>Question 44: How do I change the thickness of a line?</h3>
+                <h3>How do I change the thickness of a line?</h3>
                 <ol>
                     <li>1. Select the 'Brush' or 'Pencil' tool from the toolbar.</li>
                     <li>2. Choose the desired line thickness from the options.</li>
@@ -614,7 +534,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 45: How do I add a filled shape?</h3>
+                <h3>How do I add a filled shape?</h3>
                 <ol>
                     <li>1. Select the 'Shape' tool from the toolbar.</li>
                     <li>2. Choose a shape and color for the fill.</li>
@@ -622,14 +542,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 46: How do I use the 'Eraser' tool?</h3>
+                <h3>How do I use the 'Eraser' tool?</h3>
                 <ol>
                     <li>1. Select the 'Eraser' tool from the toolbar.</li>
                     <li>2. Click and drag over the area you want to erase.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 47: How do I use the 'Bucket' tool to fill an area with color?</h3>
+                <h3>How do I use the 'Bucket' tool to fill an area with color?</h3>
                 <ol>
                     <li>1. Select the 'Fill' tool (Bucket) from the toolbar.</li>
                     <li>2. Choose the color you want to use for filling.</li>
@@ -637,7 +557,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 48: How do I draw a straight line?</h3>
+                <h3>How do I draw a straight line?</h3>
                 <ol>
                     <li>1. Select the 'Line' tool from the toolbar.</li>
                     <li>2. Click and drag to draw a straight line.</li>
@@ -645,7 +565,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 49: How do I use the 'Select' tool to move an image?</h3>
+                <h3>How do I use the 'Select' tool to move an image?</h3>
                 <ol>
                     <li>1. Select the 'Select' tool from the toolbar.</li>
                     <li>2. Outline the area of the image you want to move.</li>
@@ -661,7 +581,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 51: How do I use the 'Color Picker' tool?</h3>
+                <h3>How do I use the 'Color Picker' tool?</h3>
                 <ol>
                     <li>1. Select the 'Color Picker' tool from the toolbar.</li>
                     <li>2. Click on the color in the canvas that you want to pick.</li>
@@ -669,14 +589,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 52: How do I draw a circle?</h3>
+                <h3>How do I draw a circle?</h3>
                 <ol>
                     <li>1. Select the 'Ellipse' tool from the toolbar.</li>
                     <li>2. Hold down the 'Shift' key while dragging to draw a perfect circle.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 53: How do I use the 'Resize' option to change canvas size?</h3>
+                <h3>How do I use the 'Resize' option to change canvas size?</h3>
                 <ol>
                     <li>1. Click on 'Image' in the top menu.</li>
                     <li>2. Select 'Resize' from the dropdown menu.</li>
@@ -684,46 +604,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 54: How do I use the 'Undo' feature to reverse changes?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Undo' from the dropdown menu or press 'Ctrl + Z.'</li>
-                    <li>3. Repeat as needed to undo multiple actions.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 55: How do I use the 'Redo' feature to reapply changes?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Redo' from the dropdown menu or press 'Ctrl + Y.'</li>
-                    <li>3. Repeat as needed to redo multiple actions.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 56: How do I add a shadow effect to a shape?</h3>
-                <ol>
-                    <li>1. MS Paint does not have built-in shadow effects. Consider using a different graphics editor
-                                    for advanced
-                                    effects.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 57: How do I draw a freeform shape?</h3>
-                <ol>
-                    <li>1. Select the 'Pencil' or 'Brush' tool from the toolbar.</li>
-                    <li>2. Click and drag on the canvas to draw a freeform shape.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 58: How do I use the 'Line' tool to draw straight lines?</h3>
-                <ol>
-                    <li>1. Select the 'Line' tool from the toolbar.</li>
-                    <li>2. Click and drag on the canvas to draw a straight line.</li>
-                    <li>3. Hold down the 'Shift' key to constrain the line to 45-degree angles.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 59: How do I save an image as a different file format?</h3>
+                <h3>How do I save an image as a different file format?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Save As' from the dropdown menu.</li>
@@ -731,48 +612,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 60: How do I create a new file?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'New' from the dropdown menu.</li>
-                    <li>3. Choose the canvas size and click 'OK.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 61: How do I open an existing file?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'Open' from the dropdown menu.</li>
-                    <li>3. Browse to the file location, select the file, and click 'Open.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 62: How do I use the 'Select' tool to copy a part of the image?</h3>
-                <ol>
-                    <li>1. Select the 'Select' tool from the toolbar.</li>
-                    <li>2. Outline the area you want to copy.</li>
-                    <li>3. Press 'Ctrl + C' to copy the selected area.</li>
-                    <li>4. Move to the desired location and press 'Ctrl + V' to paste.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 63: How do I change the background color?</h3>
-                <ol>
-                    <li>1. Select the 'Fill' tool (Bucket) from the toolbar.</li>
-                    <li>2. Choose the desired background color.</li>
-                    <li>3. Click on the canvas area to apply the color.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 64: How do I draw a rectangle?</h3>
-                <ol>
-                    <li>1. Select the 'Rectangle' tool from the toolbar.</li>
-                    <li>2. Click and drag on the canvas to draw the rectangle.</li>
-                    <li>3. Hold down the 'Shift' key for a square.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 65: How do I add an image to my drawing?</h3>
+                <h3>How do I add an image to my drawing?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Open' to open the image you want to add.</li>
@@ -781,7 +621,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 66: How do I use the 'Brush' tool?</h3>
+                <h3>How do I use the 'Brush' tool?</h3>
                 <ol>
                     <li>1. Select the 'Brush' tool from the toolbar.</li>
                     <li>2. Choose the brush size and color.</li>
@@ -789,7 +629,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 67: How do I use the 'Pencil' tool?</h3>
+                <h3>How do I use the 'Pencil' tool?</h3>
                 <ol>
                     <li>1. Select the 'Pencil' tool from the toolbar.</li>
                     <li>2. Choose the pencil size and color.</li>
@@ -797,7 +637,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 68: How do I use the 'Text' tool to add annotations?</h3>
+                <h3>How do I use the 'Text' tool to add annotations?</h3>
                 <ol>
                     <li>1. Select the 'Text' tool from the toolbar.</li>
                     <li>2. Click on the canvas where you want to add text.</li>
@@ -805,7 +645,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 69: How do I draw an irregular shape?</h3>
+                <h3>How do I draw an irregular shape?</h3>
                 <ol>
                     <li>1. Select the 'Pencil' or 'Brush' tool from the toolbar.</li>
                     <li>2. Click and drag to draw the irregular shape freehand.</li>
@@ -820,37 +660,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 71: How do I use the 'Curve' tool?</h3>
-                <ol>
-                    <li>1. Select the 'Curve' tool from the toolbar.</li>
-                    <li>2. Click and drag to draw a curve on the canvas.</li>
-                    <li>3. Adjust the curve points to refine the shape.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 72: How do I use the 'Eraser' tool to remove parts of a shape?</h3>
-                <ol>
-                    <li>1. Select the 'Eraser' tool from the toolbar.</li>
-                    <li>2. Click and drag over the parts of the shape you want to remove.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 73: How do I use the 'Color Picker' tool to match colors?</h3>
-                <ol>
-                    <li>1. Select the 'Color Picker' tool from the toolbar.</li>
-                    <li>2. Click on the color in the canvas you want to match.</li>
-                    <li>3. The selected color will appear in the color palette.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 74: How do I draw a star shape?</h3>
+                <h3>How do I draw a star shape?</h3>
                 <ol>
                     <li>1. MS Paint does not have a star shape tool. Draw a star manually using the 'Line' or 'Brush'
                                     tool.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 75: How do I use the 'Selection' tool to copy an image area?</h3>
+                <h3>How do I use the 'Selection' tool to copy an image area?</h3>
                 <ol>
                     <li>1. Select the 'Select' tool from the toolbar.</li>
                     <li>2. Drag to outline the area you want to copy.</li>
@@ -858,7 +675,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 76: How do I use the 'Fill' tool to colorize a shape?</h3>
+                <h3>How do I use the 'Fill' tool to colorize a shape?</h3>
                 <ol>
                     <li>1. Select the 'Fill' tool (Bucket) from the toolbar.</li>
                     <li>2. Choose a color from the palette.</li>
@@ -866,42 +683,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 77: How do I add a border to a shape?</h3>
-                <ol>
-                    <li>1. MS Paint does not have a direct border tool. Draw the shape and then outline it with the
-                                    'Line' tool.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 78: How do I use the 'Magnifier' tool?</h3>
+                <h3>How do I use the 'Magnifier' tool?</h3>
                 <ol>
                     <li>1. MS Paint does not have a built-in magnifier tool. Use zoom options under 'View' for
                                     magnification.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 79: How do I use 'Undo' to revert a recent change?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Undo' or press 'Ctrl + Z.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 80: How do I use 'Redo' to reapply a change?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Redo' or press 'Ctrl + Y.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 81: How do I create a new canvas?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'New' to create a new canvas.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 82: How do I open a previously saved image?</h3>
+                <h3>How do I open a previously saved image?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Open' and browse to the saved image file.</li>
@@ -909,98 +698,21 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 83: How do I save my work?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'Save As' to choose the format and location.</li>
-                    <li>3. Enter a file name and click 'Save.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 84: How do I use 'Zoom' to view details?</h3>
-                <ol>
-                    <li>1. Click on the 'View' tab in the top menu.</li>
-                    <li>2. Use the 'Zoom In' and 'Zoom Out' options to adjust the view.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 85: How do I use 'Print' to print my drawing?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'Print' or press 'Ctrl + P.'</li>
-                    <li>3. Choose your printer settings and click 'Print.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 86: How do I rotate my image?</h3>
-                <ol>
-                    <li>1. Click on 'Image' in the top menu.</li>
-                    <li>2. Select 'Rotate' and choose the rotation option (e.g., 90 degrees).</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 87: How do I resize my canvas?</h3>
-                <ol>
-                    <li>1. Click on 'File' in the top menu.</li>
-                    <li>2. Select 'Properties.'</li>
-                    <li>3. Adjust the width and height of the canvas and click 'OK.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 88: How do I use 'Brush' tool to create effects?</h3>
-                <ol>
-                    <li>1. Select the 'Brush' tool from the toolbar.</li>
-                    <li>2. Choose different brush styles and sizes.</li>
-                    <li>3. Click and drag on the canvas to create effects.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 89: How do I use 'Line' tool to draw straight lines?</h3>
-                <ol>
-                    <li>1. Select the 'Line' tool from the toolbar.</li>
-                    <li>2. Click and drag on the canvas to draw a straight line.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 90: How do I use 'Fill' tool to create gradient effects?</h3>
-                <ol>
-                    <li>1. MS Paint does not support gradient fills directly. Use multiple colors or create gradients
-                                    manually with the
-                                    'Brush' tool.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 91: How do I use 'Text' tool to format text?</h3>
-                <ol>
-                    <li>1. Select the 'Text' tool from the toolbar.</li>
-                    <li>2. Click on the canvas and type your text.</li>
-                    <li>3. Use the formatting options in the text box to adjust font, size, and style.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 92: How do I use 'Color Picker' to create custom colors?</h3>
-                <ol>
-                    <li>1. Select the 'Color Picker' tool from the toolbar.</li>
-                    <li>2. Click on the color in the canvas you want to match.</li>
-                    <li>3. Adjust color settings in the palette to create custom colors.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 93: How do I use 'Shapes' tool to draw an oval?</h3>
+                <h3>How do I use 'Shapes' tool to draw an oval?</h3>
                 <ol>
                     <li>1. Select the 'Oval' tool from the 'Shapes' menu.</li>
                     <li>2. Click and drag on the canvas to draw the oval.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 94: How do I use 'Curve' tool to draw smooth curves?</h3>
+                <h3>How do I use 'Curve' tool to draw smooth curves?</h3>
                 <ol>
                     <li>1. Select the 'Curve' tool from the toolbar.</li>
                     <li>2. Click to place points and drag to create smooth curves.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 95: How do I use 'Eraser' to clear a specific area?</h3>
+                <h3>How do I use 'Eraser' to clear a specific area?</h3>
                 <ol>
                     <li>1. Select the 'Eraser' tool from the toolbar.</li>
                     <li>2. Adjust the eraser size if needed.</li>
@@ -1008,14 +720,14 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 96: How do I use 'Line' tool to draw diagonal lines?</h3>
+                <h3>How do I use 'Line' tool to draw diagonal lines?</h3>
                 <ol>
                     <li>1. Select the 'Line' tool from the toolbar.</li>
                     <li>2. Click and drag diagonally on the canvas to draw a diagonal line.</li>
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 97: How do I use 'Text' tool to add different fonts?</h3>
+                <h3>How do I use 'Text' tool to add different fonts?</h3>
                 <ol>
                     <li>1. Select the 'Text' tool from the toolbar.</li>
                     <li>2. Click on the canvas and type your text.</li>
@@ -1023,56 +735,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 98: How do I draw an arrow shape?</h3>
-                <ol>
-                    <li>1. MS Paint does not have an arrow tool. Draw arrows manually using the 'Line' tool.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 99: How do I use 'Resize' to change the size of a shape?</h3>
-                <ol>
-                    <li>1. Select the shape with the 'Select' tool.</li>
-                    <li>2. Drag the handles to resize the shape.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 100: How do I use 'Undo' to revert multiple actions?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Undo' repeatedly or press 'Ctrl + Z' multiple times to revert multiple actions.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 101: How do I use 'Gridlines' for precise drawing?</h3>
-                <ol>
-                    <li>1. MS Paint does not have gridlines. Use 'Zoom' to enhance precision while drawing.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 102: How do I use 'Shape' tool to draw a rectangle?</h3>
-                <ol>
-                    <li>1. Select the 'Rectangle' tool from the 'Shapes' menu.</li>
-                    <li>2. Click and drag on the canvas to draw the rectangle.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 103: How do I use 'Lasso' tool to select irregular areas?</h3>
-                <ol>
-                    <li>1. Select the 'Lasso' tool from the toolbar.</li>
-                    <li>2. Click and drag around the area you want to select.</li>
-                    <li>3. Release the mouse button to complete the selection.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 104: How do I use 'Select' tool to copy and paste?</h3>
-                <ol>
-                    <li>1. Use the 'Select' tool to outline the area you want to copy.</li>
-                    <li>2. Right-click within the selection and choose 'Copy.'</li>
-                    <li>3. Move to the desired location and right-click to choose 'Paste.'</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 105: How do I use 'Color Picker' tool to match colors?</h3>
+                <h3>How do I use 'Color Picker' tool to match colors?</h3>
                 <ol>
                     <li>1. Select the 'Color Picker' tool from the toolbar.</li>
                     <li>2. Click on the color in the canvas you want to match.</li>
@@ -1080,7 +743,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 106: How do I use 'Shape' tool to draw a polygon?</h3>
+                <h3>How do I use 'Shape' tool to draw a polygon?</h3>
                 <ol>
                     <li>1. Select the 'Polygon' tool from the 'Shapes' menu.</li>
                     <li>2. Click and drag on the canvas to draw the polygon.</li>
@@ -1088,52 +751,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 107: How do I use 'Zoom' tool for detailed drawing?</h3>
-                <ol>
-                    <li>1. Click on the 'View' tab in the top menu.</li>
-                    <li>2. Use the 'Zoom In' option to closely view your drawing.</li>
-                    <li>3. Use the 'Zoom Out' option to adjust your view back.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 108: How do I use 'Gradient Fill' to add colors?</h3>
-                <ol>
-                    <li>1. MS Paint does not support gradient fills. Use 'Brush' tool with different colors to create a
-                                    similar effect</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 109: How do I use 'Eraser' tool to remove unwanted marks?</h3>
-                <ol>
-                    <li>1. Select the 'Eraser' tool from the toolbar.</li>
-                    <li>2. Adjust the size of the eraser if needed.</li>
-                    <li>3. Click and drag over the unwanted marks to erase them.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 110: How do I use 'Crop' tool to trim an image?</h3>
-                <ol>
-                    <li>1. Use the 'Select' tool to outline the area you want to keep.</li>
-                    <li>2. Click on 'Crop' in the toolbar to trim the image to the selected area.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 111: How do I use 'Adjust Colors' to change image colors?</h3>
-                <ol>
-                    <li>1. MS Paint does not have a specific 'Adjust Colors' feature. Use 'Edit Colors' to modify color
-                                    settings
-                                    manually.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 112: How do I use 'Draw' tool for freehand drawing?</h3>
-                <ol>
-                    <li>1. Select the 'Brush' or 'Pencil' tool from the toolbar.</li>
-                    <li>2. Click and drag on the canvas to draw freely.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 113: How do I use 'Text' tool for multi-line text?</h3>
+                <h3>How do I use 'Text' tool for multi-line text?</h3>
                 <ol>
                     <li>1. Select the 'Text' tool from the toolbar.</li>
                     <li>2. Click on the canvas and type your text.</li>
@@ -1141,21 +759,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 114: How do I use 'Undo' to revert recent changes?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Undo' or press 'Ctrl + Z' to revert the most recent change.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 115: How do I use 'Redo' to reapply undone actions?</h3>
-                <ol>
-                    <li>1. Click on 'Edit' in the top menu.</li>
-                    <li>2. Select 'Redo' or press 'Ctrl + Y' to reapply the last undone action.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 116: How do I use 'Paste' to insert copied content?</h3>
+                <h3>How do I use 'Paste' to insert copied content?</h3>
                 <ol>
                     <li>1. Copy the content from another source.</li>
                     <li>2. Move to the MS Paint canvas and right-click to choose 'Paste.'</li>
@@ -1163,7 +767,7 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 117: How do I use 'Save As' to save in different formats?</h3>
+                <h3>How do I use 'Save As' to save in different formats?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Save As' and choose the desired file format from the dropdown menu.</li>
@@ -1171,41 +775,15 @@ body.dark-theme .story {
                 </ol>
             </div>
             <div class="question">
-                <h3>Question 118: How do I use 'Print Preview' to check print settings?</h3>
+                <h3>How do I use 'Print Preview' to check print settings?</h3>
                 <ol>
                     <li>1. Click on 'File' in the top menu.</li>
                     <li>2. Select 'Print Preview' to view how your image will look when printed.</li>
                 </ol>
             </div>
-            <div class="question">
-                <h3>Question 119: How do I use 'Fill With Color' to color a shape?</h3>
-                <ol>
-                    <li>1. Select the 'Fill With Color' tool from the toolbar.</li>
-                    <li>2. Click inside the shape you want to fill with color.</li>
-                    <li>3. The selected color will fill the shape.</li>
-                </ol>
             </div>
-            <div class="question">
-                <h3>Question 120: How do I use 'Brush' tool for different textures?</h3>
-                <ol>
-                    <li>1. Select the 'Brush' tool from the toolbar.</li>
-                    <li>2. Choose a brush style and size from the options.</li>
-                    <li>3. Click and drag on the canvas to apply the brush texture.</li>
-                </ol>
-            </div>
-            <div class="question">
-                <h3>Question 121: How do I use 'Eyedropper' tool to pick colors from an image?</h3>
-                <ol>
-                    <li>1. Select the 'Eyedropper' tool from the toolbar.</li>
-                    <li>2. Click on the color in the image that you want to pick.</li>
-                    <li>3. The selected color will become the active color in your palette.</li>
-                </ol>
-            </div>
-            </div>
-
         <div class="container">
             <h1>MS Paint: A Story for All Ages</h1>
-
             <div class="story">
                 <h2>Once Upon a Time in Pixel Land</h2>
                 <p>In a magical world called Pixel Land, colors danced and shapes played in harmony. The land was
@@ -1222,7 +800,6 @@ body.dark-theme .story {
                     landscapes, charming characters, and imaginative scenes she brought to life. MS Paint was not just a
                     program; it was a gateway to Lily's imagination and a way for her to express herself.</p>
             </div>
-
             <div class="story">
                 <h2>The Adventures of Max and the Magical Drawing Pad</h2>
                 <p>Max was a young boy with a boundless imagination. One day, he found an old drawing pad in his attic.
@@ -1236,7 +813,6 @@ body.dark-theme .story {
                     He spent countless hours creating new characters and exploring new worlds. Through MS Paint, Max
                     learned that his imagination was the only limit to the stories he could tell.</p>
             </div>
-
             <div class="story">
                 <h2>The Artistic Journey of Grandma Rose</h2>
                 <p>Grandma Rose had always loved painting but had put away her brushes and paints as she grew older. One
@@ -1253,18 +829,14 @@ body.dark-theme .story {
         <script>
             const toggleButton = document.getElementById('theme-toggle');
             const body = document.body;
-
             toggleButton.addEventListener('click', () => {
                 body.classList.toggle('dark-theme');
                 body.classList.toggle('light-theme');
             });
-
             // Default theme
             if (!body.classList.contains('dark-theme') && !body.classList.contains('light-theme')) {
                 body.classList.add('light-theme');
             }
         </script>
-
 </body>
-
 </html>
