@@ -18,7 +18,44 @@
             font-weight: bolder;
             transition: background-color 0.3s, color 0.3s;
         }
-    
+        .theme-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 24px; 
+        justify-content: center;
+        padding: 10px;
+        border-radius: 50%;
+        transition: background-color 0.3s, transform 0.3s, color 0.3s;
+    }
+
+    /* Icon Styling */
+    .icon-sun, .icon-moon {
+        display: none;
+        transition: color 0.3s;
+    }
+
+    /* Light Theme Styling */
+    body.light-theme .theme-toggle {
+        color: #000000;
+    }
+
+    body.light-theme .icon-sun {
+        display: inline-block;
+    }
+
+    /* Dark Theme Styling */
+    body.dark-theme .theme-toggle {
+        color: #ffffff;
+    }
+
+    body.dark-theme .icon-moon {
+        display: inline-block;
+    }
+    .head {
+        display: flex;
+        
+    }
         /* Dark Theme Body Styling */
         body.dark-theme {
             color: #f9f9f9;
@@ -241,44 +278,7 @@
             }
         }
        /* Theme Toggle Button */
-    .theme-toggle {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 24px; 
-        justify-content: center;
-        padding: 10px;
-        border-radius: 50%;
-        transition: background-color 0.3s, transform 0.3s, color 0.3s;
-    }
-
-    /* Icon Styling */
-    .icon-sun, .icon-moon {
-        display: none;
-        transition: color 0.3s;
-    }
-
-    /* Light Theme Styling */
-    body.light-theme .theme-toggle {
-        color: #000000;
-    }
-
-    body.light-theme .icon-sun {
-        display: inline-block;
-    }
-
-    /* Dark Theme Styling */
-    body.dark-theme .theme-toggle {
-        color: #ffffff;
-    }
-
-    body.dark-theme .icon-moon {
-        display: inline-block;
-    }
-    .head {
-        display: flex;
-        
-    }
+    
     </style>
     
 
